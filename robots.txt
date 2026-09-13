@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://poseidon-network.com/sitemap.xml

@@ -1,0 +1,24 @@
+# Poseidon Network Systems
+
+> IT support, network infrastructure, and Dell hardware provider based in Sea Point, Cape Town, South Africa. Serving businesses and homes across the Western Cape since 2004.
+
+## About
+Poseidon Network Systems is a Cape Town-based IT services company offering managed IT support, network setup and cabling, new and refurbished Dell hardware (Authorized Dell Partner), device repairs and maintenance, consumables, and business continuity/backup solutions.
+
+## Key facts
+- Founded: 2004
+- Location: Sea Point, Cape Town, South Africa, 8005
+- Phone: 021 300 8278
+- WhatsApp: 064 702 9962
+- Hours: Monday–Friday, 07:30–17:30
+- Hardware positioning: refurbished Dell (with onsite warranty) for price-conscious clients, new Dell for brand-aware buyers, and other IT hardware sourced on request
+
+## Pages
+- Home (/): services overview, company history, quote request form
+- FAQ (/faq): hardware, network, and cloud/security questions
+- Resources (/resources): guides and reference material
+- Terms of Service (/terms)
+- Privacy Policy (/privacy)
+
+## Contact
+For quotes or support, use the contact form on the homepage, call 021 300 8278, or message via WhatsApp.

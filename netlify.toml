@@ -1,0 +1,28 @@
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "/faq"
+  to = "/FAQ.dc.html"
+  status = 200
+
+[[redirects]]
+  from = "/terms"
+  to = "/Terms of Service.dc.html"
+  status = 200
+
+[[redirects]]
+  from = "/privacy"
+  to = "/Privacy Policy.dc.html"
+  status = 200
+
+[[redirects]]
+  from = "/resources"
+  to = "/Resources.dc.html"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
