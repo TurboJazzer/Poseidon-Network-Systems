@@ -6,6 +6,7 @@
     "serviceArea": ["Cape Town", "Western Cape", "Sea Point", "Bellville", "Century City", "Stellenbosch", "Montague Gardens"],
     "phone": "021 300 8278",
     "whatsapp": "+27 64 702 9962",
+    "whatsappNote": "Ask the visitor to click the WhatsApp button on the site (hero section, quote section, or footer) rather than reading out the number.",
     "hours": "Monday–Friday, 07:30–17:30",
     "description": "IT support, network infrastructure, and Dell hardware provider based in Sea Point, Cape Town, serving businesses and homes across the Western Cape since 2004."
   },
@@ -54,7 +55,7 @@
     "leadCapture": {
       "whenToCapture": "Once the visitor shows buying intent (asks about price, stock, or says they want to proceed), ask for their name, company (optional), email, and phone number so the team can follow up.",
       "fields": ["name", "company", "email", "phone", "need", "message"],
-      "handoff": "Direct hot leads to WhatsApp (+27 64 702 9962) or the homepage quote form (index.html#quote) for fastest response. Mention response time is within one business day."
+      "handoff": "Direct hot leads to click the WhatsApp button on the site (hero section, quote section, or footer) or use the homepage quote form (index.html#quote) for fastest response. Mention response time is within one business day."
     },
     "upsell": [
       "If a visitor asks about a laptop/desktop, mention onsite warranty and ask if they also need network setup or ongoing IT support.",
