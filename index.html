@@ -35,6 +35,7 @@
   a{color:#2D5BE3;text-decoration:none}
   a:hover{color:#1F47C4}
   html{scroll-behavior:smooth}
+  .pns-dropdown:hover .pns-dropdown-menu{display:block !important;}
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -61,7 +62,14 @@
         <span style="display:block;font-size:13px;font-weight:700;letter-spacing:0.06em;color:#2D5BE3;line-height:1.4;">IT INFRASTRUCTURE &amp; HARDWARE<br/>SEA POINT, CAPE TOWN</span>
       </a>
       <nav style="display:flex;align-items:center;gap:28px;">
-        <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
+        <div style="display:flex;align-items:center;gap:18px;flex-wrap:nowrap;">
+          <div style="position:relative;" class="pns-dropdown">
+            <span style="font-size:14px;font-weight:500;color:#3D4A70;cursor:default;">Hardware</span>
+            <div style="position:absolute;top:100%;left:0;background:#fff;border:1px solid #E4E9F5;border-radius:8px;box-shadow:0 12px 30px rgba(13,27,75,0.12);padding:8px;min-width:200px;display:none;" class="pns-dropdown-menu">
+              <a href="New Dell Equipment.dc.html" style="display:block;padding:10px 12px;font-size:14px;font-weight:500;color:#3D4A70;border-radius:6px;" style-hover="background:#F6F8FD;color:#0D1B4B;">New Dell</a>
+              <a href="Refurbished Dell Equipment.dc.html" style="display:block;padding:10px 12px;font-size:14px;font-weight:500;color:#3D4A70;border-radius:6px;" style-hover="background:#F6F8FD;color:#0D1B4B;">Refurbished Dell</a>
+            </div>
+          </div>
           <a href="#services" style="font-size:14px;font-weight:500;color:#3D4A70;" style-hover="color:#0D1B4B;">Services</a>
           <a href="#process" style="font-size:14px;font-weight:500;color:#3D4A70;" style-hover="color:#0D1B4B;">How It Works</a>
           <a href="#about" style="font-size:14px;font-weight:500;color:#3D4A70;" style-hover="color:#0D1B4B;">About</a>
