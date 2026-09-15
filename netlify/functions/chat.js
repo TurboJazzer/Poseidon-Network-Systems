@@ -71,12 +71,12 @@ const KNOWLEDGE_BASE = {
   },
   "pages": {
     "home": "/index.html",
-    "newDellEquipment": "/New Dell Equipment.dc.html",
-    "refurbishedDellEquipment": "/Refurbished Dell Equipment.dc.html",
-    "faq": "/FAQ.dc.html",
-    "resources": "/Resources.dc.html",
-    "terms": "/Terms of Service.dc.html",
-    "privacy": "/Privacy Policy.dc.html"
+    "newDellEquipment": "/new-dell-equipment",
+    "refurbishedDellEquipment": "/refurbished-dell-equipment",
+    "faq": "/faq",
+    "resources": "/resources",
+    "terms": "/terms",
+    "privacy": "/privacy"
   }
 };
 
@@ -106,7 +106,17 @@ exports.handler = async function (event) {
     return { statusCode: 400, body: JSON.stringify({ error: 'Missing message' }) };
   }
 
-  const systemPrompt = 'You are the on-site assistant for Poseidon Network Systems, an IT support and Dell hardware provider in Sea Point, Cape Town. Answer visitor questions using ONLY the facts in this knowledge base JSON. Be direct and concise, no marketing fluff. Always cite real prices/specs/stock status from the data, never invent numbers. When a visitor shows buying intent, ask qualifying questions, then encourage them to click the WhatsApp button or use the quote form on the homepage.\n\nKNOWLEDGE BASE:\n' + JSON.stringify(KNOWLEDGE_BASE);
+  const systemPrompt = `You are a sales assistant for Poseidon Network Systems. Answer questions strictly using the provided ground-truth JSON data below.
+
+=== BEHAVIORAL RULES ===
+1. HARDWARE POSITIONING: Always position Refurbished Dell units (with 1-year onsite warranty) first for price-conscious clients, New Dell for brand-aware buyers, and state that any other IT hardware can be sourced on request.
+2. WHATSAPP HANDOFF: Never output raw phone numbers in chat text. Instruct visitors to click the WhatsApp buttons in the hero, quote, or footer sections of the site.
+3. PRICING ACCURACY: Quote exact ZAR figures (excl. VAT) from the JSON file. Do not invent price ranges.
+4. LEAD CAPTURE: Once buying intent is shown, ask for: Name, Company, Email, Phone Number, and Need.
+5. TONE: Concise, direct, and zero fluff.
+
+=== GROUND TRUTH DATA ===
+${JSON.stringify(KNOWLEDGE_BASE)}`;
 
   const trimmedHistory = Array.isArray(history) ? history.slice(-10) : [];
   const messages = trimmedHistory
