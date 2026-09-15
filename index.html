@@ -63,16 +63,36 @@
     .about-quote-card{position:sticky !important;top:6rem !important;}
   }
 </style>
+<link rel="preload" as="image" href="assets/hero_photo_sm.jpg" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" href="favicon.png">
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-P4J773RN');</script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-5XV1HEXGGP"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+  function gtag(){ window.dataLayer.push(arguments); }
   gtag('js', new Date());
   gtag('config', 'G-5XV1HEXGGP');
+  (function(){
+    var loaded = false;
+    function loadAnalytics(){
+      if (loaded) return;
+      loaded = true;
+      var gtm = document.createElement('script');
+      gtm.async = true;
+      gtm.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-P4J773RN&l=dataLayer';
+      document.head.appendChild(gtm);
+      var ga = document.createElement('script');
+      ga.async = true;
+      ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-5XV1HEXGGP';
+      document.head.appendChild(ga);
+      events.forEach(function(evt){ window.removeEventListener(evt, loadAnalytics); });
+      clearTimeout(fallback);
+    }
+    var events = ['scroll','touchstart','pointermove','keydown'];
+    events.forEach(function(evt){ window.addEventListener(evt, loadAnalytics, { passive: true, once: true }); });
+    var fallback = setTimeout(loadAnalytics, 3500);
+  })();
 </script>
 <script src="./cookie-consent.js" defer></script>
 <script src="./chat-widget.js" defer></script>
@@ -122,7 +142,7 @@
           </div>
         </div>
         <div style="position:relative;aspect-ratio:4/3;border-radius:18px;overflow:hidden;">
-          <img src="assets/hero_photo_sm.jpg" alt="IT technician configuring Dell hardware" style="width:100%;height:100%;object-fit:cover;" />
+          <img src="assets/hero_photo_sm.jpg" alt="IT technician configuring Dell hardware" width="800" height="446" fetchpriority="high" style="width:100%;height:100%;object-fit:cover;" />
         </div>
       </div>
 
@@ -176,7 +196,7 @@
             <h3 style="font-size:20px;font-weight:600;letter-spacing:-0.015em;color:#0D1B4B;">{{ svc.title }}</h3>
             <p style="font-size:15px;color:#4A5578;line-height:1.65;">{{ svc.desc }}</p>
             <sc-if value="{{ svc.badge }}" hint-placeholder-val="{{ false }}">
-              <img src="assets/dell_authorized_partner.png" alt="Dell Technologies Authorized Partner" style="height:44px;width:auto;object-fit:contain;margin-top:4px;" />
+              <img src="assets/dell_authorized_partner.png" alt="Dell Technologies Authorized Partner" width="320" height="93" style="height:44px;width:auto;object-fit:contain;margin-top:4px;" />
             </sc-if>
           </div>
         </sc-for>
@@ -322,7 +342,8 @@ class Component extends DCLogic {
     const data = Object.fromEntries(new FormData(e.target).entries());
     try {
       const body = new URLSearchParams({ 'form-name': 'quote-request', ...data }).toString();
-      const res = await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body });
+      await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body });
+      const res = await fetch('/api/send-quote', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
       if (!res.ok) throw new Error('failed');
       this.setState({ formStatus: "Thanks, we'll be in touch within one business day.", formSubmitting: false });
       e.target.reset();

@@ -56,13 +56,32 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" href="favicon.png">
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-P4J773RN');</script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-5XV1HEXGGP"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+  function gtag(){ window.dataLayer.push(arguments); }
   gtag('js', new Date());
   gtag('config', 'G-5XV1HEXGGP');
+  (function(){
+    var loaded = false;
+    function loadAnalytics(){
+      if (loaded) return;
+      loaded = true;
+      var gtm = document.createElement('script');
+      gtm.async = true;
+      gtm.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-P4J773RN&l=dataLayer';
+      document.head.appendChild(gtm);
+      var ga = document.createElement('script');
+      ga.async = true;
+      ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-5XV1HEXGGP';
+      document.head.appendChild(ga);
+      events.forEach(function(evt){ window.removeEventListener(evt, loadAnalytics); });
+      clearTimeout(fallback);
+    }
+    var events = ['scroll','touchstart','pointermove','keydown'];
+    events.forEach(function(evt){ window.addEventListener(evt, loadAnalytics, { passive: true, once: true }); });
+    var fallback = setTimeout(loadAnalytics, 3500);
+  })();
 </script>
 <script src="./cookie-consent.js" defer></script>
 <script src="./chat-widget.js" defer></script>

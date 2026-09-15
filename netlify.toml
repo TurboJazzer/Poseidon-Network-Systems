@@ -7,6 +7,11 @@
   function = "block-bots"
 
 [[redirects]]
+  from = "/api/send-quote"
+  to = "/.netlify/functions/send-quote"
+  status = 200
+
+[[redirects]]
   from = "/api/chat"
   to = "/.netlify/functions/chat"
   status = 200
@@ -24,6 +29,16 @@
 [[redirects]]
   from = "/refurbished-dell-equipment"
   to = "/Refurbished%20Dell%20Equipment.html"
+  status = 200
+
+[[redirects]]
+  from = "/sitemap_index.xml"
+  to = "/sitemap.xml"
+  status = 200
+
+[[redirects]]
+  from = "/favicon.ico"
+  to = "/favicon.png"
   status = 200
 
 [[redirects]]
