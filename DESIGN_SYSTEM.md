@@ -112,4 +112,4 @@ Always weave Western Cape commercial/industrial hubs into local landing page cop
 ---
 
 ## Implementation note
-The current live site (`index.html` / `Poseidon Network Systems.dc.html` + FAQ/Terms/Privacy/Resources pages) is a single-page inline-styled build, not React/Tailwind, and has no product catalog yet (no SKUs, stock counts, or pricing data). Building the `/dell-commercial/` and `/refurbished-dell/` catalog pages described here is a larger project requiring real product/inventory data — flag when ready to scope that build.
+The current live site (`index.html` + FAQ/Terms/Privacy/Resources pages) is a single-page inline-styled build, not React/Tailwind, and has no product catalog yet (no SKUs, stock counts, or pricing data). Building the `/dell-commercial/` and `/refurbished-dell/` catalog pages described here is a larger project requiring real product/inventory data — flag when ready to scope that build.

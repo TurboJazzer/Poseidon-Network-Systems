@@ -66,11 +66,11 @@
   },
   "pages": {
     "home": "/index.html",
-    "newDellEquipment": "/New Dell Equipment.dc.html",
-    "refurbishedDellEquipment": "/Refurbished Dell Equipment.dc.html",
-    "faq": "/FAQ.dc.html",
-    "resources": "/Resources.dc.html",
-    "terms": "/Terms of Service.dc.html",
-    "privacy": "/Privacy Policy.dc.html"
+    "newDellEquipment": "/new-dell-equipment",
+    "refurbishedDellEquipment": "/refurbished-dell-equipment",
+    "faq": "/faq",
+    "resources": "/resources",
+    "terms": "/terms",
+    "privacy": "/privacy"
   }
 }

@@ -36,7 +36,7 @@
         }
       }, [
         el('h3', { style: { margin: '0', fontSize: '18px', fontWeight: '700', color: '#fff' } }, ['Cookie preferences']),
-        el('p', { style: { margin: '0', fontSize: '13px', color: '#C4CCE6', lineHeight: '1.6' }, html: 'We use cookies to improve your experience and analyze site traffic. See our <a href="Privacy Policy.dc.html" style="color:#8FABF5;text-decoration:underline;">Privacy Policy</a> for details.' }),
+        el('p', { style: { margin: '0', fontSize: '13px', color: '#C4CCE6', lineHeight: '1.6' }, html: 'We use cookies to improve your experience and analyze site traffic. See our <a href="/privacy" style="color:#8FABF5;text-decoration:underline;">Privacy Policy</a> for details.' }),
         el('div', { style: { display: 'flex', gap: '10px', flexDirection: 'column' } }, [
           el('button', {
             style: { background: '#2D5BE3', border: 'none', color: '#fff', fontSize: '13px', fontWeight: '600', padding: '12px 18px', borderRadius: '6px', cursor: 'pointer' },

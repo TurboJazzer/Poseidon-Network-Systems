@@ -2,6 +2,10 @@
   publish = "."
   functions = "netlify/functions"
 
+[[edge_functions]]
+  path = "/*"
+  function = "block-bots"
+
 [[redirects]]
   from = "/api/chat"
   to = "/.netlify/functions/chat"
@@ -13,23 +17,33 @@
   status = 200
 
 [[redirects]]
+  from = "/new-dell-equipment"
+  to = "/New%20Dell%20Equipment.html"
+  status = 200
+
+[[redirects]]
+  from = "/refurbished-dell-equipment"
+  to = "/Refurbished%20Dell%20Equipment.html"
+  status = 200
+
+[[redirects]]
   from = "/faq"
-  to = "/FAQ.dc.html"
+  to = "/FAQ.html"
   status = 200
 
 [[redirects]]
   from = "/terms"
-  to = "/Terms of Service.dc.html"
+  to = "/Terms%20of%20Service.html"
   status = 200
 
 [[redirects]]
   from = "/privacy"
-  to = "/Privacy Policy.dc.html"
+  to = "/Privacy%20Policy.html"
   status = 200
 
 [[redirects]]
   from = "/resources"
-  to = "/Resources.dc.html"
+  to = "/Resources.html"
   status = 200
 
 [[headers]]

@@ -70,7 +70,10 @@
       background: '#fff', borderRadius: '14px', boxShadow: '0 24px 60px rgba(13,27,75,0.25)', border: '1px solid #E4E9F5',
       display: 'none', flexDirection: 'column', overflow: 'hidden', zIndex: '9998', fontFamily: "'Inter',sans-serif"
     }}, [
-      el('div', { style: { background: '#0D1B4B', color: '#fff', padding: '14px 16px', fontWeight: '700', fontSize: '14px' } }, ['Poseidon Assistant']),
+      el('div', { style: { background: '#2D5BE3', color: '#fff', padding: '14px 16px', fontWeight: '700', fontSize: '14px', display: 'flex', alignItems: 'center', gap: '10px' } }, [
+        el('img', { src: 'assets/pns_logo_new_sm.png', alt: '', width: '24', height: '24', style: { width: '24px', height: '24px', objectFit: 'contain', flexShrink: '0' } }),
+        el('span', {}, ['Poseidon Assistant'])
+      ]),
       msgList,
       el('div', { style: { display: 'flex', gap: '8px', padding: '12px', borderTop: '1px solid #E4E9F5' } }, [input, sendBtn])
     ]);
@@ -84,15 +87,16 @@
       style: {
         position: 'fixed', bottom: '24px', right: '24px', width: '56px', height: '56px', borderRadius: '50%',
         background: '#2D5BE3', border: 'none', color: '#fff', fontSize: '24px', cursor: 'pointer',
-        boxShadow: '0 12px 30px rgba(13,27,75,0.3)', zIndex: '9999', display: 'flex', alignItems: 'center', justifyContent: 'center'
+        boxShadow: '0 12px 30px rgba(13,27,75,0.3)', zIndex: '9999', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0'
       },
       onClick: function(){
         open = !open;
         if (!panel) buildPanel();
         panel.style.display = open ? 'flex' : 'none';
-        bubble.textContent = open ? '✕' : '💬';
+        bubble.innerHTML = '';
+        bubble.appendChild(open ? el('span', { style: { fontSize: '24px', color: '#fff' } }, ['✕']) : el('img', { src: 'assets/pns_logo_new_sm.png', alt: 'Chat', width: '32', height: '32', style: { width: '32px', height: '32px', objectFit: 'contain', borderRadius: '50%' } }));
       }
-    }, ['💬']);
+    }, [el('img', { src: 'assets/pns_logo_new_sm.png', alt: 'Chat', width: '32', height: '32', style: { width: '32px', height: '32px', objectFit: 'contain', borderRadius: '50%' } })]);
     document.body.appendChild(bubble);
   }
 
