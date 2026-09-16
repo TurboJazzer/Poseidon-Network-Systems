@@ -3,7 +3,14 @@ export default async (request, context) => {
 
   const allowedPatterns = [/googlebot/i, /googlebot-image/i, /googlebot-video/i, /google-extended/i, /googleother/i, /google-cloudvertexbot/i];
   if (allowedPatterns.some((re) => re.test(ua))) {
-    return context.next();
+    const ip = context.ip || request.headers.get("x-nf-client-connection-ip") || "";
+    if (await isVerifiedGoogleIP(ip)) {
+      return context.next();
+    }
+    return new Response("Access restricted.", {
+      status: 403,
+      headers: { "content-type": "text/plain" }
+    });
   }
 
   const blockedPatterns = [
@@ -24,3 +31,30 @@ export default async (request, context) => {
 };
 
 export const config = { path: "/*" };
+
+// Verifies an IP belongs to Google by reverse-DNS then forward-confirming the hostname,
+// per Google's documented Googlebot-verification method.
+async function isVerifiedGoogleIP(ip) {
+  if (!ip) return false;
+  try {
+    const rdnsRes = await fetch(`https://dns.google/resolve?name=${reverseIpToPtr(ip)}&type=PTR`);
+    const rdnsData = await rdnsRes.json();
+    const hostnames = (rdnsData.Answer || []).map((a) => a.data.replace(/\.$/, ""));
+    const googleHostnames = hostnames.filter((h) => /\.googlebot\.com$|\.google\.com$/i.test(h));
+    if (googleHostnames.length === 0) return false;
+
+    for (const host of googleHostnames) {
+      const fwdRes = await fetch(`https://dns.google/resolve?name=${host}&type=A`);
+      const fwdData = await fwdRes.json();
+      const ips = (fwdData.Answer || []).map((a) => a.data);
+      if (ips.includes(ip)) return true;
+    }
+    return false;
+  } catch {
+    return false;
+  }
+}
+
+function reverseIpToPtr(ip) {
+  return ip.split(".").reverse().join(".") + ".in-addr.arpa";
+}
