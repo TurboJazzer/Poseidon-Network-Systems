@@ -27,9 +27,45 @@
   status = 200
 
 [[redirects]]
+  from = "/new-dell-equipment.html"
+  to = "/new-dell-equipment"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/refurbished-dell-equipment"
   to = "/Refurbished%20Dell%20Equipment.html"
   status = 200
+
+[[redirects]]
+  from = "/refurbished-dell-equipment.html"
+  to = "/refurbished-dell-equipment"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/faq.html"
+  to = "/faq"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/terms.html"
+  to = "/terms"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/privacy.html"
+  to = "/privacy"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/resources.html"
+  to = "/resources"
+  status = 301
+  force = true
 
 [[redirects]]
   from = "/sitemap_index.xml"
