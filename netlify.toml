@@ -23,47 +23,37 @@
 
 [[redirects]]
   from = "/new-dell-equipment"
-  to = "/New%20Dell%20Equipment.html"
-  status = 200
-
-[[redirects]]
-  from = "/new-dell-equipment.html"
-  to = "/new-dell-equipment"
+  to = "/new-dell-equipment.html"
   status = 301
   force = true
 
 [[redirects]]
   from = "/refurbished-dell-equipment"
-  to = "/Refurbished%20Dell%20Equipment.html"
-  status = 200
-
-[[redirects]]
-  from = "/refurbished-dell-equipment.html"
-  to = "/refurbished-dell-equipment"
+  to = "/refurbished-dell-equipment.html"
   status = 301
   force = true
 
 [[redirects]]
-  from = "/faq.html"
-  to = "/faq"
+  from = "/faq"
+  to = "/faq.html"
   status = 301
   force = true
 
 [[redirects]]
-  from = "/terms.html"
-  to = "/terms"
+  from = "/terms"
+  to = "/terms.html"
   status = 301
   force = true
 
 [[redirects]]
-  from = "/privacy.html"
-  to = "/privacy"
+  from = "/privacy"
+  to = "/privacy.html"
   status = 301
   force = true
 
 [[redirects]]
-  from = "/resources.html"
-  to = "/resources"
+  from = "/resources"
+  to = "/resources.html"
   status = 301
   force = true
 
@@ -75,26 +65,6 @@
 [[redirects]]
   from = "/favicon.ico"
   to = "/favicon.png"
-  status = 200
-
-[[redirects]]
-  from = "/faq"
-  to = "/FAQ.html"
-  status = 200
-
-[[redirects]]
-  from = "/terms"
-  to = "/Terms%20of%20Service.html"
-  status = 200
-
-[[redirects]]
-  from = "/privacy"
-  to = "/Privacy%20Policy.html"
-  status = 200
-
-[[redirects]]
-  from = "/resources"
-  to = "/Resources.html"
   status = 200
 
 [[headers]]

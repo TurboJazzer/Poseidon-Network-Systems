@@ -67,11 +67,11 @@
   },
   "pages": {
     "home": "/index.html",
-    "newDellEquipment": "/new-dell-equipment",
-    "refurbishedDellEquipment": "/refurbished-dell-equipment",
-    "faq": "/faq",
-    "resources": "/resources",
-    "terms": "/terms",
-    "privacy": "/privacy"
+    "newDellEquipment": "/new-dell-equipment.html",
+    "refurbishedDellEquipment": "/refurbished-dell-equipment.html",
+    "faq": "/faq.html",
+    "resources": "/resources.html",
+    "terms": "/terms.html",
+    "privacy": "/privacy.html"
   }
 }
