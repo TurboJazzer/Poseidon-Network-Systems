@@ -1,7 +1,7 @@
 export default async (request, context) => {
   const ua = request.headers.get("user-agent") || "";
 
-  const allowedPatterns = [/googlebot/i, /googlebot-image/i, /googlebot-video/i];
+  const allowedPatterns = [/googlebot/i, /googlebot-image/i, /googlebot-video/i, /google-extended/i, /googleother/i, /google-cloudvertexbot/i];
   if (allowedPatterns.some((re) => re.test(ua))) {
     return context.next();
   }
