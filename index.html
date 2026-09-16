@@ -43,6 +43,8 @@
   a,button{transition:background-color .18s ease,color .18s ease,border-color .18s ease,transform .12s ease;}
   a:active,button:active{transform:scale(0.98);}
   a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #2D5BE3;outline-offset:2px;border-radius:4px;}
+  .pns-sticky-bar{display:none;}
+  @media (max-width:640px){.pns-sticky-bar{display:flex;}}
   *{box-sizing:border-box;}
   section{width:100%;}
   .ledger-line{display:flex;flex-direction:row;border-top:1px solid #E4E9F5;border-bottom:1px solid #E4E9F5;padding:20px 0;}
@@ -136,9 +138,12 @@
           <h1 style="font-size:clamp(34px,4.2vw,54px);line-height:1.1;letter-spacing:-0.02em;font-weight:700;font-family:'Space Grotesk',sans-serif;color:#ffffff;margin-bottom:18px;">Certified Dell Partner Direct &amp; Enterprise IT Infrastructure Specialists</h1>
           <p style="font-size:19px;line-height:1.6;color:rgba(255,255,255,0.85);max-width:560px;margin-bottom:36px;">New and certified refurbished Dell hardware, fully configured and supported across Cape Town and the Western Cape.</p>
           <div style="display:flex;gap:14px;flex-wrap:wrap;">
-            <a href="#quote" style="font-size:16px;font-weight:600;color:#ffffff;background:#2D5BE3;padding:16px 30px;border-radius:10px;" style-hover="background:#1F47C4;">Request a Quote</a>
-            <a href="tel:+27213008278" style="font-size:16px;font-weight:600;color:#ffffff;padding:16px 30px;border-radius:10px;border:1px solid rgba(255,255,255,0.3);" style-hover="border-color:#ffffff;">Call 021 300 8278</a>
-            <a href="https://wa.me/27647029962" style="font-size:16px;font-weight:600;color:#ffffff;padding:16px 30px;border-radius:10px;border:1px solid rgba(255,255,255,0.3);display:inline-flex;align-items:center;gap:8px;" style-hover="border-color:#ffffff;"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-1.746-.87-2.888-1.552-4.036-3.523-.305-.524.305-.487.873-1.62.098-.198.05-.372-.05-.52-.098-.15-.644-1.548-.883-2.12-.234-.556-.47-.48-.644-.49-.173-.008-.372-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.017-1.04 2.479 0 1.463 1.065 2.876 1.213 3.074.15.198 2.05 3.132 4.977 4.27 2.928 1.138 2.928.759 3.877.65.95-.11 3.1-1.263 3.55-2.483.446-1.22.446-2.266.297-2.483-.148-.198-.297-.297-.594-.446z"/><path d="M12.004 2C6.486 2 2 6.486 2 12.004c0 1.887.518 3.65 1.42 5.166L2 22l4.98-1.394A9.94 9.94 0 0 0 12.004 22c5.518 0 10.004-4.486 10.004-9.996S17.522 2 12.004 2zm0 18.174c-1.72 0-3.35-.49-4.732-1.334l-.34-.202-3.5.98.982-3.415-.222-.354A8.144 8.144 0 0 1 3.83 12.004c0-4.512 3.67-8.174 8.174-8.174 4.505 0 8.174 3.662 8.174 8.174 0 4.512-3.67 8.17-8.174 8.17z"/></svg>WhatsApp</a>
+            <a href="#quote" style="font-size:16px;font-weight:600;color:#ffffff;background:#2D5BE3;padding:16px 30px;border-radius:10px;" style-hover="background:#1F47C4;">Get a Dell Hardware Quote</a>
+            <a href="#quote" style="font-size:16px;font-weight:600;color:#ffffff;padding:16px 30px;border-radius:10px;border:1px solid rgba(255,255,255,0.3);" style-hover="border-color:#ffffff;">Book a Network Assessment</a>
+          </div>
+          <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:14px;">
+            <a href="tel:+27213008278" style="font-size:15px;font-weight:600;color:rgba(255,255,255,0.85);" style-hover="color:#ffffff;">Call 021 300 8278</a>
+            <a href="https://wa.me/27647029962" style="font-size:15px;font-weight:600;color:rgba(255,255,255,0.85);display:inline-flex;align-items:center;gap:8px;" style-hover="color:#ffffff;"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-1.746-.87-2.888-1.552-4.036-3.523-.305-.524.305-.487.873-1.62.098-.198.05-.372-.05-.52-.098-.15-.644-1.548-.883-2.12-.234-.556-.47-.48-.644-.49-.173-.008-.372-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.017-1.04 2.479 0 1.463 1.065 2.876 1.213 3.074.15.198 2.05 3.132 4.977 4.27 2.928 1.138 2.928.759 3.877.65.95-.11 3.1-1.263 3.55-2.483.446-1.22.446-2.266.297-2.483-.148-.198-.297-.297-.594-.446z"/><path d="M12.004 2C6.486 2 2 6.486 2 12.004c0 1.887.518 3.65 1.42 5.166L2 22l4.98-1.394A9.94 9.94 0 0 0 12.004 22c5.518 0 10.004-4.486 10.004-9.996S17.522 2 12.004 2zm0 18.174c-1.72 0-3.35-.49-4.732-1.334l-.34-.202-3.5.98.982-3.415-.222-.354A8.144 8.144 0 0 1 3.83 12.004c0-4.512 3.67-8.174 8.174-8.174 4.505 0 8.174 3.662 8.174 8.174 0 4.512-3.67 8.17-8.174 8.17z"/></svg>WhatsApp 064 702 9962</a>
           </div>
         </div>
         <div style="position:relative;aspect-ratio:4/3;border-radius:18px;overflow:hidden;">
@@ -274,9 +279,12 @@
           <input name="phone" type="tel" placeholder="Phone" aria-label="Phone" style="border:1px solid #D8E0F3;border-radius:10px;padding:13px 14px;font-size:15px;color:#0D1B4B;" />
           <select name="need" aria-label="What do you need?" style="border:1px solid #D8E0F3;border-radius:10px;padding:13px 14px;font-size:15px;color:#5A6588;">
             <option value="">What do you need?</option>
+            <option>New Dell laptops</option>
+            <option>Refurbished Dell laptops</option>
+            <option>Dell desktops (OptiPlex)</option>
+            <option>Dell servers (PowerEdge)</option>
             <option>Managed IT support</option>
             <option>Network setup &amp; cabling</option>
-            <option>Hardware sales</option>
             <option>Repairs &amp; maintenance</option>
             <option>Backup &amp; business continuity</option>
             <option>Something else</option>
@@ -331,6 +339,12 @@
       </div>
     </div>
   </footer>
+</div>
+
+<div class="pns-sticky-bar" style="position:fixed;bottom:0;left:0;right:0;z-index:60;background:#0D1B4B;box-shadow:0 -4px 16px rgba(13,27,75,0.2);">
+  <a href="tel:+27213008278" style="flex:1;text-align:center;padding:14px 8px;font-size:14px;font-weight:600;color:#ffffff;border-right:1px solid rgba(255,255,255,0.15);">Call</a>
+  <a href="https://wa.me/27647029962" style="flex:1;text-align:center;padding:14px 8px;font-size:14px;font-weight:600;color:#ffffff;">WhatsApp</a>
+  <a href="#quote" style="flex:1;text-align:center;padding:14px 8px;font-size:14px;font-weight:600;color:#ffffff;background:#2D5BE3;">Get Quote</a>
 </div>
 
 </x-dc>
