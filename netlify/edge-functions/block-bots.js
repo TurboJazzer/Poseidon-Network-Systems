@@ -1,8 +1,10 @@
 export default async (request, context) => {
   const ua = request.headers.get("user-agent") || "";
 
-  const allowedPatterns = [/googlebot/i, /googlebot-image/i, /googlebot-video/i, /google-extended/i, /googleother/i, /google-cloudvertexbot/i];
-  if (allowedPatterns.some((re) => re.test(ua))) {
+  const strictAllowedPatterns = [/googlebot/i, /googlebot-image/i, /googlebot-video/i];
+  const aiAgentAllowedPatterns = [/google-extended/i, /googleother/i, /google-cloudvertexbot/i];
+
+  if (strictAllowedPatterns.some((re) => re.test(ua))) {
     const ip = context.ip || request.headers.get("x-nf-client-connection-ip") || "";
     if (await isVerifiedGoogleIP(ip)) {
       return context.next();
@@ -11,6 +13,10 @@ export default async (request, context) => {
       status: 403,
       headers: { "content-type": "text/plain" }
     });
+  }
+
+  if (aiAgentAllowedPatterns.some((re) => re.test(ua))) {
+    return context.next();
   }
 
   const blockedPatterns = [
