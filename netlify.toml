@@ -2,6 +2,9 @@
   publish = "."
   functions = "netlify/functions"
 
+[build.processing.html]
+  pretty_urls = false
+
 [[edge_functions]]
   path = "/*"
   function = "block-bots"
@@ -10,50 +13,53 @@
   from = "/api/send-quote"
   to = "/.netlify/functions/send-quote"
   status = 200
+  [redirects.rate_limit]
+    window_limit = 10
+    window_size = 60
+    aggregate_by = ["ip", "domain"]
 
 [[redirects]]
   from = "/api/chat"
   to = "/.netlify/functions/chat"
   status = 200
-
-[[redirects]]
-  from = "/"
-  to = "/index.html"
-  status = 200
+  [redirects.rate_limit]
+    window_limit = 20
+    window_size = 60
+    aggregate_by = ["ip", "domain"]
 
 [[redirects]]
   from = "/new-dell-equipment"
   to = "/new-dell-equipment.html"
   status = 301
-  force = true
 
 [[redirects]]
   from = "/refurbished-dell-equipment"
   to = "/refurbished-dell-equipment.html"
   status = 301
-  force = true
 
 [[redirects]]
   from = "/faq"
   to = "/faq.html"
   status = 301
-  force = true
 
 [[redirects]]
   from = "/terms"
   to = "/terms.html"
   status = 301
-  force = true
 
 [[redirects]]
   from = "/privacy"
   to = "/privacy.html"
   status = 301
-  force = true
 
 [[redirects]]
   from = "/resources"
   to = "/resources.html"
+  status = 301
+
+[[redirects]]
+  from = "/index.html"
+  to = "/"
   status = 301
   force = true
 

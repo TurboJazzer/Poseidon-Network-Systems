@@ -32,9 +32,9 @@
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ItemList","itemListElement":[
-{"@type":"Product","position":1,"name":"Dell OptiPlex 7000 MFF","sku":"PNS-NEW-OPT7000MFF","description":"New Dell OptiPlex 7000 Micro Form Factor, Intel Core Ultra / 14th Gen, commercial desktop, full Dell OEM warranty.","image":"https://poseidon-network.com/assets/dell_optiplex_7000_mff.jpg","brand":{"@type":"Brand","name":"Dell"},"offers":{"@type":"Offer","url":"https://poseidon-network.com/new-dell-equipment.html","priceCurrency":"ZAR","availability":"https://schema.org/PreOrder","priceValidUntil":"2026-12-31","itemCondition":"https://schema.org/NewCondition","shippingDetails":{"@type":"OfferShippingDetails","shippingRate":{"@type":"MonetaryAmount","value":"0","currency":"ZAR"},"shippingDestination":{"@type":"DefinedRegion","addressCountry":"ZA"},"deliveryTime":{"@type":"ShippingDeliveryTime","handlingTime":{"@type":"QuantitativeValue","minValue":1,"maxValue":2,"unitCode":"DAY"},"transitTime":{"@type":"QuantitativeValue","minValue":1,"maxValue":3,"unitCode":"DAY"}}},"hasMerchantReturnPolicy":{"@type":"MerchantReturnPolicy","applicableCountry":"ZA","returnPolicyCategory":"https://schema.org/MerchantReturnFiniteReturnWindow","merchantReturnDays":7}}},
-{"@type":"Product","position":2,"name":"Dell Latitude 5540","sku":"PNS-NEW-LAT5540","description":"New Dell Latitude 5540, 15\" business laptop, durable build for mobile and hybrid staff, full Dell OEM warranty.","image":"https://poseidon-network.com/assets/dell_latitude_5540.jpg","brand":{"@type":"Brand","name":"Dell"},"offers":{"@type":"Offer","url":"https://poseidon-network.com/new-dell-equipment.html","priceCurrency":"ZAR","availability":"https://schema.org/PreOrder","priceValidUntil":"2026-12-31","itemCondition":"https://schema.org/NewCondition","shippingDetails":{"@type":"OfferShippingDetails","shippingRate":{"@type":"MonetaryAmount","value":"0","currency":"ZAR"},"shippingDestination":{"@type":"DefinedRegion","addressCountry":"ZA"},"deliveryTime":{"@type":"ShippingDeliveryTime","handlingTime":{"@type":"QuantitativeValue","minValue":1,"maxValue":2,"unitCode":"DAY"},"transitTime":{"@type":"QuantitativeValue","minValue":1,"maxValue":3,"unitCode":"DAY"}}},"hasMerchantReturnPolicy":{"@type":"MerchantReturnPolicy","applicableCountry":"ZA","returnPolicyCategory":"https://schema.org/MerchantReturnFiniteReturnWindow","merchantReturnDays":7}}},
-{"@type":"Product","position":3,"name":"Dell PowerEdge R760","sku":"PNS-NEW-PER760","description":"New Dell PowerEdge R760 2U rack server, enterprise compute and virtualization, full Dell OEM warranty.","image":"https://poseidon-network.com/assets/dell_poweredge_r760.jpg","brand":{"@type":"Brand","name":"Dell"},"offers":{"@type":"Offer","url":"https://poseidon-network.com/new-dell-equipment.html","priceCurrency":"ZAR","availability":"https://schema.org/PreOrder","priceValidUntil":"2026-12-31","itemCondition":"https://schema.org/NewCondition","shippingDetails":{"@type":"OfferShippingDetails","shippingRate":{"@type":"MonetaryAmount","value":"0","currency":"ZAR"},"shippingDestination":{"@type":"DefinedRegion","addressCountry":"ZA"},"deliveryTime":{"@type":"ShippingDeliveryTime","handlingTime":{"@type":"QuantitativeValue","minValue":1,"maxValue":2,"unitCode":"DAY"},"transitTime":{"@type":"QuantitativeValue","minValue":1,"maxValue":3,"unitCode":"DAY"}}},"hasMerchantReturnPolicy":{"@type":"MerchantReturnPolicy","applicableCountry":"ZA","returnPolicyCategory":"https://schema.org/MerchantReturnFiniteReturnWindow","merchantReturnDays":7}}}
+{"@type":"Product","position":1,"name":"Dell OptiPlex 7000 MFF","sku":"PNS-NEW-OPT7000MFF","description":"New Dell OptiPlex 7000 Micro Form Factor, Intel Core Ultra / 14th Gen, commercial desktop, full Dell OEM warranty.","image":"https://poseidon-network.com/assets/dell_optiplex_7000_mff.jpg","brand":{"@type":"Brand","name":"Dell"}},
+{"@type":"Product","position":2,"name":"Dell Latitude 5540","sku":"PNS-NEW-LAT5540","description":"New Dell Latitude 5540, 15\" business laptop, durable build for mobile and hybrid staff, full Dell OEM warranty.","image":"https://poseidon-network.com/assets/dell_latitude_5540.jpg","brand":{"@type":"Brand","name":"Dell"}},
+{"@type":"Product","position":3,"name":"Dell PowerEdge R760","sku":"PNS-NEW-PER760","description":"New Dell PowerEdge R760 2U rack server, enterprise compute and virtualization, full Dell OEM warranty.","image":"https://poseidon-network.com/assets/dell_poweredge_r760.jpg","brand":{"@type":"Brand","name":"Dell"}}
 ]}
 </script>
 <style>
@@ -56,22 +56,16 @@
 <script>
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
-  function gtag(){ window.dataLayer.push(arguments); }
-  gtag('js', new Date());
-  gtag('config', 'G-5XV1HEXGGP');
   (function(){
     var loaded = false;
+    function consentAllows(){ return localStorage.getItem('pns_cookie_consent') !== 'rejected'; }
     function loadAnalytics(){
-      if (loaded) return;
+      if (loaded || !consentAllows()) return;
       loaded = true;
       var gtm = document.createElement('script');
       gtm.async = true;
       gtm.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-P4J773RN&l=dataLayer';
       document.head.appendChild(gtm);
-      var ga = document.createElement('script');
-      ga.async = true;
-      ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-5XV1HEXGGP';
-      document.head.appendChild(ga);
       events.forEach(function(evt){ window.removeEventListener(evt, loadAnalytics); });
       clearTimeout(fallback);
     }
@@ -89,7 +83,7 @@
 <div style="width:100%;overflow-x:hidden;">
   <header style="position:sticky;top:0;z-index:80;background:#ffffff;border-bottom:1px solid #E4E9F5;">
     <div style="max-width:1200px;margin:0 auto;padding:14px 24px;min-height:68px;display:flex;align-items:center;flex-wrap:wrap;justify-content:space-between;gap:24px;box-sizing:border-box;">
-      <a href="index.html" style="display:flex;align-items:center;">
+      <a href="/" style="display:flex;align-items:center;">
         <img src="assets/pns_logo_new_sm.png" alt="Poseidon Network Systems" style="height:60px;width:auto;display:block;" />
       </a>
       <nav style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;justify-content:flex-end;">
@@ -100,12 +94,12 @@
             <a href="/refurbished-dell-equipment.html" style="display:block;padding:10px 12px;font-size:14px;font-weight:500;color:#3D4A70;border-radius:6px;" style-hover="background:#F6F8FD;color:#0D1B4B;">Refurbished Dell</a>
           </div>
         </div>
-        <a href="index.html#services" style="font-size:14px;font-weight:500;color:#3D4A70;" style-hover="color:#0D1B4B;">Services</a>
-        <a href="index.html#process" style="font-size:14px;font-weight:500;color:#3D4A70;" style-hover="color:#0D1B4B;">How It Works</a>
-        <a href="index.html#about" style="font-size:14px;font-weight:500;color:#3D4A70;" style-hover="color:#0D1B4B;">About</a>
+        <a href="/#services" style="font-size:14px;font-weight:500;color:#3D4A70;" style-hover="color:#0D1B4B;">Services</a>
+        <a href="/#process" style="font-size:14px;font-weight:500;color:#3D4A70;" style-hover="color:#0D1B4B;">How It Works</a>
+        <a href="/#about" style="font-size:14px;font-weight:500;color:#3D4A70;" style-hover="color:#0D1B4B;">About</a>
         <a href="/faq.html" style="font-size:14px;font-weight:500;color:#3D4A70;" style-hover="color:#0D1B4B;">FAQ</a>
         <a href="/resources.html" style="font-size:14px;font-weight:500;color:#3D4A70;" style-hover="color:#0D1B4B;">Resources</a>
-        <a href="index.html#quote" style="font-size:14px;font-weight:600;color:#ffffff;background:#2D5BE3;padding:11px 20px;border-radius:8px;white-space:nowrap;" style-hover="background:#1F47C4;">Request a Quote</a>
+        <a href="/#quote" style="font-size:14px;font-weight:600;color:#ffffff;background:#2D5BE3;padding:11px 20px;border-radius:8px;white-space:nowrap;" style-hover="background:#1F47C4;">Request a Quote</a>
       </nav>
     </div>
   </header>
@@ -136,7 +130,7 @@
         <sc-for list="{{ models }}" as="m" hint-placeholder-count="3">
           <div style="background:#fff;border:1px solid #E4E9F5;border-radius:12px;padding:28px;">
             <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
-              <h3 style="font-size:19px;font-weight:700;color:#0D1B4B;margin:0;">{{ m.name }}</h3>
+              <h3 style="font-size:19px;font-weight:700;color:#0D1B4B;margin:0;"><a href="{{ m.href }}" style="color:#0D1B4B;">{{ m.name }}</a></h3>
               <span style="font-size:11px;font-weight:700;color:#059669;background:#D1FAE5;padding:4px 10px;border-radius:999px;white-space:nowrap;">Available to order</span>
             </div>
             <p style="font-size:13px;color:#5A6588;font-family:monospace;margin:0 0 12px;">{{ m.spec }}</p>
@@ -146,11 +140,15 @@
           </div>
         </sc-for>
       </div>
+      <div style="margin-top:32px;padding:24px 28px;background:#fff;border:1px solid #E4E9F5;border-radius:12px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+        <p style="font-size:14px;color:#4A5578;margin:0;max-width:560px;">Looking for a lower-cost option? <a href="/refurbished-dell-equipment.html">Refurbished Dell hardware</a> offers the same reliability at a reduced price, backed by a 1-year onsite warranty.</p>
+        <a href="/refurbished-dell-equipment.html" style="font-size:14px;font-weight:600;color:#2D5BE3;white-space:nowrap;">View Refurbished Dell &rarr;</a>
+      </div>
     </div>
   </section>
 
   <footer style="background:#0D1B4B;padding:40px 24px;text-align:center;">
-    <p style="font-size:13px;color:rgba(255,255,255,0.5);margin:0;">© 2026 Poseidon Network Systems. <a href="index.html" style="color:rgba(255,255,255,0.5);">Home</a> · <a href="/refurbished-dell-equipment.html" style="color:rgba(255,255,255,0.5);">Refurbished Dell</a></p>
+    <p style="font-size:13px;color:rgba(255,255,255,0.5);margin:0;">© 2026 Poseidon Network Systems CC. <a href="/" style="color:rgba(255,255,255,0.5);">Home</a> · <a href="/refurbished-dell-equipment.html" style="color:rgba(255,255,255,0.5);">Refurbished Dell</a> · <a href="/faq.html" style="color:rgba(255,255,255,0.5);">FAQ</a> · <a href="/terms.html" style="color:rgba(255,255,255,0.5);">Terms</a> · <a href="/privacy.html" style="color:rgba(255,255,255,0.5);">Privacy</a></p>
   </footer>
 </div>
 
@@ -160,9 +158,9 @@ class Component extends DCLogic {
   renderVals() {
     return {
       models: [
-        { name: 'OptiPlex 7000 MFF', spec: 'Intel Core Ultra / 14th Gen · Micro Form Factor', desc: 'Compact commercial desktop built for dense office and call-center deployments.' },
-        { name: 'Latitude 5540', spec: '15" · Business Laptop', desc: 'Durable enterprise laptop for mobile staff and hybrid teams.' },
-        { name: 'PowerEdge R760', spec: '2U Rack Server', desc: 'Enterprise rack server for on-premise compute and virtualization.' }
+        { name: 'OptiPlex 7000 MFF', spec: 'Intel Core Ultra / 14th Gen · Micro Form Factor', desc: 'Compact commercial desktop built for dense office and call-center deployments.', href: '/product.html?name=' + encodeURIComponent('Dell OptiPlex 7000 MFF') },
+        { name: 'Latitude 5540', spec: '15" · Business Laptop', desc: 'Durable enterprise laptop for mobile staff and hybrid teams.', href: '/product.html?name=' + encodeURIComponent('Dell Latitude 5540') },
+        { name: 'PowerEdge R760', spec: '2U Rack Server', desc: 'Enterprise rack server for on-premise compute and virtualization.', href: '/product.html?name=' + encodeURIComponent('Dell PowerEdge R760') }
       ]
     };
   }

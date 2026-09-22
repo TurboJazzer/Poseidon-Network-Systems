@@ -44,22 +44,16 @@
 <script>
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
-  function gtag(){ window.dataLayer.push(arguments); }
-  gtag('js', new Date());
-  gtag('config', 'G-5XV1HEXGGP');
   (function(){
     var loaded = false;
+    function consentAllows(){ return localStorage.getItem('pns_cookie_consent') !== 'rejected'; }
     function loadAnalytics(){
-      if (loaded) return;
+      if (loaded || !consentAllows()) return;
       loaded = true;
       var gtm = document.createElement('script');
       gtm.async = true;
       gtm.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-P4J773RN&l=dataLayer';
       document.head.appendChild(gtm);
-      var ga = document.createElement('script');
-      ga.async = true;
-      ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-5XV1HEXGGP';
-      document.head.appendChild(ga);
       events.forEach(function(evt){ window.removeEventListener(evt, loadAnalytics); });
       clearTimeout(fallback);
     }
@@ -84,13 +78,12 @@
               <a href="/refurbished-dell-equipment.html" style="display:block;padding:10px 12px;font-size:14px;font-weight:500;color:#3D4A70;border-radius:6px;" style-hover="background:#F6F8FD;color:#0D1B4B;">Refurbished Dell</a>
             </div>
           </div>
-          <a href="index.html#services" style="font-size:14px;font-weight:500;color:#3D4A70;" style-hover="color:#0D1B4B;">Services</a>
-          <a href="index.html#process" style="font-size:14px;font-weight:500;color:#3D4A70;" style-hover="color:#0D1B4B;">How It Works</a>
-          <a href="index.html#about" style="font-size:14px;font-weight:500;color:#3D4A70;" style-hover="color:#0D1B4B;">About</a>
+          <a href="/#services" style="font-size:14px;font-weight:500;color:#3D4A70;" style-hover="color:#0D1B4B;">Services</a>
+          <a href="/#process" style="font-size:14px;font-weight:500;color:#3D4A70;" style-hover="color:#0D1B4B;">How It Works</a>
+          <a href="/#about" style="font-size:14px;font-weight:500;color:#3D4A70;" style-hover="color:#0D1B4B;">About</a>
           <a href="/faq.html" style="font-size:14px;font-weight:500;color:#3D4A70;" style-hover="color:#0D1B4B;">FAQ</a>
           <a href="/resources.html" style="font-size:14px;font-weight:500;color:#3D4A70;" style-hover="color:#0D1B4B;">Resources</a>
-        <a href="/terms.html" style="font-size:14px;font-weight:600;color:#2D5BE3;" aria-current="page">Terms</a>
-        <a href="index.html#quote" style="font-size:14px; font-weight:600; color:#fff; background:#2D5BE3; padding:10px 20px; border-radius:8px;">Request a Quote</a>
+        <a href="/#quote" style="font-size:14px; font-weight:600; color:#fff; background:#2D5BE3; padding:10px 20px; border-radius:8px;">Request a Quote</a>
       </div>
     </div>
   </div>
@@ -118,14 +111,14 @@
       </div>
       <div>
         <h2 style="font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700; color:#0D1B4B; margin:0 0 10px;">5. Contact</h2>
-        <p style="margin:0;">Questions about these terms can be directed to Poseidon Network Systems, Sea Point, Cape Town, 8000, or via <a href="tel:+27213008278">021 300 8278</a>.</p>
+        <p style="margin:0;">Questions about these terms can be directed to Poseidon Network Systems CC, Sea Point, Cape Town, 8005, or via <a href="tel:+27213008278">021 300 8278</a>.</p>
       </div>
     </div>
   </div>
 
   <div style="background:#F6F8FD; border-top:1px solid #E4E9F5;">
     <div style="max-width:1180px; margin:0 auto; padding:32px 24px; font-size:12px; color:#94A0BF; display:flex; gap:20px; flex-wrap:wrap;">
-      <span>© 2026 Poseidon Network Systems. All rights reserved.</span>
+      <span>© 2026 Poseidon Network Systems CC. All rights reserved.</span>
       <a href="/terms.html" style="color:#94A0BF;">Terms of Service</a>
       <a href="/privacy.html" style="color:#94A0BF;">Privacy Policy</a>
     </div>

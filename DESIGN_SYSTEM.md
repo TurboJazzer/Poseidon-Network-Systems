@@ -83,7 +83,7 @@ Must include: primary SKU/model, generation tag (e.g. "Intel Core Ultra / 14th G
 Visual styling: clean white background (#FFFFFF), subtle border (1px solid #E5E7EB), crisp shadow on hover (shadow-md).
 
 ### B. Refurbished Hardware Component Card (`/refurbished-dell/`)
-Must include: Condition Grade Badge (Grade A Certified), Original vs Refurbished savings indicator (Save 40%), Inspection Guarantee, Stock Count (In Stock Cape Town).
+Must include: Condition Badge (Factory Reconditioned), Original vs Refurbished savings indicator (Save 40%), Inspection Guarantee, Stock Count (In Stock Cape Town).
 Visual styling: accent banner top border, distinct badge coloring (#D97706), clear stock status pill.
 
 ---

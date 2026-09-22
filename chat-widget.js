@@ -36,6 +36,7 @@
   async function send(){
     var text = input.value.trim();
     if (!text || sending) return;
+    var historyToSend = messages.slice(1); // exclude greeting; latest message sent separately
     messages.push({ role: 'user', text: text });
     input.value = '';
     sending = true;
@@ -46,7 +47,7 @@
       var res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text, history: messages })
+        body: JSON.stringify({ message: text, history: historyToSend })
       });
       if (!res.ok) throw new Error('failed');
       var data = await res.json();

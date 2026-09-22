@@ -30,7 +30,7 @@
 <meta name="twitter:title" content="Poseidon Network Systems | Certified Dell Partner Direct, Cape Town">
 <meta name="twitter:description" content="Certified Dell Partner Direct providing enterprise IT infrastructure, office network cabling, and managed support across Cape Town since 2004. Reliable, non-blockchain business IT.">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"LocalBusiness","name":"Poseidon Network Systems","legalName":"Poseidon Network Systems","description":"Poseidon Network Systems is a Certified Dell Partner Direct, supplying new and Grade A refurbished Dell hardware alongside network infrastructure and managed IT support to businesses across Cape Town.","slogan":"Certified Dell Partner Direct","disambiguatingDescription":"A South African IT support, network infrastructure, and Dell hardware provider based in Sea Point, Cape Town, operating at poseidon-network.com. Not affiliated with poseidon.network or any blockchain, cryptocurrency, or decentralized computing project.","url":"https://poseidon-network.com/","telephone":"+27213008278","priceRange":"$$","image":"https://poseidon-network.com/assets/pns_logo_new_sm.png","address":{"@type":"PostalAddress","addressLocality":"Sea Point","addressRegion":"Cape Town","postalCode":"8005","addressCountry":"ZA"},"areaServed":["Cape Town","Western Cape"],"foundingDate":"2004"}
+{"@context":"https://schema.org","@type":"LocalBusiness","name":"Poseidon Network Systems","legalName":"Poseidon Network Systems CC","description":"Poseidon Network Systems is a Certified Dell Partner Direct, supplying new and Grade A refurbished Dell hardware alongside network infrastructure and managed IT support to businesses across Cape Town.","slogan":"Certified Dell Partner Direct","disambiguatingDescription":"A South African IT support, network infrastructure, and Dell hardware provider based in Sea Point, Cape Town, operating at poseidon-network.com. Not affiliated with poseidon.network or any blockchain, cryptocurrency, or decentralized computing project.","url":"https://poseidon-network.com/","telephone":"+27213008278","priceRange":"$$","image":"https://poseidon-network.com/assets/pns_logo_new_sm.png","address":{"@type":"PostalAddress","addressLocality":"Sea Point","addressRegion":"Cape Town","postalCode":"8005","addressCountry":"ZA"},"areaServed":["Cape Town","Western Cape"],"foundingDate":"2004","sameAs":["https://www.linkedin.com/company/poseidon-network-systems","https://facebook.com/poseidonnetwork","https://instagram.com/poseidonnetwork"],"openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"07:30","closes":"17:30"}}
 </script>
 <style>
   *,*::before,*::after{box-sizing:border-box}
@@ -72,22 +72,16 @@
 <script>
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
-  function gtag(){ window.dataLayer.push(arguments); }
-  gtag('js', new Date());
-  gtag('config', 'G-5XV1HEXGGP');
   (function(){
     var loaded = false;
+    function consentAllows(){ return localStorage.getItem('pns_cookie_consent') !== 'rejected'; }
     function loadAnalytics(){
-      if (loaded) return;
+      if (loaded || !consentAllows()) return;
       loaded = true;
       var gtm = document.createElement('script');
       gtm.async = true;
       gtm.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-P4J773RN&l=dataLayer';
       document.head.appendChild(gtm);
-      var ga = document.createElement('script');
-      ga.async = true;
-      ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-5XV1HEXGGP';
-      document.head.appendChild(ga);
       events.forEach(function(evt){ window.removeEventListener(evt, loadAnalytics); });
       clearTimeout(fallback);
     }
@@ -136,10 +130,10 @@
             Serving Cape Town &amp; the Western Cape since 2004
           </div>
           <h1 style="font-size:clamp(34px,4.2vw,54px);line-height:1.1;letter-spacing:-0.02em;font-weight:700;font-family:'Space Grotesk',sans-serif;color:#ffffff;margin-bottom:18px;">Certified Dell Partner Direct &amp; Enterprise IT Infrastructure Specialists</h1>
-          <p style="font-size:19px;line-height:1.6;color:rgba(255,255,255,0.85);max-width:560px;margin-bottom:36px;">New and certified refurbished Dell hardware, fully configured and supported across Cape Town and the Western Cape.</p>
+          <p style="font-size:19px;line-height:1.6;color:rgba(255,255,255,0.85);max-width:560px;margin-bottom:36px;">New and factory reconditioned Dell hardware, fully configured and supported across Cape Town and the Western Cape.</p>
           <div style="display:flex;gap:14px;flex-wrap:wrap;">
-            <a href="#quote" style="font-size:16px;font-weight:600;color:#ffffff;background:#2D5BE3;padding:16px 30px;border-radius:10px;" style-hover="background:#1F47C4;">Get a Dell Hardware Quote</a>
-            <a href="#quote" style="font-size:16px;font-weight:600;color:#ffffff;padding:16px 30px;border-radius:10px;border:1px solid rgba(255,255,255,0.3);" style-hover="border-color:#ffffff;">Book a Network Assessment</a>
+            <a href="#quote" onClick="{{ presetHardware }}" style="font-size:16px;font-weight:600;color:#ffffff;background:#2D5BE3;padding:16px 30px;border-radius:10px;" style-hover="background:#1F47C4;">Get a Dell Hardware Quote</a>
+            <a href="#quote" onClick="{{ presetNetwork }}" style="font-size:16px;font-weight:600;color:#ffffff;padding:16px 30px;border-radius:10px;border:1px solid rgba(255,255,255,0.3);" style-hover="border-color:#ffffff;">Book Remote or Onsite Support</a>
           </div>
           <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:14px;">
             <a href="tel:+27213008278" style="font-size:15px;font-weight:600;color:rgba(255,255,255,0.85);" style-hover="color:#ffffff;">Call 021 300 8278</a>
@@ -202,6 +196,10 @@
             <p style="font-size:15px;color:#4A5578;line-height:1.65;">{{ svc.desc }}</p>
             <sc-if value="{{ svc.badge }}" hint-placeholder-val="{{ false }}">
               <img src="assets/dell_authorized_partner.png" alt="Dell Technologies Authorized Partner" width="320" height="93" style="height:44px;width:auto;object-fit:contain;margin-top:4px;" />
+              <div style="display:flex;gap:14px;">
+                <a href="/new-dell-equipment.html" style="font-size:13px;font-weight:600;color:#2D5BE3;">New Dell &rarr;</a>
+                <a href="/refurbished-dell-equipment.html" style="font-size:13px;font-weight:600;color:#2D5BE3;">Refurbished Dell &rarr;</a>
+              </div>
             </sc-if>
           </div>
         </sc-for>
@@ -277,15 +275,14 @@
           </div>
           <input name="email" type="email" placeholder="Business email" aria-label="Email" required style="border:1px solid #D8E0F3;border-radius:10px;padding:13px 14px;font-size:15px;color:#0D1B4B;" />
           <input name="phone" type="tel" placeholder="Phone" aria-label="Phone" style="border:1px solid #D8E0F3;border-radius:10px;padding:13px 14px;font-size:15px;color:#0D1B4B;" />
-          <select name="need" aria-label="What do you need?" style="border:1px solid #D8E0F3;border-radius:10px;padding:13px 14px;font-size:15px;color:#5A6588;">
+          <select name="need" aria-label="What do you need?" key="{{ presetNeed }}" defaultValue="{{ presetNeed }}" style="border:1px solid #D8E0F3;border-radius:10px;padding:13px 14px;font-size:15px;color:#5A6588;">
             <option value="">What do you need?</option>
             <option>New Dell laptops</option>
             <option>Refurbished Dell laptops</option>
             <option>Dell desktops (OptiPlex)</option>
             <option>Dell servers (PowerEdge)</option>
-            <option>Managed IT support</option>
-            <option>Network setup &amp; cabling</option>
-            <option>Repairs &amp; maintenance</option>
+            <option>Managed IT support (remote)</option>
+            <option>Repairs, maintenance &amp; network cabling</option>
             <option>Backup &amp; business continuity</option>
             <option>Something else</option>
           </select>
@@ -309,10 +306,11 @@
         <div>
           <p style="font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#8FABF5;margin-bottom:14px;">Services</p>
           <div style="display:grid;gap:10px;">
-            <a href="#services" style="font-size:14px;color:rgba(255,255,255,0.85);" style-hover="color:#ffffff;">Managed IT Support</a>
-            <a href="#services" style="font-size:14px;color:rgba(255,255,255,0.85);" style-hover="color:#ffffff;">Network &amp; Cabling</a>
-            <a href="#services" style="font-size:14px;color:rgba(255,255,255,0.85);" style-hover="color:#ffffff;">Hardware Sales</a>
-            <a href="#services" style="font-size:14px;color:rgba(255,255,255,0.85);" style-hover="color:#ffffff;">Repairs &amp; Maintenance</a>
+            <a href="#services" style="font-size:14px;color:rgba(255,255,255,0.85);" style-hover="color:#ffffff;">Managed IT Support &amp; Helpdesk</a>
+            <a href="#services" style="font-size:14px;color:rgba(255,255,255,0.85);" style-hover="color:#ffffff;">New &amp; Refurbished Hardware</a>
+            <a href="#services" style="font-size:14px;color:rgba(255,255,255,0.85);" style-hover="color:#ffffff;">Repairs, Maintenance &amp; Network Cabling</a>
+            <a href="#services" style="font-size:14px;color:rgba(255,255,255,0.85);" style-hover="color:#ffffff;">Consumables &amp; Supplies</a>
+            <a href="#services" style="font-size:14px;color:rgba(255,255,255,0.85);" style-hover="color:#ffffff;">Business Continuity &amp; Backup</a>
           </div>
         </div>
         <div>
@@ -335,7 +333,7 @@
         </div>
       </div>
       <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;padding-top:24px;">
-        <p style="font-size:13px;color:rgba(255,255,255,0.5);">© 2026 Poseidon Network Systems. All rights reserved.</p>
+        <p style="font-size:13px;color:rgba(255,255,255,0.5);">© 2026 Poseidon Network Systems CC. All rights reserved.</p>
       </div>
     </div>
   </footer>
@@ -350,7 +348,10 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { formSubmitting: false, formStatus: null };
+  state = { formSubmitting: false, formStatus: null, presetNeed: '' };
+
+  presetHardware = () => this.setState({ presetNeed: 'New Dell laptops' });
+  presetNetwork = () => this.setState({ presetNeed: 'Repairs, maintenance & network cabling' });
 
   handleSubmit = async (e) => {
     e.preventDefault();
@@ -362,6 +363,9 @@ class Component extends DCLogic {
       const res = await fetch('/api/send-quote', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
       if (!res.ok) throw new Error('failed');
       this.setState({ formStatus: "Thanks, we'll be in touch within one business day.", formSubmitting: false });
+      if (window.dataLayer) {
+        window.dataLayer.push({ event: 'quote_form_submit', form_name: 'quote-request', lead_need: data.need || 'not_specified' });
+      }
       e.target.reset();
     } catch (err) {
       this.setState({ formStatus: 'Something went wrong. Please call or WhatsApp us instead.', formSubmitting: false });
@@ -374,6 +378,9 @@ class Component extends DCLogic {
       submitLabel: this.state.formSubmitting ? 'Sending...' : 'Send Request',
       formStatus: this.state.formStatus,
       handleSubmit: this.handleSubmit,
+      presetNeed: this.state.presetNeed,
+      presetHardware: this.presetHardware,
+      presetNetwork: this.presetNetwork,
       trustStats: [
         { value: '2004', label: 'Founded' },
         { value: '20+', label: 'Years serving Cape Town' },
@@ -387,16 +394,15 @@ class Component extends DCLogic {
         { num: '04', title: 'We deliver', desc: 'Install, repair, or ongoing support, handled and supported.', lineStyle: '' }
       ],
       services: [
-        { title: 'New & Refurbished Hardware', desc: 'Refurbished Dell units with onsite warranty for price-conscious clients, new Dell hardware for brand-aware buyers, and any other IT hardware sourced on request.', badge: true, icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D5BE3" stroke-width="1.6"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20h8M12 16v4"/></svg>' },
-        { title: 'Managed IT Support & Helpdesk', desc: 'Ongoing monitoring, troubleshooting, and a real person to call when something goes wrong.', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D5BE3" stroke-width="1.6"><path d="M4 13a8 8 0 0 1 16 0"/><rect x="2.5" y="13" width="4" height="6" rx="1.5"/><rect x="17.5" y="13" width="4" height="6" rx="1.5"/></svg>' },
-        { title: 'Network Setup & Cabling', desc: 'Structured cabling, Wi-Fi, and network design for offices and homes, built to last. Includes configuration, data migration, and security enforcement onsite.', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D5BE3" stroke-width="1.6"><path d="M5 12.5a10 10 0 0 1 14 0M8 16a6 6 0 0 1 8 0"/><circle cx="12" cy="19.5" r="1.4" fill="#2D5BE3" stroke="none"/></svg>' },
-        { title: 'Repairs & Maintenance', desc: 'Diagnostics and repair for desktops, laptops, servers, and everything in between.', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D5BE3" stroke-width="1.6"><path d="M14.5 3.5a3 3 0 0 0-4 4L4 14l2.5 2.5 6.5-6.5a3 3 0 0 0 4-4l-1.5 1.5-1.5-1.5 1.5-1.5z"/><path d="M17 17l3 3"/></svg>' },
+        { title: 'New & Refurbished Hardware', desc: 'Refurbished Dell units with a 1-year warranty for price-conscious clients, new Dell hardware for brand-aware buyers, and any other IT hardware sourced on request.', badge: true, icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D5BE3" stroke-width="1.6"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20h8M12 16v4"/></svg>' },
+        { title: 'Managed IT Support & Helpdesk', desc: 'Remote monitoring and troubleshooting via secure remote access (AnyDesk), with a real person to call when something goes wrong.', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D5BE3" stroke-width="1.6"><path d="M4 13a8 8 0 0 1 16 0"/><rect x="2.5" y="13" width="4" height="6" rx="1.5"/><rect x="17.5" y="13" width="4" height="6" rx="1.5"/></svg>' },
+        { title: 'Repairs, Maintenance & Network Cabling', desc: 'Diagnostics, repair, and structured cabling or network setup for desktops, laptops, servers, and offices. Delivered onsite when hardware or cabling work requires it.', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D5BE3" stroke-width="1.6"><path d="M14.5 3.5a3 3 0 0 0-4 4L4 14l2.5 2.5 6.5-6.5a3 3 0 0 0 4-4l-1.5 1.5-1.5-1.5 1.5-1.5z"/><path d="M17 17l3 3"/></svg>' },
         { title: 'Consumables & Supplies', desc: 'Toner, cabling, peripherals, and the everyday items that keep an office running.', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D5BE3" stroke-width="1.6"><path d="M21 8l-9-4-9 4 9 4 9-4z"/><path d="M3 8v8l9 4 9-4V8M12 12v8"/></svg>' },
         { title: 'Business Continuity & Backup', desc: 'Backup strategy and disaster recovery so downtime never means data loss.', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D5BE3" stroke-width="1.6"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/></svg>' }
       ],
       ledger: [
         { label: 'New', desc: 'Original Dell hardware, OEM warranty', hasArrow: true },
-        { label: 'Refurbished', desc: 'Grade A, onsite warranty', hasArrow: true },
+        { label: 'Refurbished', desc: 'Factory reconditioned, 1-year warranty', hasArrow: true },
         { label: 'Deployed', desc: 'Config, migration, security', hasArrow: true },
         { label: 'Supported', desc: 'Ongoing helpdesk & backup', hasArrow: false }
       ]

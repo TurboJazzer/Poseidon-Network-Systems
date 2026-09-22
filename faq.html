@@ -29,12 +29,13 @@
 <link rel="canonical" href="https://poseidon-network.com/faq.html">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"What brands of IT hardware and workstations do you supply?","acceptedAnswer":{"@type":"Answer","text":"While we tailor hardware solutions to specific office requirements across various brands, we primarily standardize on and recommend Dell commercial laptops, desktops, and enterprise devices for maximum reliability and ease of support. We also handle specialized office equipment including commercial and barcode label printers."}},
+{"@type":"Question","name":"What brands of IT hardware and workstations do you supply?","acceptedAnswer":{"@type":"Answer","text":"While we tailor hardware solutions to specific office requirements across various brands, we primarily standardize on and recommend Dell commercial laptops, desktops, and enterprise devices for maximum reliability and ease of support. We also handle specialized office equipment including commercial and barcode label printers. See our New Dell and Refurbished Dell pages for current models."}},
 {"@type":"Question","name":"Do you manage hardware repairs and device replacements?","acceptedAnswer":{"@type":"Answer","text":"Yes. We coordinate diagnostics, component upgrades, and repair or replacement pipelines for laptops, desktop workstations, and network-connected printing systems to minimize office downtime."}},
-{"@type":"Question","name":"Can you assist with setting up or expanding our physical network?","acceptedAnswer":{"@type":"Answer","text":"Absolutely. We design, install, and support physical local network infrastructure including routers, switches, firewalls, structured cabling, and managed wireless access points built for high availability and failover redundancy."}},
+{"@type":"Question","name":"Can you assist with setting up or expanding our physical network?","acceptedAnswer":{"@type":"Answer","text":"Absolutely. We design, install, and support physical local network infrastructure including routers, switches, firewalls, structured cabling, and managed wireless access points built for high availability and failover redundancy. See Repairs, Maintenance & Network Cabling."}},
+{"@type":"Question","name":"How does ongoing support work, remote or onsite?","acceptedAnswer":{"@type":"Answer","text":"Most support is remote: we connect securely via AnyDesk to resolve issues without a site visit. If a hardware fault requires physical intervention, replacement, or new cabling, we schedule an onsite visit."}},
 {"@type":"Question","name":"How do you support Google Workspace and Microsoft 365 migrations?","acceptedAnswer":{"@type":"Answer","text":"We handle end-to-end cloud setup including domain configuration, user account migration, license management, shared drive structures, and administrative security enforcement like Multi-Factor Authentication (MFA)."}},
-{"@type":"Question","name":"How do you ensure our data security and POPIA compliance?","acceptedAnswer":{"@type":"Answer","text":"We deploy a multi-layered security framework featuring network firewalls, endpoint antivirus/anti-malware protection, role-based cloud access controls, and automated encrypted backups designed to keep your business compliant with local data privacy laws (POPIA)."}},
-{"@type":"Question","name":"What is the difference between the New Dell and Refurbished Dell pages?","acceptedAnswer":{"@type":"Answer","text":"New Dell Equipment covers direct-channel, brand-new Dell commercial hardware with full OEM warranty and bulk pricing. Refurbished Dell Equipment covers Grade A factory reconditioned Dell hardware with onsite warranty, typically at a lower price point."}},
+{"@type":"Question","name":"How do you ensure our data security and POPIA compliance?","acceptedAnswer":{"@type":"Answer","text":"We deploy a multi-layered security framework featuring network firewalls, endpoint antivirus/anti-malware protection, role-based cloud access controls, and automated encrypted backups designed to keep your business compliant with local data privacy laws (POPIA). See Business Continuity & Backup."}},
+{"@type":"Question","name":"What is the difference between the New Dell and Refurbished Dell pages?","acceptedAnswer":{"@type":"Answer","text":"New Dell Equipment covers direct-channel, brand-new Dell commercial hardware with full OEM warranty and bulk pricing. Refurbished Dell Equipment covers factory reconditioned Dell hardware with a 1-year warranty, typically at a lower price point."}},
 {"@type":"Question","name":"How do I request a quote?","acceptedAnswer":{"@type":"Answer","text":"Use the quote form on the homepage, call 021 300 8278, or message via WhatsApp at +27 64 702 9962. We respond within one business day."}}
 ]}
 </script>
@@ -56,22 +57,16 @@
 <script>
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
-  function gtag(){ window.dataLayer.push(arguments); }
-  gtag('js', new Date());
-  gtag('config', 'G-5XV1HEXGGP');
   (function(){
     var loaded = false;
+    function consentAllows(){ return localStorage.getItem('pns_cookie_consent') !== 'rejected'; }
     function loadAnalytics(){
-      if (loaded) return;
+      if (loaded || !consentAllows()) return;
       loaded = true;
       var gtm = document.createElement('script');
       gtm.async = true;
       gtm.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-P4J773RN&l=dataLayer';
       document.head.appendChild(gtm);
-      var ga = document.createElement('script');
-      ga.async = true;
-      ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-5XV1HEXGGP';
-      document.head.appendChild(ga);
       events.forEach(function(evt){ window.removeEventListener(evt, loadAnalytics); });
       clearTimeout(fallback);
     }
@@ -96,12 +91,12 @@
               <a href="/refurbished-dell-equipment.html" style="display:block;padding:10px 12px;font-size:14px;font-weight:500;color:#3D4A70;border-radius:6px;" style-hover="background:#F6F8FD;color:#0D1B4B;">Refurbished Dell</a>
             </div>
           </div>
-          <a href="index.html#services" style="font-size:14px;font-weight:500;color:#3D4A70;" style-hover="color:#0D1B4B;">Services</a>
-          <a href="index.html#process" style="font-size:14px;font-weight:500;color:#3D4A70;" style-hover="color:#0D1B4B;">How It Works</a>
-          <a href="index.html#about" style="font-size:14px;font-weight:500;color:#3D4A70;" style-hover="color:#0D1B4B;">About</a>
+          <a href="/#services" style="font-size:14px;font-weight:500;color:#3D4A70;" style-hover="color:#0D1B4B;">Services</a>
+          <a href="/#process" style="font-size:14px;font-weight:500;color:#3D4A70;" style-hover="color:#0D1B4B;">How It Works</a>
+          <a href="/#about" style="font-size:14px;font-weight:500;color:#3D4A70;" style-hover="color:#0D1B4B;">About</a>
           <a href="/faq.html" style="font-size:14px;font-weight:600;color:#2D5BE3;" aria-current="page">FAQ</a>
           <a href="/resources.html" style="font-size:14px;font-weight:500;color:#3D4A70;" style-hover="color:#0D1B4B;">Resources</a>
-        <a href="index.html#quote" style="font-size:14px; font-weight:600; color:#fff; background:#2D5BE3; padding:10px 20px; border-radius:8px;">Request a Quote</a>
+        <a href="/#quote" style="font-size:14px; font-weight:600; color:#fff; background:#2D5BE3; padding:10px 20px; border-radius:8px;">Request a Quote</a>
       </div>
     </div>
   </div>
@@ -114,15 +109,10 @@
       <div style="margin-bottom:40px;">
         <h2 style="font-family:'Space Grotesk',sans-serif; font-size:clamp(1.25rem,3vw,1.4rem); font-weight:700; color:#0D1B4B; margin:0 0 16px;">{{ section.title }}</h2>
         <sc-for list="{{ section.items }}" as="item" hint-placeholder-count="2">
-          <div style="border:1px solid #E4E9F5; border-radius:8px; margin-bottom:10px; overflow:hidden; background:#fff;">
-            <button onClick="{{ item.toggle }}" aria-expanded="{{ item.open }}" style="width:100%; text-align:left; background:none; border:none; padding:18px 20px; font-size:15px; font-weight:600; color:#0D1B4B; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:12px; font-family:inherit;">
-              <span>{{ item.q }}</span>
-              <span style="color:#2D5BE3; font-size:18px; flex-shrink:0;">{{ item.icon }}</span>
-            </button>
-            <sc-if value="{{ item.open }}" hint-placeholder-val="{{ false }}">
-              <div style="padding:0 20px 18px; font-size:14px; color:#5A6588; line-height:1.7;">{{ item.a }}</div>
-            </sc-if>
-          </div>
+          <details style="border:1px solid #E4E9F5; border-radius:8px; margin-bottom:10px; overflow:hidden; background:#fff;">
+            <summary style="width:100%; text-align:left; padding:18px 20px; font-size:15px; font-weight:600; color:#0D1B4B; cursor:pointer; list-style:none; font-family:inherit;">{{ item.q }}</summary>
+            <div style="padding:0 20px 18px; font-size:14px; color:#5A6588; line-height:1.7;" html="{{ item.aHtml }}"></div>
+          </details>
         </sc-for>
       </div>
     </sc-for>
@@ -135,7 +125,7 @@
 
   <div style="background:#F6F8FD; border-top:1px solid #E4E9F5;">
     <div style="max-width:1180px; margin:0 auto; padding:32px 24px; font-size:12px; color:#94A0BF; display:flex; gap:20px; flex-wrap:wrap;">
-      <span>© 2026 Poseidon Network Systems. All rights reserved.</span>
+      <span>© 2026 Poseidon Network Systems CC. All rights reserved.</span>
       <a href="/terms.html" style="color:#94A0BF;">Terms of Service</a>
       <a href="/privacy.html" style="color:#94A0BF;">Privacy Policy</a>
     </div>
@@ -145,35 +135,28 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { open: {} };
-  toggle = (key) => { this.setState(s => ({ open: { ...s.open, [key]: !s.open[key] } })); };
   renderVals() {
     const raw = [
       { title: 'Hardware & Procurement', items: [
-        { key: 'h1', q: 'What brands of IT hardware and workstations do you supply?', a: 'We standardize on Dell commercial laptops, desktops, and enterprise devices, and tailor other brands where a specific office requires it. We also supply specialized office equipment, including commercial and barcode label printers.' },
-        { key: 'h2', q: 'Do you manage hardware repairs and device replacements?', a: 'Yes. We coordinate diagnostics, component upgrades, and repair or replacement pipelines for laptops, desktop workstations, and network-connected printing systems to minimize office downtime.' }
+        { q: 'What brands of IT hardware and workstations do you supply?', a: 'We standardize on Dell commercial laptops, desktops, and enterprise devices, and tailor other brands where a specific office requires it. We also supply specialized office equipment, including commercial and barcode label printers. See our <a href="/new-dell-equipment.html">New Dell</a> and <a href="/refurbished-dell-equipment.html">Refurbished Dell</a> pages for current models.' },
+        { q: 'Do you manage hardware repairs and device replacements?', a: 'Yes. We coordinate diagnostics, component upgrades, and repair or replacement pipelines for laptops, desktop workstations, and network-connected printing systems to minimize office downtime.' }
       ]},
-      { title: 'Network & Infrastructure', items: [
-        { key: 'n1', q: 'Can you assist with setting up or expanding our physical network?', a: 'Yes. We design, install, and support routers, switches, firewalls, structured cabling, and managed wireless access points, built for high availability and failover redundancy.' }
+      { title: 'Repairs, Maintenance & Network', items: [
+        { q: 'Can you assist with setting up or expanding our physical network?', a: 'Yes. We design, install, and support routers, switches, firewalls, structured cabling, and managed wireless access points, built for high availability and failover redundancy. See <a href="/#services">Repairs, Maintenance &amp; Network Cabling</a>.' },
+        { q: 'How does ongoing support work, remote or onsite?', a: 'Most support is remote: we connect securely via AnyDesk to resolve issues without a site visit. If a hardware fault requires physical intervention, replacement, or new cabling, we schedule an onsite visit.' }
       ]},
       { title: 'Cloud & Security', items: [
-        { key: 'c1', q: 'How do you support Google Workspace and Microsoft 365 migrations?', a: 'We handle end-to-end cloud setup including domain configuration, user account migration, license management, shared drive structures, and administrative security enforcement like Multi-Factor Authentication (MFA).' },
-        { key: 'c2', q: 'How do you ensure our data security and POPIA compliance?', a: 'We deploy a multi-layered security framework featuring network firewalls, endpoint antivirus/anti-malware protection, role-based cloud access controls, and automated encrypted backups designed to keep your business compliant with local data privacy laws (POPIA).' }
+        { q: 'How do you support Google Workspace and Microsoft 365 migrations?', a: 'We handle end-to-end cloud setup including domain configuration, user account migration, license management, shared drive structures, and administrative security enforcement like Multi-Factor Authentication (MFA).' },
+        { q: 'How do you ensure our data security and POPIA compliance?', a: 'We deploy a multi-layered security framework featuring network firewalls, endpoint antivirus/anti-malware protection, role-based cloud access controls, and automated encrypted backups designed to keep your business compliant with local data privacy laws (POPIA). See <a href="/#services">Business Continuity &amp; Backup</a>.' }
       ]},
       { title: 'Buying & Quotes', items: [
-        { key: 'b1', q: 'What is the difference between the New Dell and Refurbished Dell pages?', a: 'New Dell Equipment covers direct-channel, brand-new Dell commercial hardware with full OEM warranty and bulk pricing. Refurbished Dell Equipment covers Grade A factory reconditioned Dell hardware with onsite warranty, typically at a lower price point.' },
-        { key: 'b2', q: 'How do I request a quote?', a: 'Use the quote form on the homepage, call 021 300 8278, or message via WhatsApp at +27 64 702 9962. We respond within one business day.' }
+        { q: 'What is the difference between the New Dell and Refurbished Dell pages?', a: 'New Dell Equipment covers direct-channel, brand-new Dell commercial hardware with full OEM warranty and bulk pricing. Refurbished Dell Equipment covers factory reconditioned Dell hardware with a 1-year warranty, typically at a lower price point.' },
+        { q: 'How do I request a quote?', a: 'Use the <a href="/#quote">quote form</a> on the homepage, call 021 300 8278, or message via WhatsApp at +27 64 702 9962. We respond within one business day.' }
       ]}
     ];
-    const open = this.state.open;
     const sections = raw.map(sec => ({
       title: sec.title,
-      items: sec.items.map(it => ({
-        q: it.q, a: it.a,
-        open: !!open[it.key],
-        icon: open[it.key] ? '−' : '+',
-        toggle: () => this.toggle(it.key)
-      }))
+      items: sec.items.map(it => ({ q: it.q, aHtml: it.a }))
     }));
     return { sections };
   }
