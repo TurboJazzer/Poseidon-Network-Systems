@@ -35,6 +35,7 @@
 {"@type":"Question","name":"How does ongoing support work, remote or onsite?","acceptedAnswer":{"@type":"Answer","text":"Most support is remote: we connect securely via AnyDesk to resolve issues without a site visit. If a hardware fault requires physical intervention, replacement, or new cabling, we schedule an onsite visit."}},
 {"@type":"Question","name":"How do you support Google Workspace and Microsoft 365 migrations?","acceptedAnswer":{"@type":"Answer","text":"We handle end-to-end cloud setup including domain configuration, user account migration, license management, shared drive structures, and administrative security enforcement like Multi-Factor Authentication (MFA)."}},
 {"@type":"Question","name":"How do you ensure our data security and POPIA compliance?","acceptedAnswer":{"@type":"Answer","text":"We deploy a multi-layered security framework featuring network firewalls, endpoint antivirus/anti-malware protection, role-based cloud access controls, and automated encrypted backups designed to keep your business compliant with local data privacy laws (POPIA). See Business Continuity & Backup."}},
+{"@type":"Question","name":"What happens to our data if hardware fails or is stolen?","acceptedAnswer":{"@type":"Answer","text":"Automated encrypted backups mean a hardware failure, theft, or ransomware event doesn't mean lost data. We help design a backup and disaster recovery plan sized to your business so operations can resume quickly."}},
 {"@type":"Question","name":"What is the difference between the New Dell and Refurbished Dell pages?","acceptedAnswer":{"@type":"Answer","text":"New Dell Equipment covers direct-channel, brand-new Dell commercial hardware with full OEM warranty and bulk pricing. Refurbished Dell Equipment covers factory reconditioned Dell hardware with a 1-year warranty, typically at a lower price point."}},
 {"@type":"Question","name":"How do I request a quote?","acceptedAnswer":{"@type":"Answer","text":"Use the quote form on the homepage, call 021 300 8278, or message via WhatsApp at +27 64 702 9962. We respond within one business day."}}
 ]}
@@ -82,7 +83,7 @@
 <div style="font-family:'Inter',sans-serif; color:#3D4A70; background:#F6F8FD; min-height:100vh; width:100%; max-width:100%; overflow-x:hidden; box-sizing:border-box;">
   <div style="position:sticky; top:0; z-index:50; background:#F6F8FD; border-bottom:1px solid #E4E9F5;">
     <div style="max-width:1180px; margin:0 auto; padding:12px 24px; display:flex; align-items:center; flex-wrap:wrap; justify-content:space-between; gap:16px; box-sizing:border-box;">
-      <a href="/"><img src="assets/pns_logo_new_sm.png" alt="Poseidon Network Systems" style="height:60px; width:auto; object-fit:contain;" /></a>
+      <a href="/"><img src="assets/pns_logo_new_sm.webp" alt="Poseidon Network Systems" style="height:60px; width:auto; object-fit:contain;" /></a>
       <div style="display:flex; align-items:center; flex-wrap:wrap; gap:18px;">
         <div style="position:relative;" class="pns-dropdown">
             <button type="button" aria-haspopup="true" aria-expanded="false" style="font-size:14px;font-weight:500;color:#3D4A70;background:none;border:none;padding:0;cursor:pointer;font-family:inherit;">Hardware</button>
@@ -147,7 +148,8 @@ class Component extends DCLogic {
       ]},
       { title: 'Cloud & Security', items: [
         { q: 'How do you support Google Workspace and Microsoft 365 migrations?', a: 'We handle end-to-end cloud setup including domain configuration, user account migration, license management, shared drive structures, and administrative security enforcement like Multi-Factor Authentication (MFA).' },
-        { q: 'How do you ensure our data security and POPIA compliance?', a: 'We deploy a multi-layered security framework featuring network firewalls, endpoint antivirus/anti-malware protection, role-based cloud access controls, and automated encrypted backups designed to keep your business compliant with local data privacy laws (POPIA). See <a href="/#services">Business Continuity &amp; Backup</a>.' }
+        { q: 'How do you ensure our data security and POPIA compliance?', a: 'We deploy a multi-layered security framework featuring network firewalls, endpoint antivirus/anti-malware protection, role-based cloud access controls, and automated encrypted backups designed to keep your business compliant with local data privacy laws (POPIA). See <a href="/#services">Business Continuity &amp; Backup</a>.' },
+        { q: 'What happens to our data if hardware fails or is stolen?', a: 'Automated encrypted backups mean a hardware failure, theft, or ransomware event doesn\u2019t mean lost data. We help design a backup and disaster recovery plan sized to your business so operations can resume quickly.' }
       ]},
       { title: 'Buying & Quotes', items: [
         { q: 'What is the difference between the New Dell and Refurbished Dell pages?', a: 'New Dell Equipment covers direct-channel, brand-new Dell commercial hardware with full OEM warranty and bulk pricing. Refurbished Dell Equipment covers factory reconditioned Dell hardware with a 1-year warranty, typically at a lower price point.' },

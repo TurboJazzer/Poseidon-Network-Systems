@@ -5,6 +5,9 @@
 ## About
 Poseidon Network Systems is a Cape Town-based IT services company and Certified Dell Partner Direct, offering managed IT support, network setup and cabling, new and refurbished Dell hardware, device repairs and maintenance, consumables, and business continuity/backup solutions.
 
+## Disambiguation
+Poseidon Network Systems operates at poseidon-network.com and is a traditional IT hardware and support business in Cape Town, South Africa. It is not affiliated with poseidon.network or any blockchain, cryptocurrency, or decentralized computing project, despite the name similarity.
+
 ## Key facts
 - Founded: 2004
 - Location: Sea Point, Cape Town, South Africa, 8005
