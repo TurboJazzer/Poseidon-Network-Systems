@@ -32,6 +32,7 @@
 {"@type":"Question","name":"How much internet speed does business VoIP need?","acceptedAnswer":{"@type":"Answer","text":"Each call uses a small, steady amount of bandwidth. Connection stability matters more than speed, so Poseidon checks the connection and router before switching."}},
 {"@type":"Question","name":"Is there a long-term contract?","acceptedAnswer":{"@type":"Answer","text":"Switch Telecom services run month to month after the initial term shown on the subscription form, with one calendar month's written notice to cancel. Handsets and network equipment are a once-off purchase."}},
 {"@type":"Question","name":"Can we call emergency numbers on VoIP?","acceptedAnswer":{"@type":"Answer","text":"VoIP should not be relied on for emergency calls to 112, 10111 or 10117. Calls may be delayed and the call centre cannot see the caller's location, so always give your address and keep a mobile phone available."}},
+{"@type":"Question","name":"What happens to the phone bill I send for review?","acceptedAnswer":{"@type":"Answer","text":"Poseidon uses it only to prepare your comparison. It goes directly to the team by email, is not stored on the website, and is deleted once the result has been sent."}},
 {"@type":"Question","name":"Who do we call if something goes wrong?","acceptedAnswer":{"@type":"Answer","text":"Call Poseidon first. We identify whether the issue is the line or the network. Line and billing issues are handled with Switch Telecom; network, handset and user issues are handled by Poseidon."}}
 ]}
 </script>
@@ -94,6 +95,17 @@
   details[open] summary::after{content:"\2212"}
   details p{padding:0 40px 22px 0;font-size:15.5px;color:#4A5578;line-height:1.7;max-width:760px}
   .field{border:1px solid #D8E0F3;border-radius:10px;padding:13px 14px;font-size:15px;color:#0D1B4B;font-family:inherit;background:#fff;width:100%}
+  .lbl{display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600;color:#0D1B4B}
+  .opt{font-weight:400;color:#4A5578}
+  .hlp{font-size:13px;font-weight:400;color:#4A5578}
+  .br-err{font-size:13.5px;font-weight:500;color:#B42318;margin:6px 0 0;display:block}
+  .br-err[hidden]{display:none}
+  .field[aria-invalid="true"]{border-color:#B42318}
+  .chip{position:relative;cursor:pointer}
+  .chip input{position:absolute;opacity:0;width:1px;height:1px}
+  .chip span{display:inline-block;font-size:14px;font-weight:500;color:#3D4A70;border:1px solid #D8E0F3;border-radius:999px;padding:8px 14px;background:#fff}
+  .chip input:checked+span{background:#2D5BE3;border-color:#2D5BE3;color:#fff}
+  .chip input:focus-visible+span{outline:2px solid #2D5BE3;outline-offset:2px}
   .sticky{display:none;position:fixed;bottom:0;left:0;right:0;z-index:60;background:#0D1B4B;box-shadow:0 -4px 16px rgba(13,27,75,.2)}
   .sticky a{flex:1;text-align:center;padding:14px 8px;font-size:14px;font-weight:600;color:#fff}
   .foot a{font-size:14px;color:rgba(255,255,255,.85)}
@@ -107,6 +119,7 @@
     .steps .n::before{top:6px;left:-5px}
     .path{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:22px}
     .brks{grid-template-columns:1fr !important}
+    .br-grid{grid-template-columns:1fr !important}
   }
   @media (max-width:640px){
     .sec{padding:64px 0}
@@ -154,6 +167,7 @@
           <a href="tel:+27213008278" style="font-size:15px;font-weight:600;color:#fff;">Call 021 300 8278</a>
           <a href="https://wa.me/27647029962" style="font-size:15px;font-weight:600;color:#fff;display:inline-flex;align-items:center;gap:8px;"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-1.746-.87-2.888-1.552-4.036-3.523-.305-.524.305-.487.873-1.62.098-.198.05-.372-.05-.52-.098-.15-.644-1.548-.883-2.12-.234-.556-.47-.48-.644-.49-.173-.008-.372-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.017-1.04 2.479 0 1.463 1.065 2.876 1.213 3.074.15.198 2.05 3.132 4.977 4.27 2.928 1.138 2.928.759 3.877.65.95-.11 3.1-1.263 3.55-2.483.446-1.22.446-2.266.297-2.483-.148-.198-.297-.297-.594-.446z"/><path d="M12.004 2C6.486 2 2 6.486 2 12.004c0 1.887.518 3.65 1.42 5.166L2 22l4.98-1.394A9.94 9.94 0 0 0 12.004 22c5.518 0 10.004-4.486 10.004-9.996S17.522 2 12.004 2zm0 18.174c-1.72 0-3.35-.49-4.732-1.334l-.34-.202-3.5.98.982-3.415-.222-.354A8.144 8.144 0 0 1 3.83 12.004c0-4.512 3.67-8.174 8.174-8.174 4.505 0 8.174 3.662 8.174 8.174 0 4.512-3.67 8.17-8.174 8.17z"/></svg>WhatsApp 064 702 9962</a>
         </div>
+        <a href="#bill-review" style="display:inline-block;margin-top:18px;font-size:15px;font-weight:600;color:#A8C0FB;text-decoration:underline;text-underline-offset:3px;">Or get a free phone bill review first &rarr;</a>
         <p style="font-size:14px;color:rgba(255,255,255,0.72);margin-top:28px;padding-top:18px;border-top:1px solid rgba(255,255,255,0.14);max-width:580px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;"><!-- Logo slot: add assets/switch-telecom-logo.png then uncomment: <img src="assets/switch-telecom-logo.png" alt="Switch Telecom" height="28" style="height:28px;width:auto;display:block;"> --><span>Switch Telecom Reseller. Serving Cape Town and the Western Cape since 2004.</span></p>
       </div>
       <picture style="display:block;aspect-ratio:4/3;border-radius:18px;overflow:hidden;">
@@ -297,6 +311,65 @@
     </div>
   </section>
 
+  <!-- 8A Bill review -->
+  <section id="bill-review" class="sec" style="background:#EAF0FD;border-top:1px solid #D8E0F3;border-bottom:1px solid #D8E0F3;scroll-margin-top:80px;">
+    <div class="wrap">
+      <div style="max-width:720px;">
+        <p class="eyebrow" style="margin-bottom:12px;">Free, no obligation</p>
+        <h2 class="h2" style="margin-bottom:16px;">Get a free phone bill review</h2>
+        <p class="lead">Send us your latest phone bill and we'll show you what the same lines and calls would cost on Switch Telecom. You'll get a one-page comparison within one business day. If your current deal is already a good one, we'll tell you that too.</p>
+      </div>
+      <div class="br-grid" style="display:grid;grid-template-columns:minmax(0,0.8fr) minmax(0,1.2fr);gap:24px;margin-top:40px;align-items:start;">
+        <div style="background:#0D1B4B;border-radius:18px;padding:32px;display:flex;flex-direction:column;gap:14px;" class="dark">
+          <p class="eyebrow" style="color:#A8C0FB;">Quickest</p>
+          <h3 style="font-size:22px;font-weight:600;color:#fff;">Send a photo on WhatsApp</h3>
+          <p style="font-size:15.5px;color:rgba(255,255,255,0.85);line-height:1.65;">Take a photo of each page of your bill and send it to 064 702 9962.</p>
+          <a href="https://wa.me/27647029962?text=Hi%2C%20I%27d%20like%20a%20free%20phone%20bill%20review." class="btn" style="align-self:flex-start;margin-top:6px;">WhatsApp your bill</a>
+        </div>
+        <form id="bill-form" action="/.netlify/functions/bill-review" method="post" enctype="multipart/form-data" novalidate style="background:#fff;border:1px solid #D8E0F3;border-radius:18px;padding:32px;display:flex;flex-direction:column;gap:16px;">
+          <h3 style="font-size:22px;font-weight:600;">Or upload it here</h3>
+          <p id="br-banner" class="br-err" role="alert" hidden style="background:#FEF2F2;border:1px solid #FECACA;border-radius:8px;padding:10px 12px;">Your bill didn't send. Please try again, or WhatsApp it to 064 702 9962.</p>
+          <div class="formgrid" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+            <label class="lbl">Your name<input class="field" name="name" autocomplete="name" required></label>
+            <label class="lbl">Business name<input class="field" name="business" autocomplete="organization" required></label>
+          </div>
+          <div class="formgrid" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+            <label class="lbl">Email<input class="field" name="email" type="email" autocomplete="email" required></label>
+            <label class="lbl">Mobile<input class="field" name="mobile" type="tel" autocomplete="tel" required aria-describedby="br-mob-h"><span id="br-mob-h" class="hlp">We may reply on WhatsApp</span></label>
+          </div>
+          <label class="lbl">How many people use the phones? <span class="opt">(optional)</span>
+            <select class="field" name="users"><option value="">Choose</option><option>1 to 4</option><option>5 to 10</option><option>11 to 25</option><option>26 to 50</option><option>More than 50</option></select>
+          </label>
+          <label class="lbl">Your latest phone bill
+            <input class="field" id="br-file" name="bill" type="file" multiple accept=".pdf,.jpg,.jpeg,.png" required aria-describedby="br-file-h br-file-e" style="padding:11px 12px;">
+            <span id="br-file-h" class="hlp">PDF, JPG or PNG, up to 3 files and 5 MB in total</span>
+            <span id="br-file-e" class="br-err" hidden></span>
+          </label>
+          <fieldset style="border:0;padding:0;margin:0;">
+            <legend class="lbl" style="margin-bottom:8px;">What would you like to fix? <span class="opt">(optional)</span></legend>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;">
+              <label class="chip"><input type="checkbox" name="fix" value="Lower costs"><span>Lower costs</span></label>
+              <label class="chip"><input type="checkbox" name="fix" value="Missed calls"><span>Missed calls</span></label>
+              <label class="chip"><input type="checkbox" name="fix" value="Staff working from home"><span>Staff working from home</span></label>
+              <label class="chip"><input type="checkbox" name="fix" value="Replacing an old switchboard"><span>Replacing an old switchboard</span></label>
+              <label class="chip"><input type="checkbox" name="fix" value="Something else"><span>Something else</span></label>
+            </div>
+          </fieldset>
+          <div>
+            <label style="display:grid;grid-template-columns:20px minmax(0,1fr);gap:10px;font-size:14.5px;color:#3D4A70;line-height:1.5;cursor:pointer;"><input id="br-consent" type="checkbox" name="consent" value="yes" required aria-describedby="br-consent-e" style="width:18px;height:18px;margin:2px 0 0;accent-color:#2D5BE3;">I agree that Poseidon Network Systems may use my bill only for this review. It will be deleted afterwards.</label>
+            <span id="br-consent-e" class="br-err" hidden>Please tick the box so we can use your bill for the review.</span>
+          </div>
+          <div aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden;"><label>Website<input name="company_website" tabindex="-1" autocomplete="off"></label></div>
+          <input type="hidden" name="page" value="business-voip-cape-town">
+          <input type="hidden" name="utm_source"><input type="hidden" name="utm_medium"><input type="hidden" name="utm_campaign">
+          <button type="submit" style="font-size:16px;font-weight:600;color:#fff;background:#2D5BE3;border:none;padding:15px 24px;border-radius:10px;cursor:pointer;font-family:inherit;">Send my bill for review</button>
+          <p id="br-ok" role="status" aria-live="polite" style="font-size:15px;color:#0D1B4B;font-weight:500;"></p>
+          <p style="font-size:13px;color:#4A5578;line-height:1.6;border-top:1px solid #E4E9F5;padding-top:14px;">Your bill is sent securely to our team, used only to prepare your comparison, and deleted once we've sent it to you. We don't store it on this website.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
   <!-- 9 FAQ -->
   <section class="sec" style="background:#F6F8FD;">
     <div class="wrap" style="max-width:920px;">
@@ -308,6 +381,8 @@
         <details><summary>Do we need new phones?</summary><p>Not always. Some existing IP phones can be reused. If new handsets are needed, you buy them from us once-off, and we configure and install them.</p></details>
         <details><summary>Can we use our mobiles or laptops instead of desk phones?</summary><p>Yes. Extensions can ring on a softphone app on a mobile or computer, as well as on desk phones.</p></details>
         <details><summary>Who do we call if something goes wrong?</summary><p>Call us first. We'll work out whether it's the line or your network. Line and billing issues are handled with Switch Telecom; network, handset and user issues are handled by us.</p></details>
+        <details><summary>What happens to the phone bill I send you?</summary><p>We use it only to prepare your comparison. It goes directly to our team by email, is not stored on this website, and is deleted once we've sent you the result.</p></details>
+        <details><summary>Is the bill review really free?</summary><p>Yes. You'll get a one-page comparison with no obligation. If moving wouldn't save you money, we'll say so.</p></details>
         <details><summary>Is there a long-term contract?</summary><p>Switch Telecom services run month to month after the initial term shown on your subscription form, with one calendar month's written notice to cancel. Handsets and network equipment are a once-off purchase.</p></details>
         <details><summary>Can we call emergency numbers on VoIP?</summary><p>You shouldn't rely on VoIP for emergency calls to 112, 10111 or 10117. Calls may be delayed, and the call centre can't see where you are, so always give your address. Keep a mobile phone available for emergencies.</p></details>
         <details><summary>Are you the same company as poseidon.network?</summary><p>No. Poseidon Network Systems (poseidon-network.com) is an IT and telecoms services company in Sea Point, Cape Town. We are not affiliated with poseidon.network or any blockchain or crypto project.</p></details>
@@ -429,6 +504,48 @@
       if(window.dataLayer)window.dataLayer.push({event:'quote_form_submit',form_name:'quote-request',lead_need:data.need||'not_specified',page:'voip'});
     }catch(err){s.textContent='Something went wrong. Please call or WhatsApp us instead.';}
     b.disabled=false;b.textContent='Request VoIP quote';
+  });
+})();
+</script>
+<script>
+(function(){
+  var f=document.getElementById('bill-form');if(!f)return;
+  var q=new URLSearchParams(location.search);
+  ['utm_source','utm_medium','utm_campaign'].forEach(function(k){if(q.get(k))f.elements[k].value=q.get(k).slice(0,100);});
+  var banner=document.getElementById('br-banner'),ok=document.getElementById('br-ok'),btn=f.querySelector('button[type=submit]');
+  var file=document.getElementById('br-file'),fe=document.getElementById('br-file-e'),cons=document.getElementById('br-consent'),ce=document.getElementById('br-consent-e');
+  if(q.get('review')==='error')banner.hidden=false;
+  var TYPES=['application/pdf','image/jpeg','image/png'],MAX=5*1024*1024;
+  function err(el,msgEl,msg){el.setAttribute('aria-invalid',msg?'true':'false');msgEl.hidden=!msg;if(msg)msgEl.textContent=msg;}
+  function checkFiles(){
+    var fs=[].slice.call(file.files||[]);
+    if(!fs.length)return err(file,fe,'Please attach your latest phone bill.'),false;
+    if(fs.length>3)return err(file,fe,'Please attach up to 3 files.'),false;
+    if(fs.some(function(x){return TYPES.indexOf(x.type)<0;}))return err(file,fe,'Please upload a PDF, JPG or PNG.'),false;
+    if(fs.reduce(function(n,x){return n+x.size;},0)>MAX)return err(file,fe,"This is larger than 5 MB. Try the PDF from your provider's website, or a smaller photo."),false;
+    err(file,fe,'');return true;
+  }
+  file.addEventListener('change',checkFiles);
+  cons.addEventListener('change',function(){if(cons.checked)err(cons,ce,'');});
+  f.addEventListener('submit',async function(e){
+    e.preventDefault();banner.hidden=true;ok.textContent='';
+    var good=true;
+    ['name','business','email','mobile'].forEach(function(n){var el=f.elements[n];var v=el.checkValidity();el.setAttribute('aria-invalid',v?'false':'true');if(!v)good=false;});
+    if(!checkFiles())good=false;
+    if(!cons.checked){err(cons,ce,'Please tick the box so we can use your bill for the review.');good=false;}
+    if(!good){var first=f.querySelector('[aria-invalid="true"]');if(first)first.focus();return;}
+    btn.disabled=true;btn.textContent='Sending your bill…';
+    try{
+      var r=await fetch(f.action,{method:'POST',headers:{'X-Requested-With':'fetch'},body:new FormData(f)});
+      var j=await r.json().catch(function(){return{};});
+      if(!r.ok||!j.ok)throw 0;
+      var first=(f.elements.name.value.trim().split(' ')[0])||'';
+      ok.textContent='Thanks'+(first?', '+first:'')+". We've received your bill and will send your comparison within one business day. Check your email for a confirmation.";
+      window.dataLayer=window.dataLayer||[];
+      window.dataLayer.push({event:'bill_review_submitted',users:f.elements.users.value||'not_specified',utm_source:f.elements.utm_source.value||'(none)'});
+      f.reset();
+    }catch(x){banner.hidden=false;banner.focus&&banner.setAttribute('tabindex','-1');banner.focus();}
+    btn.disabled=false;btn.textContent='Send my bill for review';
   });
 })();
 </script>

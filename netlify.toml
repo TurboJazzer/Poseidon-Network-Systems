@@ -92,3 +92,18 @@
   from = "/voip"
   to = "/business-voip-cape-town.html"
   status = 301
+
+[[redirects]]
+  from = "/.netlify/functions/bill-review"
+  to = "/.netlify/functions/bill-review"
+  status = 200
+  force = true
+  [redirects.rate_limit]
+    window_limit = 5
+    window_size = 60
+    aggregate_by = ["ip", "domain"]
+
+[[headers]]
+  for = "/bill-review-thanks.html"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"

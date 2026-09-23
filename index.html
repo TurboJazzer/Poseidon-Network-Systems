@@ -190,23 +190,39 @@
         <p style="font-size:17px;color:#4A5578;line-height:1.7;">From cabling a new office to keeping your backups running, our team qualifies in every layer of the stack, so you deal with one partner, not five vendors.</p>
       </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;">
-        <sc-for list="{{ services }}" as="svc" hint-placeholder-count="6">
-          <div style="background:#ffffff;border:1px solid #E4E9F5;border-radius:18px;padding:32px;display:flex;flex-direction:column;gap:16px;">
-            <div style="width:40px;height:40px;border-radius:10px;background:rgba(45,91,227,0.1);display:flex;align-items:center;justify-content:center;" html="{{ svc.icon }}"></div>
-            <h3 style="font-size:20px;font-weight:600;letter-spacing:-0.015em;color:#0D1B4B;">{{ svc.title }}</h3>
-            <p style="font-size:15px;color:#4A5578;line-height:1.65;">{{ svc.desc }}</p>
-            <sc-if value="{{ svc.badge }}" hint-placeholder-val="{{ false }}">
-              <img src="assets/dell_authorized_partner.png" alt="Dell Technologies Authorized Partner" width="320" height="93" style="height:44px;width:auto;object-fit:contain;margin-top:4px;" />
-              <div style="display:flex;gap:14px;">
-                <a href="/new-dell-equipment.html" style="font-size:13px;font-weight:600;color:#2D5BE3;">New Dell &rarr;</a>
-                <a href="/refurbished-dell-equipment.html" style="font-size:13px;font-weight:600;color:#2D5BE3;">Refurbished Dell &rarr;</a>
-              </div>
-            </sc-if>
-            <sc-if value="{{ svc.href }}" hint-placeholder-val="{{ false }}">
-              <a href="{{ svc.href }}" style="font-size:13px;font-weight:600;color:#2D5BE3;">Business VoIP &rarr;</a>
-            </sc-if>
-          </div>
-        </sc-for>
+        <div style="background:#ffffff;border:1px solid #E4E9F5;border-radius:18px;padding:32px;display:flex;flex-direction:column;gap:16px;">
+          <div style="width:40px;height:40px;border-radius:10px;background:rgba(45,91,227,0.1);display:flex;align-items:center;justify-content:center;"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D5BE3" stroke-width="1.6"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20h8M12 16v4"/></svg></div>
+          <h3 style="font-size:20px;font-weight:600;letter-spacing:-0.015em;color:#0D1B4B;">New &amp; Refurbished Hardware</h3>
+          <p style="font-size:15px;color:#4A5578;line-height:1.65;">Refurbished Dell units with a 1-year warranty for price-conscious clients, new Dell hardware for brand-aware buyers, and any other IT hardware sourced on request.</p>
+          <img src="assets/dell_authorized_partner.png" alt="Dell Technologies Authorized Partner" width="320" height="93" style="height:44px;width:auto;object-fit:contain;margin-top:4px;">
+          <div style="display:flex;gap:14px;flex-wrap:wrap;"><a href="/new-dell-equipment.html" style="font-size:13px;font-weight:600;color:#2D5BE3;">New Dell &rarr;</a><a href="/refurbished-dell-equipment.html" style="font-size:13px;font-weight:600;color:#2D5BE3;">Refurbished Dell &rarr;</a></div>
+        </div>
+        <div style="background:#ffffff;border:1px solid #E4E9F5;border-radius:18px;padding:32px;display:flex;flex-direction:column;gap:16px;">
+          <div style="width:40px;height:40px;border-radius:10px;background:rgba(45,91,227,0.1);display:flex;align-items:center;justify-content:center;"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D5BE3" stroke-width="1.6"><path d="M4 13a8 8 0 0 1 16 0"/><rect x="2.5" y="13" width="4" height="6" rx="1.5"/><rect x="17.5" y="13" width="4" height="6" rx="1.5"/></svg></div>
+          <h3 style="font-size:20px;font-weight:600;letter-spacing:-0.015em;color:#0D1B4B;">Managed IT Support &amp; Helpdesk</h3>
+          <p style="font-size:15px;color:#4A5578;line-height:1.65;">Remote monitoring and troubleshooting via secure remote access (AnyDesk), with a real person to call when something goes wrong.</p>
+        </div>
+        <div style="background:#ffffff;border:1px solid #E4E9F5;border-radius:18px;padding:32px;display:flex;flex-direction:column;gap:16px;">
+          <div style="width:40px;height:40px;border-radius:10px;background:rgba(45,91,227,0.1);display:flex;align-items:center;justify-content:center;"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D5BE3" stroke-width="1.6"><path d="M14.5 3.5a3 3 0 0 0-4 4L4 14l2.5 2.5 6.5-6.5a3 3 0 0 0 4-4l-1.5 1.5-1.5-1.5 1.5-1.5z"/><path d="M17 17l3 3"/></svg></div>
+          <h3 style="font-size:20px;font-weight:600;letter-spacing:-0.015em;color:#0D1B4B;">Repairs, Maintenance &amp; Network Cabling</h3>
+          <p style="font-size:15px;color:#4A5578;line-height:1.65;">Diagnostics, repair, and structured cabling or network setup for desktops, laptops, servers, and offices. Delivered onsite when hardware or cabling work requires it.</p>
+        </div>
+        <div style="background:#ffffff;border:1px solid #E4E9F5;border-radius:18px;padding:32px;display:flex;flex-direction:column;gap:16px;">
+          <div style="width:40px;height:40px;border-radius:10px;background:rgba(45,91,227,0.1);display:flex;align-items:center;justify-content:center;"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D5BE3" stroke-width="1.6"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></div>
+          <h3 style="font-size:20px;font-weight:600;letter-spacing:-0.015em;color:#0D1B4B;">Business VoIP &amp; Phones</h3>
+          <p style="font-size:15px;color:#4A5578;line-height:1.65;">Hosted switchboards, number porting and handsets, installed on a network that&rsquo;s ready for voice.</p>
+          <div style="display:flex;gap:14px;flex-wrap:wrap;"><a href="/business-voip-cape-town.html" style="font-size:13px;font-weight:600;color:#2D5BE3;">Business VoIP &rarr;</a><a href="/business-voip-cape-town.html#bill-review" style="font-size:13px;font-weight:600;color:#2D5BE3;">Free phone bill review &rarr;</a></div>
+        </div>
+        <div style="background:#ffffff;border:1px solid #E4E9F5;border-radius:18px;padding:32px;display:flex;flex-direction:column;gap:16px;">
+          <div style="width:40px;height:40px;border-radius:10px;background:rgba(45,91,227,0.1);display:flex;align-items:center;justify-content:center;"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D5BE3" stroke-width="1.6"><path d="M21 8l-9-4-9 4 9 4 9-4z"/><path d="M3 8v8l9 4 9-4V8M12 12v8"/></svg></div>
+          <h3 style="font-size:20px;font-weight:600;letter-spacing:-0.015em;color:#0D1B4B;">Consumables &amp; Supplies</h3>
+          <p style="font-size:15px;color:#4A5578;line-height:1.65;">Toner, cabling, peripherals, and the everyday items that keep an office running.</p>
+        </div>
+        <div style="background:#ffffff;border:1px solid #E4E9F5;border-radius:18px;padding:32px;display:flex;flex-direction:column;gap:16px;">
+          <div style="width:40px;height:40px;border-radius:10px;background:rgba(45,91,227,0.1);display:flex;align-items:center;justify-content:center;"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D5BE3" stroke-width="1.6"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/></svg></div>
+          <h3 style="font-size:20px;font-weight:600;letter-spacing:-0.015em;color:#0D1B4B;">Business Continuity &amp; Backup</h3>
+          <p style="font-size:15px;color:#4A5578;line-height:1.65;">Backup strategy and disaster recovery so downtime never means data loss.</p>
+        </div>
       </div>
 
       <div class="ledger-line" style="margin:56px 0 0;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
@@ -218,9 +234,6 @@
             </div>
             <sc-if value="{{ stage.hasArrow }}" hint-placeholder-val="{{ true }}">
               <span class="ledger-step-arrow" style="color:#D8E0F3;font-size:20px;flex-shrink:0;">&rarr;</span>
-            </sc-if>
-            <sc-if value="{{ svc.href }}" hint-placeholder-val="{{ false }}">
-              <a href="{{ svc.href }}" style="font-size:13px;font-weight:600;color:#2D5BE3;">Business VoIP &rarr;</a>
             </sc-if>
           </div>
         </sc-for>
