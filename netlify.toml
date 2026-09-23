@@ -82,3 +82,13 @@
     Permissions-Policy = "geolocation=(), microphone=(), camera=()"
     Cross-Origin-Opener-Policy = "same-origin"
     Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
+
+[[redirects]]
+  from = "/business-voip-cape-town"
+  to = "/business-voip-cape-town.html"
+  status = 301
+
+[[redirects]]
+  from = "/voip"
+  to = "/business-voip-cape-town.html"
+  status = 301

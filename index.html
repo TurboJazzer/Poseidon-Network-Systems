@@ -7,7 +7,7 @@
 </head>
 <body>
 <form name="quote-request" data-netlify="true" netlify-honeypot="bot-field" hidden id="netlify-forms-detect">
-  <input name="name" /><input name="company" /><input name="email" /><input name="phone" /><input name="need" /><textarea name="message"></textarea>
+  <input name="name" /><input name="company" /><input name="email" /><input name="phone" /><input name="need" /><input name="users" /><input name="provider" /><textarea name="message"></textarea>
 </form>
 <x-dc>
 <template id="__bundler_thumbnail" data-bg-color="#0D1B4B">
@@ -112,6 +112,7 @@
             </div>
           </div>
           <a href="#services" style="font-size:14px;font-weight:500;color:#3D4A70;" style-hover="color:#0D1B4B;">Services</a>
+          <a href="/business-voip-cape-town.html" style="font-size:14px;font-weight:500;color:#3D4A70;" style-hover="color:#0D1B4B;">VoIP</a>
           <a href="#process" style="font-size:14px;font-weight:500;color:#3D4A70;" style-hover="color:#0D1B4B;">How It Works</a>
           <a href="#about" style="font-size:14px;font-weight:500;color:#3D4A70;" style-hover="color:#0D1B4B;">About</a>
           <a href="/faq.html" style="font-size:14px;font-weight:500;color:#3D4A70;" style-hover="color:#0D1B4B;">FAQ</a>
@@ -201,6 +202,9 @@
                 <a href="/refurbished-dell-equipment.html" style="font-size:13px;font-weight:600;color:#2D5BE3;">Refurbished Dell &rarr;</a>
               </div>
             </sc-if>
+            <sc-if value="{{ svc.href }}" hint-placeholder-val="{{ false }}">
+              <a href="{{ svc.href }}" style="font-size:13px;font-weight:600;color:#2D5BE3;">Business VoIP &rarr;</a>
+            </sc-if>
           </div>
         </sc-for>
       </div>
@@ -214,6 +218,9 @@
             </div>
             <sc-if value="{{ stage.hasArrow }}" hint-placeholder-val="{{ true }}">
               <span class="ledger-step-arrow" style="color:#D8E0F3;font-size:20px;flex-shrink:0;">&rarr;</span>
+            </sc-if>
+            <sc-if value="{{ svc.href }}" hint-placeholder-val="{{ false }}">
+              <a href="{{ svc.href }}" style="font-size:13px;font-weight:600;color:#2D5BE3;">Business VoIP &rarr;</a>
             </sc-if>
           </div>
         </sc-for>
@@ -277,6 +284,7 @@
           <input name="phone" type="tel" placeholder="Phone" aria-label="Phone" style="border:1px solid #D8E0F3;border-radius:10px;padding:13px 14px;font-size:15px;color:#0D1B4B;" />
           <select name="need" aria-label="What do you need?" key="{{ presetNeed }}" defaultValue="{{ presetNeed }}" style="border:1px solid #D8E0F3;border-radius:10px;padding:13px 14px;font-size:15px;color:#5A6588;">
             <option value="">What do you need?</option>
+            <option>Business phones / VoIP</option>
             <option>New Dell laptops</option>
             <option>Refurbished Dell laptops</option>
             <option>Dell desktops (OptiPlex)</option>
@@ -309,6 +317,7 @@
             <a href="#services" style="font-size:14px;color:rgba(255,255,255,0.85);" style-hover="color:#ffffff;">Managed IT Support &amp; Helpdesk</a>
             <a href="#services" style="font-size:14px;color:rgba(255,255,255,0.85);" style-hover="color:#ffffff;">New &amp; Refurbished Hardware</a>
             <a href="#services" style="font-size:14px;color:rgba(255,255,255,0.85);" style-hover="color:#ffffff;">Repairs, Maintenance &amp; Network Cabling</a>
+            <a href="/business-voip-cape-town.html" style="font-size:14px;color:rgba(255,255,255,0.85);" style-hover="color:#ffffff;">Business VoIP &amp; Hosted Switchboard</a>
             <a href="#services" style="font-size:14px;color:rgba(255,255,255,0.85);" style-hover="color:#ffffff;">Consumables &amp; Supplies</a>
             <a href="#services" style="font-size:14px;color:rgba(255,255,255,0.85);" style-hover="color:#ffffff;">Business Continuity &amp; Backup</a>
           </div>
@@ -397,6 +406,7 @@ class Component extends DCLogic {
         { title: 'New & Refurbished Hardware', desc: 'Refurbished Dell units with a 1-year warranty for price-conscious clients, new Dell hardware for brand-aware buyers, and any other IT hardware sourced on request.', badge: true, icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D5BE3" stroke-width="1.6"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20h8M12 16v4"/></svg>' },
         { title: 'Managed IT Support & Helpdesk', desc: 'Remote monitoring and troubleshooting via secure remote access (AnyDesk), with a real person to call when something goes wrong.', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D5BE3" stroke-width="1.6"><path d="M4 13a8 8 0 0 1 16 0"/><rect x="2.5" y="13" width="4" height="6" rx="1.5"/><rect x="17.5" y="13" width="4" height="6" rx="1.5"/></svg>' },
         { title: 'Repairs, Maintenance & Network Cabling', desc: 'Diagnostics, repair, and structured cabling or network setup for desktops, laptops, servers, and offices. Delivered onsite when hardware or cabling work requires it.', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D5BE3" stroke-width="1.6"><path d="M14.5 3.5a3 3 0 0 0-4 4L4 14l2.5 2.5 6.5-6.5a3 3 0 0 0 4-4l-1.5 1.5-1.5-1.5 1.5-1.5z"/><path d="M17 17l3 3"/></svg>' },
+        { title: 'Business VoIP & Phones', desc: "Hosted switchboards, number porting and handsets, installed on a network that's ready for voice.", href: '/business-voip-cape-town.html', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D5BE3" stroke-width="1.6"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>' },
         { title: 'Consumables & Supplies', desc: 'Toner, cabling, peripherals, and the everyday items that keep an office running.', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D5BE3" stroke-width="1.6"><path d="M21 8l-9-4-9 4 9 4 9-4z"/><path d="M3 8v8l9 4 9-4V8M12 12v8"/></svg>' },
         { title: 'Business Continuity & Backup', desc: 'Backup strategy and disaster recovery so downtime never means data loss.', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D5BE3" stroke-width="1.6"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/></svg>' }
       ],
