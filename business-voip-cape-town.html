@@ -326,7 +326,7 @@
           <p style="font-size:15.5px;color:rgba(255,255,255,0.85);line-height:1.65;">Take a photo of each page of your bill and send it to 064 702 9962.</p>
           <a href="https://wa.me/27647029962?text=Hi%2C%20I%27d%20like%20a%20free%20phone%20bill%20review." class="btn" style="align-self:flex-start;margin-top:6px;">WhatsApp your bill</a>
         </div>
-        <form id="bill-form" action="/.netlify/functions/bill-review" method="post" enctype="multipart/form-data" novalidate style="background:#fff;border:1px solid #D8E0F3;border-radius:18px;padding:32px;display:flex;flex-direction:column;gap:16px;">
+        <form id="bill-form" action="/api/bill-review" method="post" enctype="multipart/form-data" novalidate style="background:#fff;border:1px solid #D8E0F3;border-radius:18px;padding:32px;display:flex;flex-direction:column;gap:16px;">
           <h3 style="font-size:22px;font-weight:600;">Or upload it here</h3>
           <p id="br-banner" class="br-err" role="alert" hidden style="background:#FEF2F2;border:1px solid #FECACA;border-radius:8px;padding:10px 12px;">Your bill didn't send. Please try again, or WhatsApp it to 064 702 9962.</p>
           <div class="formgrid" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">

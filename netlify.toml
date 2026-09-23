@@ -94,10 +94,9 @@
   status = 301
 
 [[redirects]]
-  from = "/.netlify/functions/bill-review"
+  from = "/api/bill-review"
   to = "/.netlify/functions/bill-review"
   status = 200
-  force = true
   [redirects.rate_limit]
     window_limit = 5
     window_size = 60
