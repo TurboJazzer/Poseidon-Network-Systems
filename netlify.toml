@@ -30,32 +30,32 @@
 [[redirects]]
   from = "/new-dell-equipment"
   to = "/new-dell-equipment.html"
-  status = 301
+  status = 200
 
 [[redirects]]
   from = "/refurbished-dell-equipment"
   to = "/refurbished-dell-equipment.html"
-  status = 301
+  status = 200
 
 [[redirects]]
   from = "/faq"
   to = "/faq.html"
-  status = 301
+  status = 200
 
 [[redirects]]
   from = "/terms"
   to = "/terms.html"
-  status = 301
+  status = 200
 
 [[redirects]]
   from = "/privacy"
   to = "/privacy.html"
-  status = 301
+  status = 200
 
 [[redirects]]
   from = "/resources"
   to = "/resources.html"
-  status = 301
+  status = 200
 
 [[redirects]]
   from = "/index.html"
@@ -86,7 +86,7 @@
 [[redirects]]
   from = "/business-voip-cape-town"
   to = "/business-voip-cape-town.html"
-  status = 301
+  status = 200
 
 [[redirects]]
   from = "/voip"
