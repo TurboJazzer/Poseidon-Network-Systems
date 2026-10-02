@@ -107,10 +107,11 @@
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
 
-[[headers]]
-  for = "/staff-voip-checklist.html"
-  [headers.values]
-    X-Robots-Tag = "noindex, nofollow, noarchive"
+[[redirects]]
+  from = "/staff-voip-checklist.html"
+  to = "/staff/voip-checklist.html"
+  status = 301
+  force = true
 
 [[headers]]
   for = "/staff/*"
