@@ -12,5 +12,6 @@ Disallow: /
 
 User-agent: *
 Allow: /
+Disallow: /staff/
 
 Sitemap: https://poseidon-network.com/sitemap.xml
