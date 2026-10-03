@@ -1,4 +1,6 @@
 (function(){
+  if (window.__pnsChatMounted) return;
+  window.__pnsChatMounted = true;
   var open = false;
   var messages = [];
   var sending = false;
@@ -79,11 +81,21 @@
       el('div', { style: { display: 'flex', gap: '8px', padding: '12px', borderTop: '1px solid #E4E9F5' } }, [input, sendBtn])
     ]);
     document.body.appendChild(panel);
+    place();
     render();
   }
 
+  var mq = window.matchMedia('(max-width:640px)');
+  function place(){
+    if (bubble) bubble.style.bottom = mq.matches ? '72px' : '24px';
+    if (panel) panel.style.bottom = mq.matches ? '140px' : '92px';
+  }
+  if (mq.addEventListener) mq.addEventListener('change', place); else if (mq.addListener) mq.addListener(place);
+
   function init(){
+    if (document.querySelector('[data-pns-chat]')) return;
     bubble = el('button', {
+      'data-pns-chat': '1',
       'aria-label': 'Open chat assistant',
       style: {
         position: 'fixed', bottom: '24px', right: '24px', width: '56px', height: '56px', borderRadius: '50%',
@@ -99,6 +111,7 @@
       }
     }, [el('img', { src: 'assets/pns_logo_new_sm.png', alt: 'Chat', width: '32', height: '32', style: { width: '32px', height: '32px', objectFit: 'contain', borderRadius: '50%' } })]);
     document.body.appendChild(bubble);
+    place();
   }
 
   if (document.readyState === 'loading') {
