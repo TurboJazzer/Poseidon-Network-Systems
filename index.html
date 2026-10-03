@@ -84,6 +84,8 @@
   @media (max-width:640px){body{padding-bottom:52px;}.hero-contact{display:none !important;}}
   body.pns-form-visible [data-pns-chat]{display:none !important;}
   body.pns-form-visible .pns-sticky-quote{display:none !important;}
+  .svc-grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;}
+  @media (max-width:767px){.svc-grid2{grid-template-columns:minmax(0,1fr);gap:14px;}}
   .price-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;}
   .steps-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;}
   @media (max-width:900px){.price-grid{grid-template-columns:minmax(0,1fr);}}
@@ -130,16 +132,13 @@
           <div style="position:relative;" class="pns-dropdown">
             <button type="button" aria-haspopup="true" aria-expanded="false" style="font-size:14px;font-weight:500;color:#3D4A70;background:none;border:none;padding:0;cursor:pointer;font-family:inherit;">Hardware</button>
             <div style="position:absolute;top:100%;left:0;background:#fff;border:1px solid #E4E9F5;border-radius:8px;box-shadow:0 12px 30px rgba(13,27,75,0.12);padding:8px;min-width:200px;" class="pns-dropdown-menu">
-              <a href="/new-dell-equipment.html" style="display:block;padding:10px 12px;font-size:14px;font-weight:500;color:#3D4A70;border-radius:6px;" style-hover="background:#F6F8FD;color:#0D1B4B;">New Dell</a>
               <a href="/refurbished-dell-equipment.html" style="display:block;padding:10px 12px;font-size:14px;font-weight:500;color:#3D4A70;border-radius:6px;" style-hover="background:#F6F8FD;color:#0D1B4B;">Refurbished Dell</a>
+              <a href="/new-dell-equipment.html" style="display:block;padding:10px 12px;font-size:14px;font-weight:500;color:#3D4A70;border-radius:6px;" style-hover="background:#F6F8FD;color:#0D1B4B;">New Dell</a>
             </div>
           </div>
-          <a href="#services" style="font-size:14px;font-weight:500;color:#3D4A70;" style-hover="color:#0D1B4B;">Services</a>
-          <a href="#prices" style="font-size:14px;font-weight:500;color:#3D4A70;" style-hover="color:#0D1B4B;">Prices</a>
+          <a href="#services" style="font-size:14px;font-weight:500;color:#3D4A70;" style-hover="color:#0D1B4B;">IT Support</a>
           <a href="/business-voip-cape-town.html" style="font-size:14px;font-weight:500;color:#3D4A70;" style-hover="color:#0D1B4B;">VoIP</a>
-          <a href="#about" style="font-size:14px;font-weight:500;color:#3D4A70;" style-hover="color:#0D1B4B;">About</a>
           <a href="/faq.html" style="font-size:14px;font-weight:500;color:#3D4A70;" style-hover="color:#0D1B4B;">FAQ</a>
-          <a href="/resources.html" style="font-size:14px;font-weight:500;color:#3D4A70;" style-hover="color:#0D1B4B;">Resources</a>
         </div>
         <a href="#quote" onClick="{{ presetHardware }}" style="font-size:14px;font-weight:600;color:#ffffff;background:#2D5BE3;padding:11px 20px;border-radius:8px;white-space:nowrap;display:inline-flex;align-items:center;" style-hover="background:#1F47C4;">Get a Quote</a>
       </nav>
@@ -149,14 +148,11 @@
     </div>
     <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
       <div id="pns-mobile-menu" class="pns-mobile-menu" style="border-top:1px solid #E4E9F5;background:#ffffff;padding:4px 20px 20px;">
-        <a href="/new-dell-equipment.html" onClick="{{ closeMenu }}" style="display:block;padding:14px 4px;font-size:16px;font-weight:500;color:#0D1B4B;border-bottom:1px solid #E4E9F5;">New Dell</a>
         <a href="/refurbished-dell-equipment.html" onClick="{{ closeMenu }}" style="display:block;padding:14px 4px;font-size:16px;font-weight:500;color:#0D1B4B;border-bottom:1px solid #E4E9F5;">Refurbished Dell</a>
-        <a href="#services" onClick="{{ closeMenu }}" style="display:block;padding:14px 4px;font-size:16px;font-weight:500;color:#0D1B4B;border-bottom:1px solid #E4E9F5;">Services</a>
-        <a href="#prices" onClick="{{ closeMenu }}" style="display:block;padding:14px 4px;font-size:16px;font-weight:500;color:#0D1B4B;border-bottom:1px solid #E4E9F5;">Prices</a>
+        <a href="/new-dell-equipment.html" onClick="{{ closeMenu }}" style="display:block;padding:14px 4px;font-size:16px;font-weight:500;color:#0D1B4B;border-bottom:1px solid #E4E9F5;">New Dell</a>
+        <a href="#services" onClick="{{ closeMenu }}" style="display:block;padding:14px 4px;font-size:16px;font-weight:500;color:#0D1B4B;border-bottom:1px solid #E4E9F5;">IT Support</a>
         <a href="/business-voip-cape-town.html" onClick="{{ closeMenu }}" style="display:block;padding:14px 4px;font-size:16px;font-weight:500;color:#0D1B4B;border-bottom:1px solid #E4E9F5;">VoIP</a>
-        <a href="#about" onClick="{{ closeMenu }}" style="display:block;padding:14px 4px;font-size:16px;font-weight:500;color:#0D1B4B;border-bottom:1px solid #E4E9F5;">About</a>
         <a href="/faq.html" onClick="{{ closeMenu }}" style="display:block;padding:14px 4px;font-size:16px;font-weight:500;color:#0D1B4B;border-bottom:1px solid #E4E9F5;">FAQ</a>
-        <a href="/resources.html" onClick="{{ closeMenu }}" style="display:block;padding:14px 4px;font-size:16px;font-weight:500;color:#0D1B4B;border-bottom:1px solid #E4E9F5;">Resources</a>
       </div>
     </sc-if>
   </header>
@@ -166,7 +162,7 @@
       <div class="hero-grid" style="display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,0.9fr);gap:56px;align-items:center;">
         <div>
           <h1 class="hero-h1" style="font-size:clamp(32px,4vw,48px);line-height:1.12;letter-spacing:-0.02em;font-weight:700;font-family:'Space Grotesk',sans-serif;color:#ffffff;margin:0 0 18px;text-wrap:balance;">Dell laptops and IT support for Cape Town offices.</h1>
-          <p style="font-size:19px;line-height:1.6;color:rgba(255,255,255,0.85);max-width:540px;margin:0 0 32px;text-wrap:pretty;">Refurbished Dell laptops from R5,000 excl. VAT with a 1-year warranty, plus remote IT support and business phones.</p>
+          <p style="font-size:19px;line-height:1.6;color:rgba(255,255,255,0.85);max-width:540px;margin:0 0 32px;text-wrap:pretty;">Refurbished Dell laptops from R5,000 excl. VAT with a 1&#8209;year warranty, plus remote IT support and business phones.</p>
           <div style="display:flex;gap:14px;flex-wrap:wrap;">
             <a href="#quote" onClick="{{ presetHardware }}" style="font-size:16px;font-weight:600;color:#ffffff;background:#2D5BE3;padding:16px 30px;border-radius:10px;white-space:nowrap;display:inline-flex;align-items:center;" style-hover="background:#1F47C4;">Get a Quote</a>
             <a href="/business-voip-cape-town.html#bill-review" style="font-size:16px;font-weight:600;color:#ffffff;padding:16px 30px;border-radius:10px;border:1px solid rgba(255,255,255,0.4);white-space:nowrap;display:inline-flex;align-items:center;" style-hover="border-color:#ffffff;">Free phone bill review</a>
@@ -192,53 +188,12 @@
     </div>
   </section>
 
-  <section id="services" class="pns-section" style="background:#F6F8FD;padding:100px 24px;">
-    <div style="max-width:1200px;margin:0 auto;">
-      <div style="max-width:720px;margin-bottom:44px;">
-        <p style="font-size:12px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#2D5BE3;margin:0 0 14px;">Services</p>
-        <h2 style="font-size:clamp(28px,3.6vw,44px);line-height:1.1;letter-spacing:-0.025em;font-weight:700;font-family:'Space Grotesk',sans-serif;color:#0D1B4B;margin:0 0 16px;">Hardware, support and phones from one team.</h2>
-        <p style="font-size:17px;color:#4A5578;line-height:1.7;margin:0;">From a new Dell laptop to keeping your backups running, you deal with one partner, not five vendors.</p>
-      </div>
-      <div class="svc-grid">
-        <div class="svc-a" style="background:#ffffff;border:1px solid #E4E9F5;border-radius:18px;padding:32px;display:flex;flex-direction:column;gap:16px;">
-          <div style="width:40px;height:40px;border-radius:10px;background:rgba(45,91,227,0.1);display:flex;align-items:center;justify-content:center;"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D5BE3" stroke-width="1.6"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20h8M12 16v4"/></svg></div>
-          <h3 style="font-size:22px;font-weight:600;letter-spacing:-0.015em;color:#0D1B4B;margin:0;">New &amp; Refurbished Dell Hardware</h3>
-          <p style="font-size:15px;color:#4A5578;line-height:1.65;margin:0;">Refurbished Dell units with a 1-year warranty for price-conscious buyers, new Dell for brand-aware buyers, and other IT hardware sourced on request.</p>
-          <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:auto;"><a href="/refurbished-dell-equipment.html" style="font-size:14px;font-weight:600;color:#2D5BE3;">Refurbished Dell &rarr;</a><a href="/new-dell-equipment.html" style="font-size:14px;font-weight:600;color:#2D5BE3;">New Dell &rarr;</a></div>
-        </div>
-        <div class="svc-a" style="background:#ffffff;border:1px solid #E4E9F5;border-radius:18px;padding:32px;display:flex;flex-direction:column;gap:16px;">
-          <div style="width:40px;height:40px;border-radius:10px;background:rgba(45,91,227,0.1);display:flex;align-items:center;justify-content:center;"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D5BE3" stroke-width="1.6"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></div>
-          <h3 style="font-size:22px;font-weight:600;letter-spacing:-0.015em;color:#0D1B4B;margin:0;">Business VoIP &amp; Phones</h3>
-          <p style="font-size:15px;color:#4A5578;line-height:1.65;margin:0;">Hosted switchboards (your office phone system in the cloud), number porting and handsets, set up and supported for your office.</p>
-          <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:auto;"><a href="/business-voip-cape-town.html" style="font-size:14px;font-weight:600;color:#2D5BE3;">Business VoIP &rarr;</a></div>
-        </div>
-        <div class="svc-b" style="background:#ffffff;border:1px solid #E4E9F5;border-radius:18px;padding:32px;display:flex;flex-direction:column;gap:16px;">
-          <div style="width:40px;height:40px;border-radius:10px;background:rgba(45,91,227,0.1);display:flex;align-items:center;justify-content:center;"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D5BE3" stroke-width="1.6"><path d="M4 13a8 8 0 0 1 16 0"/><rect x="2.5" y="13" width="4" height="6" rx="1.5"/><rect x="17.5" y="13" width="4" height="6" rx="1.5"/></svg></div>
-          <h3 style="font-size:20px;font-weight:600;letter-spacing:-0.015em;color:#0D1B4B;margin:0;">Managed IT Support &amp; Helpdesk</h3>
-          <p style="font-size:15px;color:#4A5578;line-height:1.65;margin:0;">Secure remote access, so we can fix things without a visit, with a real person to call when something goes wrong.</p>
-          <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:auto;"><a href="#quote" style="font-size:14px;font-weight:600;color:#2D5BE3;">Ask about IT support &rarr;</a></div>
-        </div>
-        <div class="svc-b" style="background:#ffffff;border:1px solid #E4E9F5;border-radius:18px;padding:32px;display:flex;flex-direction:column;gap:16px;">
-          <div style="width:40px;height:40px;border-radius:10px;background:rgba(45,91,227,0.1);display:flex;align-items:center;justify-content:center;"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D5BE3" stroke-width="1.6"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/></svg></div>
-          <h3 style="font-size:20px;font-weight:600;letter-spacing:-0.015em;color:#0D1B4B;margin:0;">Business Continuity &amp; Backup</h3>
-          <p style="font-size:15px;color:#4A5578;line-height:1.65;margin:0;">Backup strategy and disaster recovery so downtime never means data loss.</p>
-          <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:auto;"><a href="#quote" style="font-size:14px;font-weight:600;color:#2D5BE3;">Ask about backup &rarr;</a></div>
-        </div>
-        <div class="svc-c" style="background:#ffffff;border:1px solid #E4E9F5;border-radius:18px;padding:32px;display:flex;flex-direction:column;gap:16px;">
-          <div style="width:40px;height:40px;border-radius:10px;background:rgba(45,91,227,0.1);display:flex;align-items:center;justify-content:center;"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D5BE3" stroke-width="1.6"><path d="M21 8l-9-4-9 4 9 4 9-4z"/><path d="M3 8v8l9 4 9-4V8M12 12v8"/></svg></div>
-          <h3 style="font-size:20px;font-weight:600;letter-spacing:-0.015em;color:#0D1B4B;margin:0;">Consumables &amp; Supplies</h3>
-          <p style="font-size:15px;color:#4A5578;line-height:1.65;margin:0;">Toner, cables, peripherals and the everyday items that keep an office running.</p>
-          <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:auto;"><a href="#quote" style="font-size:14px;font-weight:600;color:#2D5BE3;">Ask for a price &rarr;</a></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="prices" class="pns-section" style="background:#ffffff;padding:100px 24px;">
+  <section id="prices" class="pns-section" style="background:#F6F8FD;padding:88px 24px;">
     <div style="max-width:1200px;margin:0 auto;">
       <div style="max-width:760px;margin-bottom:40px;">
         <p style="font-size:12px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#2D5BE3;margin:0 0 14px;">Refurbished Dell</p>
-        <h2 style="font-size:clamp(28px,3.6vw,44px);line-height:1.1;letter-spacing:-0.025em;font-weight:700;font-family:'Space Grotesk',sans-serif;color:#0D1B4B;margin:0;text-wrap:balance;">Refurbished Dell laptops from R5,000 excl. VAT</h2>
+        <h2 style="font-size:clamp(28px,3.6vw,44px);line-height:1.1;letter-spacing:-0.025em;font-weight:700;font-family:'Space Grotesk',sans-serif;color:#0D1B4B;margin:0 0 14px;text-wrap:balance;">Refurbished Dell laptops, from R5,000 excl. VAT</h2>
+        <p style="font-size:17px;color:#4A5578;line-height:1.6;margin:0;">Factory reconditioned, Windows 11 Pro, 1&#8209;year warranty. Delivered within 40km of Cape Town.</p>
       </div>
       <div class="price-grid">
         <sc-for list="{{ priceList }}" as="p" hint-placeholder-count="3">
@@ -254,14 +209,14 @@
               <p style="font-size:14px;color:#4A5578;line-height:1.55;margin:0;">{{ p.spec }}</p>
               <p style="margin:6px 0 0;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;"><span style="font-size:28px;font-weight:700;font-family:'Space Grotesk',sans-serif;color:#0D1B4B;letter-spacing:-0.02em;">{{ p.ex }}</span><span style="font-size:14px;color:#4A5578;">excl. VAT</span></p>
               <p style="font-size:14px;color:#4A5578;margin:0;">{{ p.inc }} incl. VAT</p>
-              <span style="font-size:14px;font-weight:600;color:#2D5BE3;margin-top:4px;">View details &rarr;</span>
+              <span style="font-size:14px;font-weight:600;color:#2D5BE3;margin-top:4px;">{{ p.cta }} &rarr;</span>
             </div>
           </a>
         </sc-for>
       </div>
       <div style="display:flex;justify-content:space-between;align-items:center;gap:12px 24px;flex-wrap:wrap;margin-top:28px;">
-        <p style="font-size:16px;font-weight:600;color:#0D1B4B;margin:0;">Every unit: factory reconditioned, Windows 11 Pro, 1-year warranty.</p>
-        <a href="/refurbished-dell-equipment.html" style="font-size:15px;font-weight:600;color:#2D5BE3;display:inline-flex;align-items:center;min-height:44px;">See all refurbished Dell &rarr;</a>
+        <a href="/refurbished-dell-equipment.html" style="font-size:15px;font-weight:600;color:#2D5BE3;display:inline-flex;align-items:center;min-height:44px;">See all refurbished Dell, including desktops &rarr;</a>
+        <a href="/new-dell-equipment.html" style="font-size:15px;font-weight:600;color:#2D5BE3;display:inline-flex;align-items:center;min-height:44px;">Looking for new Dell? &rarr;</a>
       </div>
       <sc-if value="{{ showWin10 }}" hint-placeholder-val="{{ true }}">
         <p style="font-size:15px;color:#0D1B4B;line-height:1.6;margin:16px 0 0;background:#F6F8FD;border-radius:12px;padding:14px 18px;">Windows 10 extended support gets more expensive after 13 October 2026. Every machine here comes with Windows 11 Pro.</p>
@@ -269,31 +224,63 @@
     </div>
   </section>
 
+  <section id="services" class="pns-section" style="background:#ffffff;padding:88px 24px;">
+    <div style="max-width:1200px;margin:0 auto;">
+      <div style="max-width:720px;margin-bottom:36px;">
+        <p style="font-size:12px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#2D5BE3;margin:0 0 14px;">Services</p>
+        <h2 style="font-size:clamp(28px,3.6vw,44px);line-height:1.1;letter-spacing:-0.025em;font-weight:700;font-family:'Space Grotesk',sans-serif;color:#0D1B4B;margin:0 0 16px;">Support, phones and backup from one team.</h2>
+        <p style="font-size:17px;color:#4A5578;line-height:1.7;margin:0;">From remote IT support to keeping your backups running, you deal with one partner, not five vendors.</p>
+      </div>
+      <div class="svc-grid2">
+        <div style="background:#ffffff;border:1px solid #E4E9F5;border-radius:18px;padding:28px;display:flex;flex-direction:column;gap:14px;">
+          <div style="width:40px;height:40px;border-radius:10px;background:rgba(45,91,227,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D5BE3" stroke-width="1.6"><path d="M4 13a8 8 0 0 1 16 0"/><rect x="2.5" y="13" width="4" height="6" rx="1.5"/><rect x="17.5" y="13" width="4" height="6" rx="1.5"/></svg></div>
+          <h3 style="font-size:22px;font-weight:600;letter-spacing:-0.015em;color:#0D1B4B;margin:0;">Managed IT Support &amp; Helpdesk</h3>
+          <p style="font-size:15px;color:#4A5578;line-height:1.65;margin:0;">Help for your team when something stops working.</p>
+          <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;"><li style="display:flex;gap:10px;align-items:flex-start;font-size:15px;color:#0D1B4B;line-height:1.5;"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2D5BE3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:3px;"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Secure remote access, so most issues are fixed without a visit</span></li><li style="display:flex;gap:10px;align-items:flex-start;font-size:15px;color:#0D1B4B;line-height:1.5;"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2D5BE3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:3px;"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>A real person to call during office hours (Mon-Fri 07:30-17:30)</span></li><li style="display:flex;gap:10px;align-items:flex-start;font-size:15px;color:#0D1B4B;line-height:1.5;"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2D5BE3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:3px;"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Setup and support for Dell laptops and Microsoft 365 accounts</span></li></ul>
+          <div style="margin-top:auto;"><a href="#quote" style="font-size:14px;font-weight:600;color:#2D5BE3;display:inline-flex;align-items:center;min-height:44px;">Ask about IT support &rarr;</a></div>
+        </div>
+        <div style="background:#ffffff;border:1px solid #E4E9F5;border-radius:18px;padding:28px;display:flex;flex-direction:column;gap:14px;">
+          <div style="width:40px;height:40px;border-radius:10px;background:rgba(45,91,227,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D5BE3" stroke-width="1.6"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></div>
+          <h3 style="font-size:22px;font-weight:600;letter-spacing:-0.015em;color:#0D1B4B;margin:0;">Business VoIP &amp; Phones</h3>
+          <p style="font-size:15px;color:#4A5578;line-height:1.65;margin:0;">Hosted switchboards (your office phone system in the cloud), number porting and handsets, set up and supported for your office.</p>
+          
+          <div style="margin-top:auto;"><a href="/business-voip-cape-town.html" style="font-size:14px;font-weight:600;color:#2D5BE3;display:inline-flex;align-items:center;min-height:44px;">Business VoIP &rarr;</a></div>
+        </div>
+        <div style="background:#ffffff;border:1px solid #E4E9F5;border-radius:18px;padding:24px;display:flex;flex-direction:column;gap:12px;">
+          <div style="display:flex;align-items:center;gap:14px;"><div style="width:40px;height:40px;border-radius:10px;background:rgba(45,91,227,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D5BE3" stroke-width="1.6"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/></svg></div><h3 style="font-size:19px;font-weight:600;letter-spacing:-0.015em;color:#0D1B4B;margin:0;">Backup &amp; Recovery</h3></div>
+          
+          <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;"><li style="display:flex;gap:10px;align-items:flex-start;font-size:15px;color:#0D1B4B;line-height:1.5;"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2D5BE3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:3px;"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Automatic backups of your important files</span></li><li style="display:flex;gap:10px;align-items:flex-start;font-size:15px;color:#0D1B4B;line-height:1.5;"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2D5BE3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:3px;"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>A plan for getting back up and running if a laptop is lost or fails</span></li><li style="display:flex;gap:10px;align-items:flex-start;font-size:15px;color:#0D1B4B;line-height:1.5;"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2D5BE3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:3px;"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Regular checks that backups actually work</span></li></ul>
+          <div style="margin-top:auto;"><a href="#quote" style="font-size:14px;font-weight:600;color:#2D5BE3;display:inline-flex;align-items:center;min-height:44px;">Ask about backup &rarr;</a></div>
+        </div>
+        <div style="background:#ffffff;border:1px solid #E4E9F5;border-radius:18px;padding:24px;display:flex;flex-direction:column;gap:12px;">
+          <div style="display:flex;align-items:center;gap:14px;"><div style="width:40px;height:40px;border-radius:10px;background:rgba(45,91,227,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D5BE3" stroke-width="1.6"><path d="M21 8l-9-4-9 4 9 4 9-4z"/><path d="M3 8v8l9 4 9-4V8M12 12v8"/></svg></div><h3 style="font-size:19px;font-weight:600;letter-spacing:-0.015em;color:#0D1B4B;margin:0;">Consumables &amp; Supplies</h3></div>
+          <p style="font-size:15px;color:#4A5578;line-height:1.6;margin:0;">Toner, cables, peripherals and the everyday items that keep an office running.</p>
+          
+          <div style="margin-top:auto;"><a href="#quote" style="font-size:14px;font-weight:600;color:#2D5BE3;display:inline-flex;align-items:center;min-height:44px;">Ask for a price &rarr;</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+
   <section aria-label="Free phone bill review" style="background:#ffffff;padding:0 24px 72px;">
     <div style="max-width:1200px;margin:0 auto;background:#0D1B4B;border-radius:18px;padding:36px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
       <div style="max-width:640px;">
-        <p style="font-size:12px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#A8C0FB;margin:0 0 10px;">Free phone bill review</p>
         <h2 class="bill-h2" style="font-size:clamp(26px,2.6vw,30px);line-height:1.2;font-weight:700;font-family:'Space Grotesk',sans-serif;color:#ffffff;margin:0;text-wrap:balance;">Send us your last phone bill. We'll show you what you could save.</h2>
       </div>
       <a href="/business-voip-cape-town.html#bill-review" style="font-size:16px;font-weight:600;color:#ffffff;background:#2D5BE3;padding:15px 26px;border-radius:10px;white-space:nowrap;" style-hover="background:#1F47C4;">Get my free review</a>
     </div>
   </section>
 
-  <section id="about" class="pns-section" style="background:#F6F8FD;padding:100px 24px;">
-    <div class="about-grid" style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:48px;align-items:start;">
+  <section id="about" class="pns-section" style="background:#F6F8FD;padding:72px 24px;">
+    <div style="max-width:1200px;margin:0 auto;"><div style="max-width:760px;">
       <div>
         <h2 style="font-size:clamp(26px,3vw,34px);font-weight:700;font-family:'Space Grotesk',sans-serif;color:#0D1B4B;letter-spacing:-0.01em;margin:0 0 16px;line-height:1.15;">Two decades on the same street in Sea Point.</h2>
         <p style="font-size:16px;color:#4A5578;line-height:1.7;margin:0;">Founded in 2004, Poseidon Network Systems has grown alongside Cape Town's businesses and home offices, supplying Dell hardware, setting up business phones, and answering the phone when something breaks. Most support is handled remotely over a secure connection, by people who already know your setup.</p>
       </div>
-      <div class="about-quote-card" style="background:#ffffff;border-radius:18px;padding:28px;position:sticky;top:110px;">
-        <h3 style="font-size:20px;font-weight:600;font-family:'Space Grotesk',sans-serif;color:#0D1B4B;margin:0 0 16px;">Our promise</h3>
-        <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px;">
-          <li style="display:flex;gap:10px;align-items:flex-start;font-size:15px;color:#0D1B4B;line-height:1.5;"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2D5BE3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:3px;"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>A reply within one business day</span></li>
-          <li style="display:flex;gap:10px;align-items:flex-start;font-size:15px;color:#0D1B4B;line-height:1.5;"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2D5BE3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:3px;"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>A 1-year warranty on refurbished Dell</span></li>
-          <li style="display:flex;gap:10px;align-items:flex-start;font-size:15px;color:#0D1B4B;line-height:1.5;"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2D5BE3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:3px;"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>No-obligation quotes</span></li>
-        </ul>
-      </div>
     </div>
+  </div>
   </section>
 
   <section id="quote" class="pns-section" style="background:#0D1B4B;padding:88px 24px 100px;">
@@ -309,11 +296,12 @@
             </li>
           </sc-for>
         </ol>
+        <p style="display:flex;gap:10px;align-items:flex-start;font-size:15px;color:#ffffff;line-height:1.5;margin:20px 0 0;"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A8C0FB" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:3px;"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><strong>Our promise:</strong> no-obligation quotes and clear, competitive pricing.</span></p>
       </div>
       <div class="quote-grid" style="display:grid;grid-template-columns:minmax(0,0.85fr) minmax(0,1.15fr);gap:48px;align-items:start;">
         <div>
           <h2 style="font-size:clamp(28px,3.2vw,40px);line-height:1.1;letter-spacing:-0.025em;font-weight:700;font-family:'Space Grotesk',sans-serif;color:#ffffff;margin:0 0 16px;text-wrap:balance;">Tell us what you need. We'll get back to you within one business day.</h2>
-          <p style="font-size:16px;color:rgba(255,255,255,0.8);line-height:1.7;margin:0 0 16px;">Dell hardware, remote IT support or business phones, we'll come back with clear, competitive pricing.</p>
+          <p style="font-size:16px;color:rgba(255,255,255,0.8);line-height:1.7;margin:0 0 16px;">Dell hardware, remote IT support or business phones. Tell us what you're after and we'll take it from there.</p>
           <p style="font-size:14px;color:rgba(255,255,255,0.78);line-height:1.6;margin:0 0 24px;">Enquiries sent after hours or at the weekend are answered the next business day.</p>
           <div style="display:flex;flex-direction:column;gap:10px;font-size:15px;color:rgba(255,255,255,0.85);">
             <div>Sea Point, Cape Town, 8005</div>
@@ -339,7 +327,7 @@
             <label style="font-size:14px;font-weight:600;color:#0D1B4B;display:flex;flex-direction:column;gap:6px;"><span>Company <span style="font-weight:400;color:#4A5578;">(optional)</span></span><input name="company" autocomplete="organization" aria-label="Company" style="border:1px solid #D8E0F3;border-radius:10px;padding:13px 14px;font-size:16px;color:#0D1B4B;font-weight:400;background:#ffffff;font-family:inherit;width:100%;" /></label>
           </div>
           <label style="font-size:14px;font-weight:600;color:#0D1B4B;display:flex;flex-direction:column;gap:6px;"><span>Business email<span aria-hidden="true" style="color:#2D5BE3;"> *</span></span><input name="email" type="email" autocomplete="email" aria-label="Email" required="{{ true }}" aria-invalid="{{ invalidEmail }}" aria-describedby="err-email" onInput="{{ clearEmail }}" style="border:1px solid #D8E0F3;border-radius:10px;padding:13px 14px;font-size:16px;color:#0D1B4B;font-weight:400;background:#ffffff;font-family:inherit;width:100%;border-color:{{ borderEmail }};" /><sc-if value="{{ err.email }}" hint-placeholder-val="{{ false }}"><span id="err-email" style="font-size:14px;font-weight:600;color:#2D5BE3;display:flex;gap:6px;align-items:center;"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5M12 16.5h.01"/></svg>{{ err.email }}</span></sc-if></label>
-          <label style="font-size:14px;font-weight:600;color:#0D1B4B;display:flex;flex-direction:column;gap:6px;"><span>Phone</span><input name="phone" type="tel" autocomplete="tel" aria-label="Phone" style="border:1px solid #D8E0F3;border-radius:10px;padding:13px 14px;font-size:16px;color:#0D1B4B;font-weight:400;background:#ffffff;font-family:inherit;width:100%;" /></label>
+          <label style="font-size:14px;font-weight:600;color:#0D1B4B;display:flex;flex-direction:column;gap:6px;"><span>Phone <span style="font-weight:400;color:#4A5578;">(optional)</span></span><input name="phone" type="tel" autocomplete="tel" aria-label="Phone" style="border:1px solid #D8E0F3;border-radius:10px;padding:13px 14px;font-size:16px;color:#0D1B4B;font-weight:400;background:#ffffff;font-family:inherit;width:100%;" /></label>
           <label style="font-size:14px;font-weight:600;color:#0D1B4B;display:flex;flex-direction:column;gap:6px;"><span>What do you need?</span>
             <select name="need" aria-label="What do you need?" key="{{ presetNeed }}" defaultValue="{{ presetNeed }}" style="border:1px solid #D8E0F3;border-radius:10px;padding:13px 14px;font-size:16px;color:#0D1B4B;font-weight:400;background:#ffffff;font-family:inherit;width:100%;">
               <option value="">Choose one</option>
@@ -367,8 +355,8 @@
     <div style="max-width:1200px;margin:0 auto;">
       <div style="background:#ffffff;border:1px solid #E4E9F5;border-radius:18px;padding:32px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
         <div style="max-width:560px;">
-          <h3 style="font-size:22px;font-weight:600;color:#0D1B4B;margin:0 0 10px;">Answers on Dell hardware, IT support and business phones</h3>
-          <p style="font-size:15px;color:#4A5578;line-height:1.6;margin:0;">Common questions from businesses and home offices across Cape Town.</p>
+          <h2 style="font-size:24px;font-weight:700;font-family:'Space Grotesk',sans-serif;color:#0D1B4B;margin:0 0 10px;">Common questions</h2>
+          <p style="font-size:15px;color:#4A5578;line-height:1.6;margin:0;">Delivery area, warranty, payment and more, answered for businesses and home offices across Cape Town.</p>
         </div>
         <a href="/faq.html" style="font-size:15px;font-weight:600;color:#2D5BE3;background:#ffffff;border:1px solid #D8E0F3;padding:14px 24px;border-radius:10px;white-space:nowrap;" style-hover="border-color:#2D5BE3;">View the FAQ</a>
       </div>
@@ -389,7 +377,7 @@
             <a href="/new-dell-equipment.html" style="font-size:14px;color:rgba(255,255,255,0.85);" style-hover="color:#ffffff;">New Dell Hardware</a>
             <a href="/business-voip-cape-town.html" style="font-size:14px;color:rgba(255,255,255,0.85);" style-hover="color:#ffffff;">Business VoIP &amp; Hosted Switchboard</a>
             <a href="#services" style="font-size:14px;color:rgba(255,255,255,0.85);" style-hover="color:#ffffff;">Managed IT Support &amp; Helpdesk</a>
-            <a href="#services" style="font-size:14px;color:rgba(255,255,255,0.85);" style-hover="color:#ffffff;">Business Continuity &amp; Backup</a>
+            <a href="#services" style="font-size:14px;color:rgba(255,255,255,0.85);" style-hover="color:#ffffff;">Backup &amp; Recovery</a>
             <a href="#services" style="font-size:14px;color:rgba(255,255,255,0.85);" style-hover="color:#ffffff;">Consumables &amp; Supplies</a>
           </div>
         </div>
@@ -397,6 +385,8 @@
           <p style="font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#8FABF5;margin:0 0 14px;">Company</p>
           <div style="display:grid;gap:10px;">
             <a href="/faq.html" style="font-size:14px;color:rgba(255,255,255,0.85);" style-hover="color:#ffffff;">FAQ</a>
+            <a href="#process" style="font-size:14px;color:rgba(255,255,255,0.85);" style-hover="color:#ffffff;">How It Works</a>
+            <a href="#about" style="font-size:14px;color:rgba(255,255,255,0.85);" style-hover="color:#ffffff;">About</a>
             <a href="/resources.html" style="font-size:14px;color:rgba(255,255,255,0.85);" style-hover="color:#ffffff;">Resources</a>
             <a href="#quote" style="font-size:14px;color:rgba(255,255,255,0.85);" style-hover="color:#ffffff;">Get a Quote</a>
             <a href="/terms.html" style="font-size:14px;color:rgba(255,255,255,0.85);" style-hover="color:#ffffff;">Terms of Service</a>
@@ -435,11 +425,11 @@
 <script type="text/x-dc" data-dc-script>
 // Homepage refurbished prices: edit here only. Must match the product pages and refurbished-dell-equipment.html.
 const REFURB_PRICES = [
-  { model: 'Latitude 5400 laptop', spec: 'i5 8th Gen, 8GB, 256GB SSD, 14", Windows 11 Pro, free bag', status: 'In Stock', ex: 5000, href: '/product-dell-latitude-5400.html', img: 'assets/dell_latitude_5400.jpg', alt: 'Refurbished Dell Latitude 5400 laptop' },
-  { model: 'Latitude 5330 laptop', spec: 'i5 12th Gen, 16GB, 512GB SSD, 13.3", Windows 11 Pro, free bag', status: 'In Stock', ex: 8600, href: '/product-dell-latitude-5330.html', img: 'assets/dell_latitude_5330.png', alt: 'Refurbished Dell Latitude 5330 laptop' },
-  { model: 'OptiPlex 3070 Micro desktop', spec: 'i5 8th Gen, 8GB, 256GB SSD, Windows 11 Pro, keyboard & mouse', status: 'Coming Soon', ex: 4650, href: '/product-dell-optiplex-3070-micro.html', img: 'assets/dell_optiplex_3070_micro.jpg', alt: 'Refurbished Dell OptiPlex 3070 Micro desktop' }
+  { model: 'Latitude 5400', spec: 'i5 8th Gen, 8GB, 256GB SSD, 14", Windows 11 Pro, free bag', status: 'In Stock', ex: 5000, href: '/product-dell-latitude-5400.html', img: 'assets/dell_latitude_5400.jpg', alt: 'Refurbished Dell Latitude 5400 laptop' },
+  { model: 'Latitude 5330', spec: 'i5 12th Gen, 16GB, 512GB SSD, 13.3", Windows 11 Pro, free bag', status: 'In Stock', ex: 8600, href: '/product-dell-latitude-5330.html', img: 'assets/dell_latitude_5330.png', alt: 'Refurbished Dell Latitude 5330 laptop' },
+  { model: 'Latitude 7430 2-in-1', spec: 'i7 12th Gen, 32GB, 512GB SSD, 14" Touch, Windows 11 Pro, free bag', status: 'Coming Soon', ex: 14180, href: '/product-dell-latitude-7430-2-in-1.html', img: 'assets/dell_latitude_7430.jpg', alt: 'Refurbished Dell Latitude 7430 2-in-1 laptop' }
 ];
-const WIN10_LINE_UNTIL = new Date('2026-10-14T00:00:00+02:00');
+const WIN10_LINE_UNTIL = new Date('2026-10-13T00:00:00+02:00');
 const fmtR = n => 'R' + n.toLocaleString('en-US', { minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2 });
 
 class Component extends DCLogic {
@@ -518,11 +508,11 @@ class Component extends DCLogic {
       toggleMenu: this.toggleMenu,
       closeMenu: this.closeMenu,
       showWin10: Date.now() < WIN10_LINE_UNTIL.getTime(),
-      priceList: REFURB_PRICES.map(p => ({ ...p, ex: fmtR(p.ex), inc: fmtR(Math.round(p.ex * 115) / 100), badgeStyle: p.status === 'In Stock' ? badgeIn : badgeSoon })),
+      priceList: REFURB_PRICES.map(p => ({ ...p, ex: fmtR(p.ex), inc: fmtR(Math.round(p.ex * 115) / 100), badgeStyle: p.status === 'In Stock' ? badgeIn : badgeSoon, cta: p.status === 'In Stock' ? 'View details' : 'Pre-order' })),
       steps: [
         { num: '01', title: 'Reach out', desc: 'Call, WhatsApp or send this form.' },
         { num: '02', title: 'We assess', desc: 'We review your setup and needs.' },
-        { num: '03', title: 'We quote', desc: 'Clear pricing within one business day.' },
+        { num: '03', title: 'We quote', desc: 'Clear, itemised pricing.' },
         { num: '04', title: 'We deliver', desc: 'Configured, delivered and supported.' }
       ]
     };

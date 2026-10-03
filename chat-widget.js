@@ -87,8 +87,8 @@
 
   var mq = window.matchMedia('(max-width:640px)');
   function place(){
-    if (bubble) bubble.style.bottom = mq.matches ? '72px' : '24px';
-    if (panel) panel.style.bottom = mq.matches ? '140px' : '92px';
+    if (bubble) bubble.style.bottom = mq.matches ? 'calc(66px + env(safe-area-inset-bottom))' : '24px';
+    if (panel) panel.style.bottom = mq.matches ? 'calc(134px + env(safe-area-inset-bottom))' : '92px';
   }
   if (mq.addEventListener) mq.addEventListener('change', place); else if (mq.addListener) mq.addListener(place);
 
