@@ -85,9 +85,9 @@
     render();
   }
 
-  var mq = window.matchMedia('(max-width:640px)');
+  var mq = window.matchMedia('(max-width:767px)');
   function place(){
-    if (bubble) bubble.style.bottom = mq.matches ? 'calc(66px + env(safe-area-inset-bottom))' : '24px';
+    if (bubble) { bubble.style.bottom = mq.matches ? 'calc(48px + 12px + env(safe-area-inset-bottom))' : '24px'; bubble.style.right = mq.matches ? '16px' : '24px'; }
     if (panel) panel.style.bottom = mq.matches ? 'calc(134px + env(safe-area-inset-bottom))' : '92px';
   }
   if (mq.addEventListener) mq.addEventListener('change', place); else if (mq.addListener) mq.addListener(place);
@@ -107,9 +107,9 @@
         if (!panel) buildPanel();
         panel.style.display = open ? 'flex' : 'none';
         bubble.innerHTML = '';
-        bubble.appendChild(open ? el('span', { style: { fontSize: '24px', color: '#fff' } }, ['✕']) : el('img', { src: 'assets/pns_logo_new_sm.png', alt: 'Chat', width: '32', height: '32', style: { width: '32px', height: '32px', objectFit: 'contain', borderRadius: '50%' } }));
+        bubble.appendChild(open ? el('span', { style: { fontSize: '24px', color: '#fff' } }, ['✕']) : el('img', { src: 'assets/pns_logo_new_sm.png', alt: '', width: '32', height: '32', style: { width: '32px', height: '32px', objectFit: 'contain', borderRadius: '50%' } }));
       }
-    }, [el('img', { src: 'assets/pns_logo_new_sm.png', alt: 'Chat', width: '32', height: '32', style: { width: '32px', height: '32px', objectFit: 'contain', borderRadius: '50%' } })]);
+    }, [el('img', { src: 'assets/pns_logo_new_sm.png', alt: '', width: '32', height: '32', style: { width: '32px', height: '32px', objectFit: 'contain', borderRadius: '50%' } })]);
     document.body.appendChild(bubble);
     place();
   }

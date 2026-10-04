@@ -3,46 +3,178 @@
     "name": "Poseidon Network Systems",
     "founded": 2004,
     "location": "Sea Point, Cape Town, South Africa, 8005",
-    "serviceArea": ["Cape Town", "Western Cape", "Sea Point", "Bellville", "Century City", "Stellenbosch", "Montague Gardens"],
+    "serviceArea": [
+      "Cape Town",
+      "Western Cape",
+      "Sea Point",
+      "Bellville",
+      "Century City",
+      "Stellenbosch",
+      "Montague Gardens"
+    ],
     "phone": "021 300 8278",
-    "whatsapp": "+27 64 702 9962",
+    "whatsapp": "064 702 9962",
     "whatsappNote": "Ask the visitor to click the WhatsApp button on the site (hero section, quote section, or footer) rather than reading out the number.",
-    "hours": "Monday–Friday, 07:30–17:30",
-    "supportModel": "Remote-first via secure remote access (AnyDesk) for troubleshooting and configuration. Onsite visits happen only when a hardware fault or physical/cabling work makes a site visit unavoidable. Hardware is still delivered and installed onsite.",
-    "description": "Poseidon Network Systems is a Certified Dell Partner Direct, providing IT support, network infrastructure, and new/refurbished Dell hardware based in Sea Point, Cape Town, serving businesses and homes across the Western Cape since 2004.",
+    "hours": "Mon to Fri, 07:30 to 17:30",
+    "supportModel": "Remote-first via secure remote access (AnyDesk) for troubleshooting and configuration. Onsite visits happen only when a problem cannot be fixed remotely.",
+    "description": "Poseidon Network Systems provides IT support, business VoIP, network infrastructure, and new and refurbished Dell hardware. Based in Sea Point, Cape Town, serving businesses and homes across the Western Cape since 2004. Poseidon is a Dell Technologies Authorized Partner for new Dell equipment only; refurbished stock does not come from Dell.",
     "disambiguation": "Operates at poseidon-network.com. Not affiliated with poseidon.network or any blockchain, cryptocurrency, or decentralized computing project."
   },
   "services": [
-    { "name": "Managed IT Support & Helpdesk", "description": "Remote monitoring and troubleshooting via secure remote access (AnyDesk), with a real person to call when something goes wrong." },
-    { "name": "New & Refurbished Hardware", "description": "Refurbished Dell units with a 1-year warranty for price-conscious clients, new Dell hardware for brand-aware buyers, and any other IT hardware sourced on request." },
-    { "name": "Repairs, Maintenance & Network Cabling", "description": "Diagnostics, repair, and structured cabling or network setup for desktops, laptops, servers, and offices. Delivered onsite when hardware or cabling work requires it." },
-    { "name": "Consumables & Supplies", "description": "Toner, cabling, peripherals, and everyday items that keep an office running." },
-    { "name": "Business Continuity & Backup", "description": "Backup strategy and disaster recovery so downtime never means data loss." }
+    {
+      "name": "Managed IT Support & Helpdesk",
+      "description": "Remote monitoring and troubleshooting via secure remote access (AnyDesk), with a real person to call when something goes wrong."
+    },
+    {
+      "name": "Business VoIP & Hosted Switchboard",
+      "description": "Cloud-based switchboard (hosted PBX). Handsets are set up remotely before delivery and plug into existing network points. Starts with a free phone bill review and a free remote network readiness check. Any new cabling or switches go to an installation partner, with Poseidon as the single point of contact."
+    },
+    {
+      "name": "New & Refurbished Hardware",
+      "description": "Refurbished Dell units with a 1-year warranty for price-conscious clients, new Dell hardware for brand-aware buyers, and any other IT hardware sourced on request."
+    },
+    {
+      "name": "Repairs, Maintenance & Network Cabling",
+      "description": "Diagnostics, repair, and structured cabling or network setup for desktops, laptops, servers, and offices. Delivered onsite when hardware or cabling work requires it."
+    },
+    {
+      "name": "Consumables & Supplies",
+      "description": "Toner, cabling, peripherals, and everyday items that keep an office running."
+    },
+    {
+      "name": "Business Continuity & Backup",
+      "description": "Backup strategy and disaster recovery so downtime never means data loss."
+    }
   ],
   "hardwarePositioning": "Refurbished Dell (factory reconditioned) with a 1-year warranty first for price-conscious clients, new Dell for brand-aware buyers, plus any other IT hardware sourced on request. Not limited to one vendor.",
   "products": {
     "refurbished": [
-      { "name": "Dell Latitude 5400", "category": "Laptop", "specs": "Intel Core i5-8th Gen, 8GB DDR4, 256GB SSD, 14\" screen, Windows 11 Pro", "price": 5000, "currency": "ZAR", "priceNote": "excl. VAT", "availability": "In Stock", "notes": "Factory reconditioned and tested. Includes free bag and 1-year onsite warranty. 4G Card/LTE WWAN upgrade available." },
-      { "name": "Dell OptiPlex 3070 Micro", "category": "Desktop", "specs": "Intel Core i5-8th Gen, 8GB DDR4, 256GB SSD, Windows 11 Pro", "price": 4650, "currency": "ZAR", "priceNote": "excl. VAT", "availability": "Coming Soon", "notes": "Factory reconditioned and tested. Includes keyboard & mouse and 1-year onsite warranty. Monitor sold separately." },
-      { "name": "Dell OptiPlex 5060 SFF", "category": "Desktop", "specs": "Intel Core i5-8th Gen, 16GB DDR4, 256GB SSD, Windows 11 Pro", "price": 5940, "currency": "ZAR", "priceNote": "excl. VAT", "availability": "Coming Soon", "notes": "Factory reconditioned and tested. Includes keyboard & mouse and 1-year onsite warranty. Monitor sold separately." },
-      { "name": "Dell Latitude 5330", "category": "Laptop", "specs": "Intel Core i5-12th Gen, 16GB DDR4, 512GB SSD, 13.3\" screen, Windows 11 Pro", "price": 8600, "currency": "ZAR", "priceNote": "excl. VAT (R9,890 incl. 15% VAT)", "availability": "In Stock", "notes": "Factory reconditioned and tested. Includes free bag and 1-year onsite warranty." },
-      { "name": "Dell Latitude 7430 2-in-1", "category": "Laptop", "specs": "Intel Core i7-12th Gen, 32GB DDR4, 512GB SSD, 14\" touchscreen, Windows 11 Pro", "price": 14180, "currency": "ZAR", "priceNote": "excl. VAT", "availability": "Coming Soon", "notes": "Factory reconditioned and tested 2-in-1 touchscreen laptop. Includes free bag and 1-year onsite warranty." },
-      { "name": "Dell PowerEdge R760 2U Server", "category": "Server", "specs": "2x Intel Xeon Silver 4416+, configurable RAM/HDD, PERC H755 RAID, Quad-port 10GB NIC, iDRAC9", "price": 235295, "currency": "ZAR", "priceNote": "excl. VAT", "availability": "Coming Soon", "notes": "Recertified Dell PowerEdge enterprise rack server, 24x 2.5\" backplane, 5-year warranty." }
+      {
+        "name": "Dell Latitude 5400",
+        "category": "Laptop",
+        "specs": "Intel Core i5-8th Gen, 8GB DDR4, 256GB SSD, 14\" screen, Windows 11 Pro",
+        "price": 5000,
+        "currency": "ZAR",
+        "priceNote": "excl. VAT",
+        "availability": "In Stock",
+        "notes": "Factory reconditioned and tested. Includes free bag and 1-year warranty (battery covered for 6 months). 4G Card/LTE WWAN upgrade available."
+      },
+      {
+        "name": "Dell OptiPlex 3070 Micro",
+        "category": "Desktop",
+        "specs": "Intel Core i5-8th Gen, 8GB DDR4, 256GB SSD, Windows 11 Pro",
+        "price": 4650,
+        "currency": "ZAR",
+        "priceNote": "excl. VAT",
+        "availability": "Coming Soon",
+        "notes": "Factory reconditioned and tested. Includes keyboard & mouse and 1-year warranty (battery covered for 6 months). Monitor sold separately."
+      },
+      {
+        "name": "Dell OptiPlex 5060 SFF",
+        "category": "Desktop",
+        "specs": "Intel Core i5-8th Gen, 16GB DDR4, 256GB SSD, Windows 11 Pro",
+        "price": 5940,
+        "currency": "ZAR",
+        "priceNote": "excl. VAT",
+        "availability": "Coming Soon",
+        "notes": "Factory reconditioned and tested. Includes keyboard & mouse and 1-year warranty (battery covered for 6 months). Monitor sold separately."
+      },
+      {
+        "name": "Dell Latitude 5330",
+        "category": "Laptop",
+        "specs": "Intel Core i5-12th Gen, 16GB DDR4, 512GB SSD, 13.3\" screen, Windows 11 Pro",
+        "price": 8600,
+        "currency": "ZAR",
+        "priceNote": "excl. VAT (R9,890 incl. 15% VAT)",
+        "availability": "In Stock",
+        "notes": "Factory reconditioned and tested. Includes free bag and 1-year warranty (battery covered for 6 months)."
+      },
+      {
+        "name": "Dell Latitude 7430 2-in-1",
+        "category": "Laptop",
+        "specs": "Intel Core i7-12th Gen, 32GB DDR4, 512GB SSD, 14\" touchscreen, Windows 11 Pro",
+        "price": 14180,
+        "currency": "ZAR",
+        "priceNote": "excl. VAT",
+        "availability": "Coming Soon",
+        "notes": "Factory reconditioned and tested 2-in-1 touchscreen laptop. Includes free bag and 1-year warranty (battery covered for 6 months)."
+      },
+      {
+        "name": "Dell PowerEdge R760 2U Server",
+        "category": "Server",
+        "specs": "2x Intel Xeon Silver 4416+, configurable RAM/HDD, PERC H755 RAID, Quad-port 10GB NIC, iDRAC9",
+        "price": 235295,
+        "currency": "ZAR",
+        "priceNote": "excl. VAT",
+        "availability": "Out of Stock",
+        "notes": "Recertified Dell PowerEdge enterprise rack server, 24x 2.5\" backplane, 5-year warranty (per supplier)."
+      }
     ],
     "new": [
-      { "name": "Dell OptiPlex 7000 MFF", "category": "Desktop", "specs": "Intel Core Ultra / 14th Gen, Micro Form Factor", "availability": "Available to order", "notes": "Compact commercial desktop built for dense office and call-center deployments. New, Dell OEM warranty." },
-      { "name": "Dell Latitude 5540", "category": "Laptop", "specs": "15\" business laptop", "availability": "Available to order", "notes": "Durable enterprise laptop for mobile staff and hybrid teams. New, Dell OEM warranty." },
-      { "name": "Dell PowerEdge R760", "category": "Server", "specs": "2U rack server", "availability": "Available to order", "notes": "Enterprise rack server for on-premise compute and virtualization. New, Dell OEM warranty." }
+      {
+        "name": "Dell OptiPlex 7000 MFF",
+        "category": "Desktop",
+        "specs": "Intel Core Ultra / 14th Gen, Micro Form Factor",
+        "availability": "Available to order",
+        "notes": "Compact commercial desktop built for dense office and call-center deployments. New, Dell OEM warranty."
+      },
+      {
+        "name": "Dell Latitude 5540",
+        "category": "Laptop",
+        "specs": "15\" business laptop",
+        "availability": "Available to order",
+        "notes": "Durable enterprise laptop for mobile staff and hybrid teams. New, Dell OEM warranty."
+      },
+      {
+        "name": "Dell PowerEdge R760",
+        "category": "Server",
+        "specs": "2U rack server",
+        "availability": "Available to order",
+        "notes": "Enterprise rack server for on-premise compute and virtualization. New, Dell OEM warranty."
+      }
     ]
   },
   "faq": [
-    { "question": "What brands of IT hardware and workstations do you supply?", "answer": "We standardize on Dell commercial laptops, desktops, and enterprise devices, and tailor other brands where a specific office requires it. We also supply specialized office equipment, including commercial and barcode label printers." },
-    { "question": "Do you manage hardware repairs and device replacements?", "answer": "Yes. We coordinate diagnostics, component upgrades, and repair or replacement pipelines for laptops, desktop workstations, and network-connected printing systems to minimize office downtime." },
-    { "question": "Can you assist with setting up or expanding our physical network?", "answer": "Yes. We design, install, and support routers, switches, firewalls, structured cabling, and managed wireless access points, built for high availability and failover redundancy." },
-    { "question": "How do you support Google Workspace and Microsoft 365 migrations?", "answer": "We handle end-to-end cloud setup including domain configuration, user account migration, license management, shared drive structures, and administrative security enforcement like Multi-Factor Authentication (MFA)." },
-    { "question": "How do you ensure our data security and POPIA compliance?", "answer": "We deploy a multi-layered security framework featuring network firewalls, endpoint antivirus/anti-malware protection, role-based cloud access controls, and automated encrypted backups designed to keep your business compliant with local data privacy laws (POPIA)." },
-    { "question": "What is the difference between the New Dell and Refurbished Dell pages?", "answer": "New Dell Equipment covers direct-channel, brand-new Dell commercial hardware with full OEM warranty and bulk pricing. Refurbished Dell Equipment covers factory reconditioned Dell hardware with a 1-year warranty, typically at a lower price point." },
-    { "question": "How do I request a quote?", "answer": "Use the quote form on the homepage, call 021 300 8278, or message via WhatsApp at +27 64 702 9962. We respond within one business day." }
+    {
+      "question": "What brands of IT hardware and workstations do you supply?",
+      "answer": "We standardize on Dell commercial laptops, desktops, and enterprise devices, and tailor other brands where a specific office requires it. We also supply specialized office equipment, including commercial and barcode label printers."
+    },
+    {
+      "question": "Do you manage hardware repairs and device replacements?",
+      "answer": "Yes. We coordinate diagnostics, component upgrades, and repair or replacement pipelines for laptops, desktop workstations, and network-connected printing systems to minimize office downtime."
+    },
+    {
+      "question": "Can you assist with setting up or expanding our physical network?",
+      "answer": "Yes. We design, install, and support routers, switches, firewalls, structured cabling, and managed wireless access points, built for high availability and failover redundancy."
+    },
+    {
+      "question": "How do you support Google Workspace and Microsoft 365 migrations?",
+      "answer": "We handle end-to-end cloud setup including domain configuration, user account migration, license management, shared drive structures, and administrative security enforcement like Multi-Factor Authentication (MFA)."
+    },
+    {
+      "question": "How do you ensure our data security and POPIA compliance?",
+      "answer": "We deploy a multi-layered security framework featuring network firewalls, endpoint antivirus/anti-malware protection, role-based cloud access controls, and automated encrypted backups designed to keep your business compliant with local data privacy laws (POPIA)."
+    },
+    {
+      "question": "What is the difference between the New Dell and Refurbished Dell pages?",
+      "answer": "New Dell Equipment covers brand-new Dell commercial hardware with Dell OEM warranty, supplied as a Dell Technologies Authorized Partner. Refurbished Dell Equipment covers factory reconditioned Dell hardware with a 1-year warranty (battery 6 months), typically at a lower price point. Refurbished stock does not come from Dell."
+    },
+    {
+      "question": "How do I request a quote?",
+      "answer": "Use the quote form on the homepage, call 021 300 8278, or message via WhatsApp at +27 64 702 9962. We respond within one business day."
+    },
+    {
+      "question": "Do you deliver?",
+      "answer": "Within 40km of Cape Town, arranged per order. Further away, we can courier it at your cost. Check your order and note any damage on the delivery note before you sign."
+    },
+    {
+      "question": "Is the battery covered?",
+      "answer": "Yes. On refurbished units the battery is covered for 6 months, within the 1-year warranty."
+    },
+    {
+      "question": "Are you a Dell partner?",
+      "answer": "Yes. Poseidon is a Dell Technologies Authorized Partner for new Dell equipment."
+    }
   ],
   "pages": {
     "home": "/",
@@ -51,6 +183,20 @@
     "faq": "/faq.html",
     "resources": "/resources.html",
     "terms": "/terms.html",
-    "privacy": "/privacy.html"
+    "privacy": "/privacy.html",
+    "voip": "/business-voip-cape-town.html",
+    "phoneBillChecklist": "/phone-bill-checklist.html",
+    "refurbishedLaptopChecklist": "/refurbished-laptop-checklist.html"
+  },
+  "policies": {
+    "dellPartner": "Poseidon is a Dell Technologies Authorized Partner. This applies to new Dell equipment only. Never say or imply refurbished stock comes from Dell.",
+    "warrantyRefurbished": "1-year warranty: a faulty unit is repaired or replaced. The battery is covered for 6 months. Accidental, liquid and power-surge damage aren't covered.",
+    "factoryReconditioned": "Each unit goes through a full set of reliability tests and is completely cleaned before sale. Units sold as A-grade have no cosmetic defects and look like new. Every unit ships with Windows 11 Pro.",
+    "delivery": "Within 40km of Cape Town, arranged per order. Further away, we can courier it at your cost. Check your order and note any damage on the delivery note before you sign. Do not describe delivery as free and do not quote courier prices or delivery times.",
+    "payment": "Payment is due before delivery. Businesses can pay within 30 days of invoice if agreed in writing.",
+    "returns": "Businesses: tell us within 7 days of delivery if anything isn't as ordered. Private buyers can cancel within 7 working days of delivery if the unit is unused and returned undamaged in its original packaging.",
+    "voipContract": "Month to month after the initial term, with one calendar month's written notice.",
+    "emergencyCalls": "Don't rely on VoIP for 112, 10111 or 10177. Keep a mobile phone available.",
+    "billReview": "Free phone bill review: WhatsApp a photo or PDF of your last phone bill to 064 702 9962 and we send back a one-page comparison with a cloud-based switchboard. No obligation."
   }
 }
