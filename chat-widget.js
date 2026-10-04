@@ -53,7 +53,8 @@
       });
       if (!res.ok) throw new Error('failed');
       var data = await res.json();
-      messages.push({ role: 'assistant', text: data.reply || "Sorry, I couldn't process that." });
+      var clean = String(data.reply || '').replace(/\*\*|__/g, '').replace(/\s*\u2014\s*/g, ', ').trim();
+      messages.push({ role: 'assistant', text: clean || "Sorry, I couldn't process that." });
     } catch (e) {
       messages.push({ role: 'assistant', text: "I'm having trouble connecting right now. Please WhatsApp us at 064 702 9962 or call 021 300 8278." });
     }
