@@ -49,7 +49,7 @@ ul.rules li{margin:3px 0}
   <div class="in">
     <p class="tag">Poseidon staff only</p>
     <h1>Product flyer template</h1>
-    <p>Pick a product, upload a clean product photo, check the details, then download the 1080 × 1350 flyer for Facebook and WhatsApp. The PNS banner, logo and layout are fixed and identical on every flyer.</p>
+    <p>Pick a product, upload a clean product photo, check the details, then download the 1080 × 1350 flyer for Facebook and WhatsApp. The PNS banner, logo, contact strip and layout are fixed and identical on every flyer.</p>
   </div>
 </header>
 <main>
@@ -60,7 +60,10 @@ ul.rules li{margin:3px 0}
       <div class="grid">
         <label class="f">Product<select id="preset"></select></label>
         <label class="f">Title on flyer<input type="text" id="title"></label>
+        <label class="f">Condition<select id="kind"><option value="refurb">Factory reconditioned</option><option value="recert">Recertified</option><option value="new">New Dell</option></select></label>
+        <label class="f">Stock (must match the website)<select id="stock"><option value="in">In stock</option><option value="pre">Coming soon (pre-order)</option><option value="out">Out of stock</option></select></label>
       </div>
+      <p class="hint" style="margin-top:12px">The Dell Technologies Authorized Partner badge only shows on <b>New Dell</b> flyers. Refurbished and recertified flyers show the condition instead, as the Consumer Protection Act requires.</p>
     </section>
     <section class="card">
       <h2>2. Product photo</h2>
@@ -79,6 +82,7 @@ ul.rules li{margin:3px 0}
         <label class="f">Warranty<select id="years"><option value="1">1 year</option><option value="2">2 years</option><option value="3">3 years</option><option value="5">5 years</option></select></label>
       </div>
       <p class="calc">Incl. VAT (15%): <b id="incOut">-</b></p>
+      <label class="f" style="margin-top:12px;flex-direction:row;align-items:center;gap:10px;font-weight:500"><input type="checkbox" id="battery" style="width:22px;height:22px;accent-color:var(--blue)"> Show "Battery: 6 months" under the warranty seal (refurbished laptops)</label>
       <label class="f" style="margin-top:12px">Extra line in red (one per line, optional)<textarea id="extra"></textarea></label>
     </section>
     <section class="card">
@@ -86,6 +90,7 @@ ul.rules li{margin:3px 0}
       <ul class="rules">
         <li>Model, specs and price must match the website.</li>
         <li>Never write "Reseller Price".</li>
+        <li>Don't post flyers for out-of-stock items.</li>
         <li>Don't use these flyers as website product images.</li>
       </ul>
     </section>
@@ -94,6 +99,8 @@ ul.rules li{margin:3px 0}
     <section class="card">
       <canvas id="cv" width="1080" height="1350" aria-label="Flyer preview"></canvas>
       <p class="warn" id="noPhoto">Upload a product photo before downloading.</p>
+      <p class="warn" id="outWarn" hidden>This product is out of stock. Don't post a flyer for it.</p>
+      <p class="warn" id="imgWarn" hidden>The PNS logo or Dell badge didn't load. Refresh the page before downloading.</p>
       <div style="margin-top:14px"><button id="dl" type="button">Download flyer PNG</button></div>
     </section>
   </div>
@@ -119,24 +126,28 @@ const SEAL = (() => { const p = []; for (let i = 0; i < 48; i++) { const r = i %
   return 'data:image/svg+xml;utf8,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 200 200"><defs><radialGradient id="g" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#3a3a3a"/><stop offset="1" stop-color="#0d0d0d"/></radialGradient></defs><polygon points="${p.join(' ')}" fill="url(#g)"/><circle cx="100" cy="100" r="78" fill="none" stroke="#fff" stroke-width="3"/><circle cx="100" cy="100" r="71" fill="none" stroke="#fff" stroke-width="1" opacity=".6"/></svg>`); })();
 const WIN = ['windows', 'Windows 11 Pro (64-bit)'];
 const PRESETS = [
-  { file: 'flyer_dell_latitude_5400.png', title: 'Dell Latitude 5400 Laptop', years: 1, ex: 5000, extra: 'Includes FREE bag\n4G LTE upgrade available',
+  { file: 'flyer_dell_latitude_5400.png', title: 'Dell Latitude 5400 Laptop', kind: 'refurb', stock: 'in', battery: true, years: 1, ex: 5000, extra: 'Includes FREE bag\n4G LTE upgrade available',
     specs: [['cpu', '8th Gen Intel Core i5 Processor'], ['ram', '8GB DDR4 Memory'], ['ssd', '256GB Solid State Drive'], ['screen', '14" Screen'], ['webcam', 'Webcam'], WIN] },
-  { file: 'flyer_dell_latitude_5330.png', title: 'Dell Latitude 5330 Laptop', years: 1, ex: 8600, extra: 'Includes FREE bag',
+  { file: 'flyer_dell_latitude_5330.png', title: 'Dell Latitude 5330 Laptop', kind: 'refurb', stock: 'in', battery: true, years: 1, ex: 8600, extra: 'Includes FREE bag',
     specs: [['cpu', '12th Gen Intel Core i5 Processor'], ['ram', '16GB DDR4 Memory'], ['ssd', '512GB Solid State Drive'], ['screen', '13.3" Screen'], ['webcam', 'Webcam'], WIN] },
-  { file: 'flyer_dell_optiplex_micro.png', title: 'Dell OptiPlex 3070 Micro', years: 1, ex: 4650, extra: '*Monitor sold separately',
+  { file: 'flyer_dell_optiplex_micro.png', title: 'Dell OptiPlex 3070 Micro', kind: 'refurb', stock: 'pre', battery: false, years: 1, ex: 4650, extra: '*Monitor sold separately',
     specs: [['cpu', '8th Gen Intel Core i5 Processor'], ['ram', '8GB DDR4 Memory'], ['ssd', '256GB Solid State Drive'], ['keyboard', 'Keyboard & Mouse'], WIN] },
-  { file: 'flyer_dell_optiplex_5060_sff.png', title: 'Dell OptiPlex 5060 SFF', years: 1, ex: 5940, extra: '*Monitor sold separately',
+  { file: 'flyer_dell_optiplex_5060_sff.png', title: 'Dell OptiPlex 5060 SFF', kind: 'refurb', stock: 'pre', battery: false, years: 1, ex: 5940, extra: '*Monitor sold separately',
     specs: [['cpu', '8th Gen Intel Core i5 Processor'], ['ram', '16GB DDR4 Memory'], ['ssd', '256GB Solid State Drive'], ['keyboard', 'Keyboard & Mouse'], WIN] },
-  { file: 'flyer_dell_latitude_7430.png', title: 'Dell Latitude 7430 2-in-1', years: 1, ex: 14180, extra: 'Includes FREE bag',
+  { file: 'flyer_dell_latitude_7430.png', title: 'Dell Latitude 7430 2-in-1', kind: 'refurb', stock: 'pre', battery: true, years: 1, ex: 14180, extra: 'Includes FREE bag',
     specs: [['cpu', '12th Gen Intel Core i7 Processor'], ['ram', '32GB DDR4 Memory'], ['ssd', '512GB Solid State Drive'], ['screen', '14" Touchscreen'], WIN] },
-  { file: 'flyer_dell_poweredge_r760.png', title: 'Dell PowerEdge R760 2U Server', years: 5, ex: 235295, extra: 'Configurable RAM and storage',
+  { file: 'flyer_dell_poweredge_r760.png', title: 'Dell PowerEdge R760 2U Server', kind: 'recert', stock: 'out', battery: false, years: 5, ex: 235295, extra: 'Configurable RAM and storage',
     specs: [['cpu', '2x Intel Xeon Silver 4416+'], ['raid', 'PERC H755 RAID Controller'], ['network', 'Quad 10GB NIC'], ['remote', 'iDRAC9 Remote Management'], ['bays', '24x 2.5" Drive Backplane']] },
-  { file: '', title: 'New product', years: 1, ex: '', extra: '', specs: [] }
+  { file: '', title: 'New product', kind: 'refurb', stock: 'in', battery: false, years: 1, ex: '', extra: '', specs: [] }
 ];
 const $ = id => document.getElementById(id);
 const cv = $('cv'), ctx = cv.getContext('2d');
 const load = src => new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = src; });
 const imgs = {}; let photo = null;
+const CONTACT = 'WhatsApp 064 702 9962  \u00b7  021 300 8278  \u00b7  poseidon-network.com';
+const DELIVERY = 'Delivery within 40km of Cape Town \u00b7 courier further afield at your cost';
+const CONDITION = { refurb: ['FACTORY', 'RECONDITIONED', '& TESTED'], recert: ['RECERTIFIED', '& TESTED'] };
+const STOCK = { in: ['IN STOCK', '#1F7A4D'], pre: ['PRE-ORDER', '#2D5BE3'], out: ['OUT OF STOCK', '#6B6B6B'] };
 
 const preset = $('preset');
 PRESETS.forEach((p, i) => preset.add(new Option(p.title, i)));
@@ -152,12 +163,15 @@ const specRows = [...specWrap.children];
 
 function applyPreset(i) {
   const p = PRESETS[i];
-  $('title').value = p.title; $('years').value = p.years; $('ex').value = p.ex; $('extra').value = p.extra;
+  $('title').value = p.title; $('kind').value = p.kind; $('stock').value = p.stock; $('battery').checked = p.battery; $('years').value = p.years; $('ex').value = p.ex; $('extra').value = p.extra;
   specRows.forEach((r, j) => { const s = p.specs[j]; r.children[0].value = s ? s[0] : 'cpu'; r.children[1].value = s ? s[1] : ''; });
   draw();
 }
-const fmtEx = n => 'R' + (Number.isInteger(n) ? n : n.toFixed(2));
-const incl = n => 'R' + (Math.round(n * 115) / 100).toFixed(2);
+// Same format as the website: R5,000 / R5,750 / R5,347.50
+const fmtR = n => { const c = Math.round(n * 100), whole = Math.floor(c / 100), cents = c % 100;
+  return 'R' + String(whole).replace(/\B(?=(\d{3})+(?!\d))/g, ',') + (cents ? '.' + String(cents).padStart(2, '0') : ''); };
+const fmtEx = n => fmtR(n);
+const incl = n => fmtR(Math.round(n * 115) / 100);
 
 function wrap(text, maxW) {
   const words = text.split(' '), out = []; let line = '';
@@ -167,58 +181,81 @@ function wrap(text, maxW) {
 function spacing(px) { if ('letterSpacing' in ctx) ctx.letterSpacing = px + 'px'; }
 
 function draw(forExport) {
-  if (!imgs.logo) return;
   ctx.save(); ctx.clearRect(0, 0, W, H);
   const g = ctx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, '#B8B8B6'); g.addColorStop(1, '#ECECEC');
   ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
   ctx.fillStyle = '#CDCFD2'; ctx.beginPath(); ctx.moveTo(508, 0); ctx.lineTo(W, 0); ctx.lineTo(W, 312); ctx.lineTo(620, 312); ctx.closePath(); ctx.fill();
   ctx.fillStyle = '#172841'; ctx.beginPath(); ctx.moveTo(520, 0); ctx.lineTo(W, 0); ctx.lineTo(W, 300); ctx.lineTo(628, 300); ctx.closePath(); ctx.fill();
-  ctx.drawImage(imgs.logo, W - 60 - 300, 22, 300, 300 * imgs.logo.height / imgs.logo.width);
-  ctx.drawImage(imgs.dell, 60, 96, 360, 360 * imgs.dell.height / imgs.dell.width);
+  if (imgs.logo) ctx.drawImage(imgs.logo, W - 60 - 300, 22, 300, 300 * imgs.logo.height / imgs.logo.width);
+  const kind = $('kind').value, stock = STOCK[$('stock').value];
+
+  // Stock pill, top left
+  ctx.save(); ctx.font = "800 28px 'Open Sans'"; spacing(1); const pw = ctx.measureText(stock[0]).width + 44;
+  ctx.fillStyle = stock[1]; ctx.beginPath(); ctx.roundRect ? ctx.roundRect(60, 34, pw, 54, 27) : ctx.rect(60, 34, pw, 54); ctx.fill();
+  ctx.fillStyle = '#fff'; ctx.textAlign = 'left'; ctx.textBaseline = 'middle'; ctx.fillText(stock[0], 82, 62); spacing(0); ctx.restore();
+
+  // Dell partner badge only on new Dell; otherwise the condition, shown clearly
+  if (kind === 'new') { if (imgs.dell) ctx.drawImage(imgs.dell, 60, 110, 360, 360 * imgs.dell.height / imgs.dell.width); }
+  else { ctx.save(); ctx.fillStyle = '#172841'; ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic'; ctx.font = "800 40px 'Open Sans'"; spacing(0.5);
+    CONDITION[kind].forEach((l, i) => ctx.fillText(l, 60, 160 + i * 48, 420)); spacing(0); ctx.restore(); }
 
   ctx.save(); ctx.font = "700 56px 'Open Sans'"; ctx.fillStyle = '#fff'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
   ctx.shadowColor = 'rgba(0,0,0,.45)'; ctx.shadowBlur = 8; ctx.shadowOffsetY = 2;
   ctx.fillText($('title').value, W / 2, 318 + 31, W - 80); ctx.restore();
 
-  const bx = 220, by = 410, bw = 640, bh = 380;
+  const bx = 220, by = 405, bw = 640, bh = 370;
   if (photo) { const s = Math.min(bw / photo.width, bh / photo.height), w = photo.width * s, h = photo.height * s; ctx.drawImage(photo, bx + (bw - w) / 2, by + (bh - h) / 2, w, h); }
   else if (!forExport) { ctx.save(); ctx.setLineDash([12, 10]); ctx.strokeStyle = '#8a8a8a'; ctx.lineWidth = 3; ctx.strokeRect(bx, by, bw, bh);
     ctx.fillStyle = '#6b6b6b'; ctx.font = "600 28px 'Open Sans'"; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('Upload a clean product photo', bx + bw / 2, by + bh / 2); ctx.restore(); }
 
+  // Specs: width capped so text never runs under the seal
   let row = 0;
-  ctx.font = "400 34px 'Open Sans'"; ctx.fillStyle = '#333'; ctx.textBaseline = 'middle'; ctx.textAlign = 'left';
-  specRows.forEach(r => { const t = r.children[1].value.trim(); if (!t) return; const y = 816 + row * 50;
-    ctx.drawImage(imgs[r.children[0].value], 100, y + 1, 40, 40); ctx.fillText(t, 160, y + 22); row++; });
+  ctx.font = "400 32px 'Open Sans'"; ctx.fillStyle = '#333'; ctx.textBaseline = 'middle'; ctx.textAlign = 'left';
+  specRows.forEach(r => { const t = r.children[1].value.trim(); if (!t) return; const y = 796 + row * 47;
+    if (imgs[r.children[0].value]) ctx.drawImage(imgs[r.children[0].value], 100, y + 1, 40, 40); ctx.fillText(t, 160, y + 22, 610); row++; });
 
-  ctx.drawImage(imgs.seal, 794, 830, 190, 190);
+  ctx.drawImage(imgs.seal, 794, 800, 190, 190);
   ctx.fillStyle = '#fff'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-  ctx.font = "400 76px 'Open Sans'"; ctx.fillText($('years').value, 889, 896);
-  spacing(1); ctx.font = "700 26px 'Open Sans'"; ctx.fillText('YEAR', 889, 952);
-  spacing(1.5); ctx.font = "700 13px 'Open Sans'"; ctx.fillText('WARRANTY', 889, 976); spacing(0);
+  ctx.font = "400 76px 'Open Sans'"; ctx.fillText($('years').value, 889, 866);
+  spacing(1); ctx.font = "700 26px 'Open Sans'"; ctx.fillText($('years').value === '1' ? 'YEAR' : 'YEARS', 889, 922);
+  spacing(1.5); ctx.font = "700 13px 'Open Sans'"; ctx.fillText('WARRANTY', 889, 946); spacing(0);
+  if ($('battery').checked) { ctx.fillStyle = '#172841'; ctx.font = "700 22px 'Open Sans'"; ctx.fillText('Battery: 6 months', 889, 1014); }
 
+  // Prices
   const n = parseFloat($('ex').value); let priceLeft = W - 56;
   ctx.fillStyle = '#152640'; ctx.textAlign = 'right'; ctx.textBaseline = 'alphabetic';
   if (!isNaN(n)) {
     const R = W - 56;
-    const line = (price, size, ls, label, y) => { ctx.font = "600 26px 'Open Sans'"; ctx.fillText(label, R, y); const lw = ctx.measureText(label).width;
+    const line = (price, size, ls, label, y) => { ctx.font = "600 24px 'Open Sans'"; ctx.fillText(label, R, y); const lw = ctx.measureText(label).width;
       spacing(ls); ctx.font = `800 ${size}px 'Open Sans'`; ctx.fillText(price, R - lw - 12, y); const pw = ctx.measureText(price).width; spacing(0); return R - lw - 12 - pw; };
-    priceLeft = Math.min(line(fmtEx(n), 110, -3, 'excl. VAT', 1218), line(incl(n), 60, -1, 'incl. VAT', 1298));
+    priceLeft = Math.min(line(fmtEx(n), 96, -3, 'excl. VAT', 1160), line(incl(n), 52, -1, 'incl. VAT', 1232));
   }
-  ctx.textAlign = 'left'; ctx.fillStyle = '#333'; spacing(0.5); ctx.font = "800 20px 'Open Sans'"; ctx.fillText('FACTORY RECONDITIONED & TESTED', 60, 1300); spacing(0);
-  ctx.font = "700 30px 'Open Sans'"; ctx.fillStyle = '#C0392B';
+
+  // Extra lines in red, bottom left
+  ctx.textAlign = 'left'; ctx.font = "700 28px 'Open Sans'"; ctx.fillStyle = '#C0392B';
   const maxW = Math.min(priceLeft - 24 - 60, 620), lines = [];
   $('extra').value.split('\n').map(s => s.trim()).filter(Boolean).forEach(s => lines.push(...wrap(s, maxW)));
-  lines.reverse().forEach((l, i) => ctx.fillText(l, 60, 1262 - i * 38));
+  lines.reverse().forEach((l, i) => ctx.fillText(l, 60, 1232 - i * 36));
+
+  // Contact strip, identical on every flyer
+  ctx.fillStyle = '#172841'; ctx.fillRect(0, H - 86, W, 86);
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.fillStyle = '#fff'; ctx.font = "700 30px 'Open Sans'"; ctx.fillText(CONTACT, W / 2, H - 56, W - 80);
+  ctx.fillStyle = '#C9D5F5'; ctx.font = "400 21px 'Open Sans'"; ctx.fillText(DELIVERY, W / 2, H - 22, W - 80);
   ctx.restore();
   $('incOut').textContent = isNaN(n) ? '-' : incl(n);
   $('noPhoto').hidden = !!photo;
+  $('outWarn').hidden = $('stock').value !== 'out';
+  $('imgWarn').hidden = !!(imgs.logo && ($('kind').value !== 'new' || imgs.dell));
 }
 
 preset.addEventListener('change', () => applyPreset(+preset.value));
-document.querySelectorAll('main input:not([type=file]), main select:not(#preset), main textarea').forEach(el => el.addEventListener('input', () => draw()));
+document.querySelectorAll('main input:not([type=file]), main select:not(#preset), main textarea').forEach(el => { el.addEventListener('input', () => draw()); el.addEventListener('change', () => draw()); });
 $('photo').addEventListener('change', e => { const f = e.target.files[0]; if (!f) return; const url = URL.createObjectURL(f); load(url).then(i => { photo = i; draw(); }); });
 $('dl').addEventListener('click', () => {
   if (!photo) { alert('Upload a product photo first.'); return; }
+  if ($('stock').value === 'out') { alert('This product is out of stock. Don\'t post a flyer for it.'); return; }
+  if (!imgs.logo || ($('kind').value === 'new' && !imgs.dell)) { alert('The logo or Dell badge did not load. Refresh the page and try again.'); return; }
   if (/reseller/i.test($('title').value + $('extra').value)) { alert('Remove "Reseller" wording before downloading.'); return; }
   draw(true);
   const p = PRESETS[+preset.value];
@@ -227,8 +264,8 @@ $('dl').addEventListener('click', () => {
 });
 
 Promise.all([
-  load('../assets/pns_logo_new.png').then(i => imgs.logo = i),
-  load('../assets/dell_partner_logo.png').then(i => imgs.dell = i),
+  load('../assets/pns_logo_new.png').then(i => imgs.logo = i).catch(() => {}),
+  load('../assets/dell_partner_logo.png').then(i => imgs.dell = i).catch(() => {}),
   load(SEAL).then(i => imgs.seal = i),
   ...Object.entries(ICONS).map(([k, v]) => load(v[1]).then(i => imgs[k] = i)),
   document.fonts.load("800 110px 'Open Sans'"), document.fonts.load("700 56px 'Open Sans'"), document.fonts.load("400 34px 'Open Sans'"), document.fonts.load("600 26px 'Open Sans'")
