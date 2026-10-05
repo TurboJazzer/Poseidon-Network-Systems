@@ -12,8 +12,8 @@
 import { createHmac, timingSafeEqual } from "node:crypto";
 
 const SITE = (process.env.URL || "https://poseidon-network.com").replace(/\/$/, "");
-const SIGN = `<p style="margin:24px 0 0;color:#4A5578;font-size:13px;line-height:1.6">The Poseidon Network Systems team<br>Poseidon Network Systems CC, Sea Point, Cape Town<br>Phone 021 300 8278 · WhatsApp 064 702 9962 · <a href="${SITE}/" style="color:#2D5BE3">poseidon-network.com</a></p>`;
-const WA_BILL = "https://wa.me/27647029962?text=Hi%2C%20I%27d%20like%20a%20free%20phone%20bill%20review.";
+const SIGN = `<p style="margin:24px 0 0;color:#4A5578;font-size:13px;line-height:1.6">The Poseidon Network Systems team<br>Poseidon Network Systems CC, Sea Point, Cape Town<br>Phone 021 300 8278 · WhatsApp 062 788 3650 · <a href="${SITE}/" style="color:#2D5BE3">poseidon-network.com</a></p>`;
+const WA_BILL = "https://wa.me/27627883650?text=Hi%2C%20I%27d%20like%20a%20free%20phone%20bill%20review.";
 const P = (s) => `<p style="margin:0 0 14px;color:#0D1B4B;font-size:15px;line-height:1.6">${s}</p>`;
 const A = (href, text) => `<a href="${href}" style="color:#2D5BE3;font-weight:600">${text}</a>`;
 const wrap = (body, unsub) => `<div style="font-family:Inter,Arial,sans-serif;max-width:560px">${body}${SIGN}${
@@ -28,19 +28,19 @@ const MAGNETS = {
       subject: "Your business phone bill checklist",
       html: P(`Here's your checklist: ${A(pdf, "Download the PDF")}`) +
         P("Start with items 3 and 7: what you pay for calls to cellphones, and when your contract ends. Those two usually tell you whether it's worth looking at alternatives now or later.") +
-        P(`If you'd rather we did the checking, WhatsApp a photo or PDF of your last bill to ${A(WA_BILL, "064 702 9962")}. We'll send back a one-page comparison with a cloud-based switchboard. No obligation.`),
+        P(`If you'd rather we did the checking, WhatsApp a photo or PDF of your last bill to ${A(WA_BILL, "062 788 3650")}. We'll send back a one-page comparison with a cloud-based switchboard. No obligation.`),
     }),
     e2: {
       subject: "The line on your bill that renews without asking",
       html: P("Many business phone contracts renew automatically if notice isn't given in time, and some add a yearly price increase. Check your contract end date and notice period (items 7 and 8 on the checklist) and put a reminder in your calendar a month before the notice deadline.") +
-        P(`Need a second pair of eyes? WhatsApp your bill to ${A(WA_BILL, "064 702 9962")}.`),
+        P(`Need a second pair of eyes? WhatsApp your bill to ${A(WA_BILL, "062 788 3650")}.`),
     },
     e3: {
       subject: "Still on a copper line?",
       html: P("Telkom is retiring copper lines area by area. Moving to a cloud-based switchboard means your numbers can come with you. Handsets are set up before delivery and plug into your existing network points.") +
         P("We start with a free bill review and a network readiness check, so you know what changes before anything is quoted.") +
         P(A(`${SITE}/business-voip-cape-town.html`, "See how it works")) +
-        P("WhatsApp 064 702 9962 · Phone 021 300 8278"),
+        P("WhatsApp 062 788 3650 · Phone 021 300 8278"),
     },
   },
   "refurb-laptop": {
@@ -62,7 +62,7 @@ const MAGNETS = {
       subject: "Laptops for the team?",
       html: P("Every refurbished Dell we sell ships with Windows 11 Pro and a 1-year warranty: a faulty unit is repaired or replaced, and the battery is covered for 6 months. We deliver within 40km of Cape Town, and further away by courier at your cost.") +
         P("Tell us how many people need laptops and what they use them for, and we'll quote. No obligation.") +
-        P(`${A(`${SITE}/#quote-form`, "Get a quote")} · WhatsApp 064 702 9962`),
+        P(`${A(`${SITE}/#quote-form`, "Get a quote")} · WhatsApp 062 788 3650`),
     },
   },
 };

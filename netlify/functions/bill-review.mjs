@@ -117,7 +117,7 @@ export default async (req) => {
         <p>Hi ${esc(name.split(" ")[0])},</p>
         <p>Thanks for sending your phone bill. We'll send your one-page comparison within one business day.</p>
         <p>We use your bill only for this review and delete it once we've sent you the result.</p>
-        <p>Questions? Call 021 300 8278 or WhatsApp 064 702 9962.</p>
+        <p>Questions? Call 021 300 8278 or WhatsApp 062 788 3650.</p>
         <p>Poseidon Network Systems<br>Sea Point, Cape Town</p>`,
     });
   } catch {
