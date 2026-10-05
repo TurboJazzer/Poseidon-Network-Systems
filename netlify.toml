@@ -129,6 +129,11 @@
     aggregate_by = ["ip", "domain"]
 
 [[redirects]]
+  from = "/links"
+  to = "/links.html"
+  status = 200
+
+[[redirects]]
   from = "/phone-bill-checklist"
   to = "/phone-bill-checklist.html"
   status = 200
