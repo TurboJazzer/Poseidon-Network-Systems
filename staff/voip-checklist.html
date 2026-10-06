@@ -136,7 +136,7 @@ pre.out{white-space:pre-wrap;background:var(--bg);border:1px solid var(--line);b
     <li><input type="checkbox" id="r4" data-req><label for="r4">Voice priority (QoS) checked<span class="req">REQUIRED</span><span class="why">Can the router prioritise voice, and can we set it up remotely?</span></label></li>
     <li><input type="checkbox" id="r5" data-req><label for="r5">Desk network points confirmed<span class="req">REQUIRED</span><span class="why">One network point per desk: the phone plugs into the point, the computer plugs into the phone. Note any desks on Wi-Fi only (softphone instead).</span></label></li>
     <li><input type="checkbox" id="r6" data-req><label for="r6">Phone power checked<span class="req">REQUIRED</span><span class="why">Does the switch power phones over the cable (PoE)? If not, count the power adapters needed.</span></label></li>
-    <li><input type="checkbox" id="r7"><label for="r7">UPS checked<span class="why">Are the router and switch on a UPS? If not, size one so phones keep working during load shedding.</span></label></li>
+    <li><input type="checkbox" id="r7"><label for="r7">UPS checked<span class="why">Are the router and switch on a UPS? If not, size one so phones keep working during a power cut.</span></label></li>
     <li><input type="checkbox" id="r8"><label for="r8">Photo of router / network cabinet received<span class="why">Ask the client to WhatsApp a photo. It answers most of the questions above.</span></label></li>
   </ul>
   <div class="grid">
@@ -266,7 +266,7 @@ We'll come back with a written result: ready to switch, or what needs to change 
       "Phone power: "+(v('poe')||"-")+(v('adapters')&&v('adapters')!=="0"?", "+v('adapters')+" adapter(s)":""),
       "UPS: "+(v('ups')||"-"),""];
     if(v('changes')){lines.push("Changes needed before switching:",v('changes'),"")}
-    lines.push("Any questions: 021 300 8278 or WhatsApp 064 702 9962.","Poseidon Network Systems");
+    lines.push("Any questions: 021 300 8278 or WhatsApp 062 788 3650.","Poseidon Network Systems");
     $('#resultOut').textContent=lines.join("\n");
     save();
   }
