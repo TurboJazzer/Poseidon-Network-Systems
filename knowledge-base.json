@@ -17,7 +17,7 @@
     "whatsappNote": "Ask the visitor to click the WhatsApp button on the site (hero section, quote section, or footer) rather than reading out the number.",
     "hours": "Mon to Fri, 07:30 to 17:30",
     "supportModel": "Remote-first via secure remote access (AnyDesk) for troubleshooting and configuration. Onsite visits happen only when a problem cannot be fixed remotely.",
-    "description": "Poseidon Network Systems provides IT support, business VoIP, network infrastructure, and new and refurbished Dell hardware. Based in Sea Point, Cape Town, serving businesses and homes across the Western Cape since 2004. Poseidon is a Dell Technologies Authorized Partner for new Dell equipment only; refurbished stock does not come from Dell.",
+    "description": "Poseidon Network Systems provides Dell hardware, remote IT support, business VoIP and backup. Based in Sea Point, Cape Town, serving businesses and homes across the Western Cape since 2004. Poseidon is a Dell Technologies Authorized Partner for new Dell equipment only; refurbished stock does not come from Dell.",
     "disambiguation": "Operates at poseidon-network.com. Not affiliated with poseidon.network or any blockchain, cryptocurrency, or decentralized computing project."
   },
   "services": [
@@ -34,12 +34,8 @@
       "description": "Refurbished Dell units with a 1-year warranty for price-conscious clients, new Dell hardware for brand-aware buyers, and any other IT hardware sourced on request."
     },
     {
-      "name": "Repairs, Maintenance & Network Cabling",
-      "description": "Diagnostics, repair, and structured cabling or network setup for desktops, laptops, servers, and offices. Delivered onsite when hardware or cabling work requires it."
-    },
-    {
       "name": "Consumables & Supplies",
-      "description": "Toner, cabling, peripherals, and everyday items that keep an office running."
+      "description": "Toner, network cables, peripherals, and everyday items that keep an office running."
     },
     {
       "name": "Business Continuity & Backup",
@@ -168,12 +164,12 @@
       "answer": "We standardize on Dell commercial laptops, desktops, and enterprise devices, and tailor other brands where a specific office requires it. We also supply specialized office equipment, including commercial and barcode label printers."
     },
     {
-      "question": "Do you manage hardware repairs and device replacements?",
-      "answer": "Yes. We coordinate diagnostics, component upgrades, and repair or replacement pipelines for laptops, desktop workstations, and network-connected printing systems to minimize office downtime."
+      "question": "Do you repair laptops and desktops?",
+      "answer": "Not as a separate service. Refurbished units we sell carry a 1-year warranty: a faulty unit is repaired or replaced. If an older device keeps giving trouble, we can quote on a new or refurbished replacement."
     },
     {
       "question": "Can you assist with setting up or expanding our physical network?",
-      "answer": "Yes. We design, install, and support routers, switches, firewalls, structured cabling, and managed wireless access points, built for high availability and failover redundancy."
+      "answer": "Yes. We plan and support routers, switches, firewalls and managed wireless access points. Any new cabling is arranged through our installation partner, with Poseidon as the single point of contact."
     },
     {
       "question": "How do you support Google Workspace and Microsoft 365 migrations?",
@@ -225,6 +221,7 @@
     "returns": "Businesses: tell us within 7 days of delivery if anything isn't as ordered. Private buyers can cancel within 7 working days of delivery if the unit is unused and returned undamaged in its original packaging.",
     "voipContract": "Month to month after the initial term, with one calendar month's written notice.",
     "emergencyCalls": "Don't rely on VoIP for 112, 10111 or 10177. Keep a mobile phone available.",
-    "billReview": "Free phone bill review: WhatsApp a photo or PDF of your last phone bill to 062 788 3650 and we send back a one-page comparison with a cloud-based switchboard. No obligation."
+    "billReview": "Free phone bill review: WhatsApp a photo or PDF of your last phone bill to 062 788 3650 and we send back a one-page comparison with a cloud-based switchboard. No obligation.",
+    "noRepairs": "Poseidon does not offer repairs, maintenance or network cabling as a service. Any new cabling is arranged through an installation partner, with Poseidon as the single point of contact. Warranty repairs on refurbished units we sold are covered by the 1-year warranty."
   }
 }
