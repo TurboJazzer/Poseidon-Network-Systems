@@ -142,3 +142,19 @@
   from = "/refurbished-laptop-checklist"
   to = "/refurbished-laptop-checklist.html"
   status = 200
+
+[[headers]]
+  for = "/downloads/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"
+
+[[headers]]
+  for = "/thank-you-guide.html"
+  [headers.values]
+    X-Robots-Tag = "noindex"
+
+[[redirects]]
+  from = "/product-dell-optiplex-3070-micro.html"
+  to = "/product-dell-optiplex-3060-micro.html"
+  status = 301
+  force = true

@@ -1,17 +1,28 @@
-User-agent: MJ12bot
-Disallow: /
-
-User-agent: DotBot
-Disallow: /
-
-User-agent: PetalBot
-Disallow: /
-
-User-agent: Bytespider
-Disallow: /
+# Poseidon Network Systems: all search and AI platforms welcome on public pages
 
 User-agent: *
 Allow: /
 Disallow: /staff/
+Disallow: /downloads/
+
+# Named explicitly so no older rule or default can block them
+User-agent: Googlebot
+User-agent: Google-Extended
+User-agent: Bingbot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: GPTBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: ClaudeBot
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Applebot
+User-agent: Applebot-Extended
+User-agent: meta-externalagent
+User-agent: meta-externalfetcher
+Allow: /
+Disallow: /staff/
+Disallow: /downloads/
 
 Sitemap: https://poseidon-network.com/sitemap.xml

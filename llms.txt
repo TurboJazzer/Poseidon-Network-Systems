@@ -1,40 +1,22 @@
 # Poseidon Network Systems
 
-> IT support, network infrastructure, and Dell hardware provider based in Sea Point, Cape Town, South Africa. Serving businesses and homes across the Western Cape since 2004.
+> IT services company in Sea Point, Cape Town, South Africa, since 2004. Dell Technologies Authorized Partner and authorised Switch Telecom reseller. Remote-first IT support, business VoIP and new and refurbished Dell equipment for small and medium businesses.
 
-## About
-Poseidon Network Systems is a Cape Town-based IT services company offering managed IT support, business VoIP and hosted switchboards, network setup, new and refurbished Dell hardware, device repairs and maintenance, consumables, and business continuity/backup solutions.
+## Services
+- [Business VoIP and hosted switchboards](https://poseidon-network.com/business-voip-cape-town.html): Switch Telecom VoIP, cloud switchboard, number porting, Microsoft Teams calling, handsets set up before delivery. Free phone bill review and free remote network readiness check.
+- [Refurbished Dell laptops and desktops](https://poseidon-network.com/refurbished-dell-equipment.html): business-grade, factory reconditioned and tested, Windows 11 (Home or Pro, depending on the model), 1-year warranty. Delivered within 40km of Cape Town.
+- [New Dell equipment](https://poseidon-network.com/new-dell-equipment.html): new Dell laptops, desktops and servers.
+- [Remote IT support](https://poseidon-network.com/): helpdesk and troubleshooting over secure remote access, usually within one business day. Onsite only when that's the only way to solve a problem.
 
-## Disambiguation
-Poseidon Network Systems operates at poseidon-network.com and is a traditional IT hardware and support business in Cape Town, South Africa. It is not affiliated with poseidon.network or any blockchain, cryptocurrency, or decentralized computing project, despite the name similarity.
-
-## Key facts
-- Founded: 2004
-- Location: Sea Point, Cape Town, South Africa, 8005
-- Phone: 021 300 8278
-- WhatsApp: 062 788 3650
-- Hours: Mon to Fri, 07:30 to 17:30
-- Dell: Dell Technologies Authorized Partner (new Dell only)
-- Support model: remote-first via secure remote access (AnyDesk) for troubleshooting and configuration. Onsite visits happen only when a problem cannot be fixed remotely.
-- Hardware positioning: refurbished Dell (1-year warranty) for price-conscious clients, new Dell for brand-aware buyers, and other IT hardware sourced on request
-- Warranty (refurbished): 1-year warranty, a faulty unit is repaired or replaced. The battery is covered for 6 months. Accidental, liquid and power-surge damage aren't covered.
-- Delivery: within 40km of Cape Town, arranged per order. Further away, we can courier it at your cost.
-- Free phone bill review: WhatsApp a photo or PDF of your last phone bill to 062 788 3650 for a one-page comparison with a cloud-based switchboard. No obligation.
-
-## Pages
-- [Home](https://poseidon-network.com/): services overview, company history, quote request form
-- [New Dell Equipment](https://poseidon-network.com/new-dell-equipment.html): new Dell OptiPlex, Latitude, and PowerEdge commercial hardware, OEM warranty
-- [Refurbished Dell Equipment](https://poseidon-network.com/refurbished-dell-equipment.html): factory reconditioned Dell laptops, desktops, and servers with a 1-year warranty
-- [Business VoIP & Hosted PBX](https://poseidon-network.com/business-voip-cape-town.html): business VoIP, hosted switchboards (hosted PBX), number porting and handsets for Cape Town offices, with a free phone bill review
-- [FAQ](https://poseidon-network.com/faq.html): hardware, network, and cloud/security questions
-- [Resources](https://poseidon-network.com/resources.html): guides and reference material
-- [Backup basics](https://poseidon-network.com/guide-backup-basics.html): what backup, disaster recovery and business continuity each cover
-- [Terms of Service](https://poseidon-network.com/terms.html)
-- [Privacy Policy](https://poseidon-network.com/privacy.html)
-
-## Free resources
-- [Business phone bill checklist](https://poseidon-network.com/phone-bill-checklist.html): free 2-page PDF, 10 things to check on an office phone bill before you renew
-- [Refurbished laptop buyer's checklist](https://poseidon-network.com/refurbished-laptop-checklist.html): free 2-page PDF, 12 checks before you pay for a refurbished business laptop
+## Free guides
+- Phone bill decoder: what each line on a business phone bill means.
+- Refurbished vs new Dell: an honest comparison.
 
 ## Contact
-For quotes or support, use the contact form on the homepage, call 021 300 8278, or message via WhatsApp.
+- Phone: 021 300 8278
+- WhatsApp: 062 788 3650
+- Hours: Monday to Friday, 07:30 to 17:30 (South Africa)
+- Location: Sea Point, Cape Town 8005
+
+## Not affiliated
+Poseidon Network Systems (poseidon-network.com) is not affiliated with poseidon.network or any blockchain or crypto project.
