@@ -60,29 +60,10 @@ const KNOWLEDGE_BASE = {
         "specs": "Intel Core i5-8th Gen, 8GB DDR4, 256GB SSD, 14\" screen, Windows 11 Pro",
         "price": 5000,
         "currency": "ZAR",
-        "priceNote": "excl. VAT",
-        "availability": "In Stock",
-        "notes": "Factory reconditioned and tested. Includes free bag and 1-year warranty (battery covered for 6 months). 4G Card/LTE WWAN upgrade available."
-      },
-      {
-        "name": "Dell OptiPlex 3070 Micro",
-        "category": "Desktop",
-        "specs": "Intel Core i5-8th Gen, 8GB DDR4, 256GB SSD, Windows 11 Pro",
-        "price": 4650,
-        "currency": "ZAR",
-        "priceNote": "excl. VAT",
-        "availability": "Coming Soon",
-        "notes": "Factory reconditioned and tested. Includes keyboard & mouse and 1-year warranty (battery covered for 6 months). Monitor sold separately."
-      },
-      {
-        "name": "Dell OptiPlex 5060 SFF",
-        "category": "Desktop",
-        "specs": "Intel Core i5-8th Gen, 16GB DDR4, 256GB SSD, Windows 11 Pro",
-        "price": 5940,
-        "currency": "ZAR",
-        "priceNote": "excl. VAT",
-        "availability": "Coming Soon",
-        "notes": "Factory reconditioned and tested. Includes keyboard & mouse and 1-year warranty (battery covered for 6 months). Monitor sold separately."
+        "priceNote": "excl. VAT (R5,750 incl. VAT)",
+        "availability": "In stock",
+        "notes": "Factory reconditioned and tested. Includes free bag and 1-year warranty (battery covered for 6 months). 4G Card/LTE WWAN upgrade available.",
+        "page": "/product-dell-latitude-5400.html"
       },
       {
         "name": "Dell Latitude 5330",
@@ -90,29 +71,76 @@ const KNOWLEDGE_BASE = {
         "specs": "Intel Core i5-12th Gen, 16GB DDR4, 512GB SSD, 13.3\" screen, Windows 11 Pro",
         "price": 8600,
         "currency": "ZAR",
-        "priceNote": "excl. VAT (R9,890 incl. 15% VAT)",
-        "availability": "In Stock",
-        "notes": "Factory reconditioned and tested. Includes free bag and 1-year warranty (battery covered for 6 months)."
+        "priceNote": "excl. VAT (R9,890 incl. VAT)",
+        "availability": "In stock",
+        "notes": "Factory reconditioned and tested. Includes free bag and 1-year warranty (battery covered for 6 months).",
+        "page": "/product-dell-latitude-5330.html"
+      },
+      {
+        "name": "Dell Latitude 5410",
+        "category": "Laptop",
+        "specs": "Intel Core i5-10th Gen, 16GB DDR4, 256GB SSD, 14\" screen, webcam, Windows 11 Pro",
+        "price": 6440,
+        "currency": "ZAR",
+        "priceNote": "excl. VAT (R7,406 incl. VAT)",
+        "availability": "Coming soon",
+        "notes": "Factory reconditioned and tested. Includes free bag and 1-year warranty (battery covered for 6 months).",
+        "page": "/product-dell-latitude-5410.html"
       },
       {
         "name": "Dell Latitude 7430 2-in-1",
         "category": "Laptop",
-        "specs": "Intel Core i7-12th Gen, 32GB DDR4, 512GB SSD, 14\" touchscreen, Windows 11 Pro",
-        "price": 14180,
+        "specs": "Intel Core i7-13th Gen, 32GB DDR4, 512GB SSD, 14\" touchscreen, webcam, Windows 11 Pro",
+        "price": 15295,
         "currency": "ZAR",
-        "priceNote": "excl. VAT",
-        "availability": "Coming Soon",
-        "notes": "Factory reconditioned and tested 2-in-1 touchscreen laptop. Includes free bag and 1-year warranty (battery covered for 6 months)."
+        "priceNote": "excl. VAT (R17,589.25 incl. VAT)",
+        "availability": "Coming soon",
+        "notes": "Factory reconditioned and tested. Includes free bag and 1-year warranty (battery covered for 6 months).",
+        "page": "/product-dell-latitude-7430-2-in-1.html"
+      },
+      {
+        "name": "Dell OptiPlex 3060 Micro",
+        "category": "Desktop",
+        "specs": "Intel Core i5-8th Gen, 8GB DDR4, 256GB SSD, Intel UHD 630, Windows 11 Home",
+        "price": 4650,
+        "currency": "ZAR",
+        "priceNote": "excl. VAT (R5,347.50 incl. VAT)",
+        "availability": "In stock",
+        "notes": "Factory reconditioned and tested. Includes keyboard and mouse and 1-year warranty. Monitor sold separately.",
+        "page": "/product-dell-optiplex-3060-micro.html"
+      },
+      {
+        "name": "Dell OptiPlex 5060 SFF",
+        "category": "Desktop",
+        "specs": "Intel Core i5-8th Gen, 16GB DDR4, 256GB SSD, Windows 11",
+        "price": 5940,
+        "currency": "ZAR",
+        "priceNote": "excl. VAT (R6,831 incl. VAT)",
+        "availability": "Coming soon",
+        "notes": "Factory reconditioned and tested. Includes keyboard and mouse and 1-year warranty. Monitor sold separately.",
+        "page": "/product-dell-optiplex-5060-sff.html"
+      },
+      {
+        "name": "Dell OptiPlex 3080 SFF",
+        "category": "Desktop",
+        "specs": "Intel Core i7-10th Gen, 16GB DDR4, 256GB SSD, Windows 11 Pro",
+        "price": 8590,
+        "currency": "ZAR",
+        "priceNote": "excl. VAT (R9,878.50 incl. VAT)",
+        "availability": "In stock",
+        "notes": "Factory reconditioned and tested. Includes keyboard and mouse and 1-year warranty. Monitor sold separately.",
+        "page": "/product-dell-optiplex-3080-sff.html"
       },
       {
         "name": "Dell PowerEdge R760 2U Server",
         "category": "Server",
-        "specs": "2x Intel Xeon Silver 4416+, configurable RAM/HDD, PERC H755 RAID, Quad-port 10GB NIC, iDRAC9",
-        "price": 235295,
+        "specs": "2 x Intel Xeon Silver 4416+ (20 cores / 40 threads), memory and storage configured to order (24 x 2.5\" backplane), PERC H755 RAID, Intel X710-T4L quad-port 10GbE, iDRAC9",
+        "price": null,
         "currency": "ZAR",
-        "priceNote": "excl. VAT",
-        "availability": "Out of Stock",
-        "notes": "Recertified Dell PowerEdge enterprise rack server, 24x 2.5\" backplane, 5-year warranty (per supplier)."
+        "priceNote": "Price on application",
+        "availability": "Available to order",
+        "notes": "Factory reconditioned and tested. 5-year parts replacement warranty. WhatsApp 062 788 3650 for a quote.",
+        "page": "/product-dell-poweredge-r760-2u-server.html"
       }
     ],
     "new": [
@@ -196,7 +224,7 @@ const KNOWLEDGE_BASE = {
   "policies": {
     "dellPartner": "Poseidon is a Dell Technologies Authorized Partner. This applies to new Dell equipment only. Never say or imply refurbished stock comes from Dell.",
     "warrantyRefurbished": "1-year warranty: a faulty unit is repaired or replaced. The battery is covered for 6 months. Accidental, liquid and power-surge damage aren't covered.",
-    "factoryReconditioned": "Each unit goes through a full set of reliability tests and is completely cleaned before sale. Units sold as A-grade have no cosmetic defects and look like new. Every unit ships with Windows 11 Pro.",
+    "factoryReconditioned": "Each unit goes through a full set of reliability tests and is completely cleaned before sale. Units sold as A-grade have no cosmetic defects and look like new. Every unit ships with Windows 11 (Home or Pro, depending on the model).",
     "delivery": "Within 40km of Cape Town, arranged per order. Further away, we can courier it at your cost. Check your order and note any damage on the delivery note before you sign. Do not describe delivery as free and do not quote courier prices or delivery times.",
     "payment": "Payment is due before delivery. Businesses can pay within 30 days of invoice if agreed in writing.",
     "returns": "Businesses: tell us within 7 days of delivery if anything isn't as ordered. Private buyers can cancel within 7 working days of delivery if the unit is unused and returned undamaged in its original packaging.",

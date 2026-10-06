@@ -1,6 +1,6 @@
-// POST /api/lead-magnet  — emails a checklist PDF link, notifies the team,
+// POST /api/lead-magnet  - emails a checklist PDF link, notifies the team,
 // and (opt-in only) adds a Resend contact to a segment and schedules 2 follow-ups.
-// GET/POST /api/lead-magnet?unsub=1&... — one-click unsubscribe from follow-ups.
+// GET/POST /api/lead-magnet?unsub=1&... - one-click unsubscribe from follow-ups.
 //
 // Env (Netlify > Site configuration > Environment variables):
 //   RESEND_API_KEY                 (already used by bill-review)
@@ -60,12 +60,61 @@ const MAGNETS = {
     },
     e3: {
       subject: "Laptops for the team?",
-      html: P("Every refurbished Dell we sell ships with Windows 11 Pro and a 1-year warranty: a faulty unit is repaired or replaced, and the battery is covered for 6 months. We deliver within 40km of Cape Town, and further away by courier at your cost.") +
+      html: P("Every refurbished Dell we sell ships with Windows 11 (Home or Pro, depending on the model) and a 1-year warranty: a faulty unit is repaired or replaced, and the battery is covered for 6 months. We deliver within 40km of Cape Town, and further away by courier at your cost.") +
         P("Tell us how many people need laptops and what they use them for, and we'll quote. No obligation.") +
         P(`${A(`${SITE}/#quote-form`, "Get a quote")} · WhatsApp 062 788 3650`),
     },
   },
 };
+
+// Free guides (name + email + consent). One email to the visitor, one to the team. Nothing stored.
+const GUIDES = {
+  "bill-decoder": {
+    name: "phone bill decoder",
+    pdf: "/downloads/PNS-Phone-Bill-Decoder.pdf",
+    next: `Want the full picture? WhatsApp a photo of your bill to ${A(WA_BILL, "062 788 3650")} for a free comparison within one business day.`,
+  },
+  "refurb-vs-new": {
+    name: "refurbished vs new Dell comparison",
+    pdf: "/downloads/PNS-Refurbished-vs-New-Dell.pdf",
+    next: `Tell us how many people need machines and what they do, and we'll suggest the right mix with prices. WhatsApp ${A("https://wa.me/27627883650", "062 788 3650")}.`,
+  },
+};
+const esc = (s) => String(s).replace(/[<>&"]/g, (c) => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;", '"': "&quot;" }[c]));
+
+async function guide(form, f, magnet, wantsJson) {
+  const G = GUIDES[magnet];
+  const back = (ok, code = "") => wantsJson
+    ? Response.json({ ok, code }, { status: ok ? 200 : 400 })
+    : ok
+      ? new Response(null, { status: 303, headers: { Location: `/thank-you-guide.html#${magnet}` } })
+      : page("That didn't send", `Please go back and try again, or WhatsApp us on <a href="https://wa.me/27627883650" style="color:#2D5BE3">062 788 3650</a> and we'll send the ${G.name} there.`, 400);
+  if (f("company_website")) return back(true); // spam trap: pretend success, send nothing
+  const name = f("name").slice(0, 80), email = f("email"), mobile = f("mobile").slice(0, 40);
+  if (!name) return back(false, "invalid_name");
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return back(false, "invalid_email");
+  if (form.get("consent") !== "yes") return back(false, "no_consent");
+
+  const FROM = process.env.LEAD_FROM || process.env.BILL_REVIEW_FROM;
+  const TO = process.env.LEAD_TO || process.env.BILL_REVIEW_TO;
+  if (!process.env.RESEND_API_KEY || !FROM || !TO) { console.error("lead-magnet: missing_env"); return back(false, "not_configured"); }
+  const send = (body) => api("/emails", "POST", { from: FROM, reply_to: TO, ...body });
+
+  const r1 = await send({
+    to: [email],
+    subject: `Your ${G.name} from Poseidon Network Systems`,
+    html: wrap(P(`Hi ${esc(name)},`) + P(`Here's your ${G.name}: ${A(SITE + G.pdf, "Download the PDF")}`) + P(G.next)),
+  }).catch(() => null);
+  if (!r1 || !r1.ok) { console.error("lead-magnet: guide_send_failed", r1 && r1.status); return back(false, "send_failed"); }
+
+  const utm = ["utm_source", "utm_medium", "utm_campaign"].map((k) => f(k)).filter(Boolean).join(" / ") || "(none)";
+  await send({
+    to: [TO],
+    subject: `New lead: ${G.name}`,
+    html: `<p><strong>Name:</strong> ${esc(name)}<br><strong>Email:</strong> ${esc(email)}<br><strong>Mobile:</strong> ${esc(mobile || "-")}<br><strong>UTM source:</strong> ${esc(utm)}<br><strong>Time:</strong> ${new Date().toISOString()}</p><p>Follow up within one business day. Add them to the right WhatsApp list.</p>`,
+  }).catch(() => console.error("lead-magnet: guide_notify_failed"));
+  return back(true);
+}
 
 const DAY = 864e5;
 const secret = () => process.env.LEAD_UNSUB_SECRET || "";
@@ -109,6 +158,7 @@ export default async (req) => {
   try { form = await req.formData(); } catch { return Response.json({ ok: false, code: "invalid_form" }, { status: 400 }); }
   const f = (k) => (form.get(k) || "").toString().trim().slice(0, 200);
   const magnet = f("magnet");
+  if (GUIDES[magnet]) return guide(form, f, magnet, wantsJson);
   const M = MAGNETS[magnet];
   const back = (ok, code = "") => wantsJson
     ? Response.json({ ok, code }, { status: ok ? 200 : 400 })

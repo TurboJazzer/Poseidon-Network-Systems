@@ -30,7 +30,7 @@ exports.handler = async function (event) {
   const esc = (s) => String(s || '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
   const html = `
-    <h2>New quote request — Poseidon Network Systems</h2>
+    <h2>New quote request: Poseidon Network Systems</h2>
     <p><strong>Name:</strong> ${esc(name)}</p>
     <p><strong>Company:</strong> ${esc(company) || 'N/A'}</p>
     <p><strong>Email:</strong> ${esc(email)}</p>
