@@ -1,4 +1,5 @@
 [build]
+  command = "node notify-indexnow.js"
   publish = "."
   functions = "netlify/functions"
 
