@@ -10,6 +10,11 @@ const CACHE_TTL_MS = 60 * 60 * 1000;
 export default async (request, context) => {
   const ua = request.headers.get("user-agent") || "";
 
+  if (LOG_REQUESTS) {
+    const ip = context.ip || request.headers.get("x-nf-client-connection-ip") || "";
+    console.log(`[bots] ${request.method} ${new URL(request.url).pathname} | ${ip} | ${ua}`);
+  }
+
   const strictAllowedPatterns = [/googlebot/i, /googlebot-image/i, /googlebot-video/i, /bingbot/i, /msnbot/i, /bingpreview/i];
   const aiAgentAllowedPatterns = [/google-extended/i, /googleother/i, /google-cloudvertexbot/i];
 
