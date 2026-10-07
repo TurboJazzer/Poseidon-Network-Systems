@@ -8,12 +8,23 @@ const verifiedIpCache = new Map();
 const CACHE_TTL_MS = 60 * 60 * 1000;
 
 export default async (request, context) => {
+  // Fail open: if anything below throws, serve the page instead of crashing the site.
+  try {
+    return await handle(request, context);
+  } catch (e) {
+    console.log("[bots] error, failing open:", e && e.message);
+    return context.next();
+  }
+};
+
+async function handle(request, context) {
   const ua = request.headers.get("user-agent") || "";
 
-  if (LOG_REQUESTS) {
+  // Temporary request logging to diagnose AI fetchers. Delete this block when finished.
+  try {
     const ip = context.ip || request.headers.get("x-nf-client-connection-ip") || "";
     console.log(`[bots] ${request.method} ${new URL(request.url).pathname} | ${ip} | ${ua}`);
-  }
+  } catch (e) { /* ignore */ }
 
   const strictAllowedPatterns = [/googlebot/i, /googlebot-image/i, /googlebot-video/i, /bingbot/i, /msnbot/i, /bingpreview/i];
   const aiAgentAllowedPatterns = [/google-extended/i, /googleother/i, /google-cloudvertexbot/i];
@@ -52,7 +63,7 @@ export default async (request, context) => {
   }
 
   return context.next();
-};
+}
 
 // Verifies an IP belongs to the given hostname pattern by reverse-DNS then forward-confirming,
 // per Google's documented Googlebot-verification method (same approach works for Bingbot).
