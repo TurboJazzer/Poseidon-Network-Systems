@@ -12,7 +12,6 @@ export default async (request, context) => {
   try {
     return await handle(request, context);
   } catch (e) {
-    console.log("[bots] error, failing open:", e && e.message);
     return context.next();
   }
 };
@@ -20,10 +19,16 @@ export default async (request, context) => {
 async function handle(request, context) {
   const ua = request.headers.get("user-agent") || "";
 
-  // Temporary request logging to diagnose AI fetchers. Delete this block when finished.
+  // Temporary logging to see which crawlers and AI agents visit. Page requests only.
+  // Delete this block when finished. Wrapped so logging can never break a page load.
   try {
-    const ip = context.ip || request.headers.get("x-nf-client-connection-ip") || "";
-    console.log(`[bots] ${request.method} ${new URL(request.url).pathname} | ${ip} | ${ua}`);
+    const path = new URL(request.url).pathname;
+    const isAsset = /\.(webp|png|jpe?g|gif|svg|ico|css|js|woff2?|ttf|map|json|xml|txt)$/i.test(path) && path !== "/robots.txt";
+    const isOwnVisitor = /Chrome\/\d+[^ ]* Safari\/[\d.]+$/.test(ua) && !/bot|crawl|spider|headless|lighthouse|compatible/i.test(ua);
+    if (!isAsset && !isOwnVisitor) {
+      const ip = context.ip || request.headers.get("x-nf-client-connection-ip") || "";
+      console.log(`[bots] ${request.method} ${path} | ${ip} | ${ua}`);
+    }
   } catch (e) { /* ignore */ }
 
   const strictAllowedPatterns = [/googlebot/i, /googlebot-image/i, /googlebot-video/i, /bingbot/i, /msnbot/i, /bingpreview/i];
