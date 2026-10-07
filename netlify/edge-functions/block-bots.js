@@ -1,3 +1,9 @@
+// Deliberate bot blocking, reviewed 6 October 2026.
+// Blocked: MJ12bot, DotBot, PetalBot, Bytespider (ByteDance, the one AI crawler we don't allow) and Scrapy,
+// plus anything claiming to be Googlebot or Bingbot that fails reverse-DNS verification.
+// Do NOT add rules blocking GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, Claude-SearchBot, Claude-User,
+// PerplexityBot, Perplexity-User, Google-Extended, Applebot or Meta's crawlers. They are welcome (see robots.txt).
+
 const verifiedIpCache = new Map();
 const CACHE_TTL_MS = 60 * 60 * 1000;
 
@@ -12,7 +18,7 @@ export default async (request, context) => {
     const isBing = /bingbot|msnbot|bingpreview/i.test(ua);
     const pattern = isBing ? /\.search\.msn\.com$/i : /\.googlebot\.com$|\.google\.com$/i;
     const result = await isVerifiedIP(ip, pattern);
-    // Fail open: a lookup error shouldn't block a real crawler; only a confirmed mismatch does.
+    // Fail open: crawlers are never blocked by verification failures.
     if (result !== false) {
       return context.next();
     }
@@ -45,7 +51,7 @@ export default async (request, context) => {
 
 // Verifies an IP belongs to the given hostname pattern by reverse-DNS then forward-confirming,
 // per Google's documented Googlebot-verification method (same approach works for Bingbot).
-// Returns true (verified), false (confirmed mismatch), or null (lookup error/unknown - fail open).
+// Returns true (verified) or null (error, unmatched PTR or forward-DNS mismatch: fail open). Never blocks.
 async function isVerifiedIP(ip, hostnamePattern) {
   if (!ip) return null;
   const cacheKey = ip + '|' + hostnamePattern.source;
@@ -58,9 +64,8 @@ async function isVerifiedIP(ip, hostnamePattern) {
     const hostnames = (rdnsData.Answer || []).map((a) => a.data.replace(/\.$/, ""));
     const matchedHostnames = hostnames.filter((h) => hostnamePattern.test(h));
     if (matchedHostnames.length === 0) {
-      const result = hostnames.length === 0 ? null : false;
-      verifiedIpCache.set(cacheKey, { result, at: Date.now() });
-      return result;
+      verifiedIpCache.set(cacheKey, { result: null, at: Date.now() });
+      return null; // no matching PTR: fail open
     }
 
     for (const host of matchedHostnames) {
@@ -73,8 +78,8 @@ async function isVerifiedIP(ip, hostnamePattern) {
         return true;
       }
     }
-    verifiedIpCache.set(cacheKey, { result: false, at: Date.now() });
-    return false;
+    verifiedIpCache.set(cacheKey, { result: null, at: Date.now() });
+    return null; // forward-DNS mismatch: fail open
   } catch {
     return null; // lookup failed - fail open rather than block a real crawler
   }
