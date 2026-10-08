@@ -1,6 +1,17 @@
 (function(){
   var KEY = 'pns_cookie_consent';
 
+  // Microsoft Clarity: loaded only after the visitor accepts cookies.
+  function loadClarity(){
+    if (window.__pnsClarityLoaded) return;
+    window.__pnsClarityLoaded = true;
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "yudlrgdbfc");
+  }
+
   function el(tag, attrs, children){
     var e = document.createElement(tag);
     for (var k in attrs || {}) {
@@ -42,6 +53,7 @@
             style: { background: '#2D5BE3', border: 'none', color: '#fff', fontSize: '13px', fontWeight: '600', padding: '12px 18px', borderRadius: '6px', cursor: 'pointer' },
             onClick: function(){
               localStorage.setItem(KEY, 'accepted');
+              loadClarity();
               if (window.dataLayer) window.dataLayer.push({ event: 'cookie_consent_accepted' });
               hide();
             }
@@ -59,7 +71,9 @@
   window.showCookieBanner = show;
 
   function init(){
-    if (!localStorage.getItem(KEY)) show();
+    var consent = localStorage.getItem(KEY);
+    if (!consent) show();
+    else if (consent === 'accepted') loadClarity();
   }
 
   if (document.readyState === 'loading') {
