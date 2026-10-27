@@ -16,37 +16,99 @@ a{color:#2D5BE3}a:hover{color:#1F47C4}
 header{background:#0D1B4B;color:#fff;padding:28px 20px 30px}
 header .in,main{max-width:920px;margin:0 auto}
 .tag{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8fabf5;margin:0 0 8px}
-h1,h2{font-family:'Space Grotesk',sans-serif;margin:0}
+h1,h2,h3{font-family:'Space Grotesk',sans-serif;margin:0}
 h1{font-size:28px;line-height:1.2}
-main{padding:24px 16px 64px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px}
+main{padding:24px 16px 40px}
+.sec{margin:0 0 32px}
+.sec h2{font-size:22px;line-height:1.25}
+.subh{margin:2px 0 14px;color:#4A5578;font-size:15px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px}
+ul.links{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:8px}
+ul.links a{display:flex;align-items:center;min-height:44px;padding:8px 14px;background:#fff;border:1px solid #E4E9F5;border-radius:10px;text-decoration:none;font-size:14.5px;font-weight:500}
+ul.links a:hover{border-color:#2D5BE3}
+ul.links a:focus-visible{outline:3px solid #9DB6F5;outline-offset:2px}
 a.tool{display:flex;flex-direction:column;gap:6px;background:#fff;border:1px solid #E4E9F5;border-radius:12px;padding:20px;text-decoration:none;color:#0D1B4B;min-height:44px;transition:border-color .15s,box-shadow .15s}
 a.tool:hover{border-color:#2D5BE3;box-shadow:0 4px 16px rgba(13,27,75,.08);color:#0D1B4B}
 a.tool:focus-visible{outline:3px solid #9DB6F5;outline-offset:2px}
-a.tool h2{font-size:19px}
+a.tool h3{font-family:'Space Grotesk',sans-serif;margin:0;font-size:19px}
 a.tool p{margin:0;color:#4A5578;font-size:14.5px}
 a.tool span{margin-top:6px;font-size:14px;font-weight:600;color:#2D5BE3}
 .back{max-width:920px;margin:0 auto;padding:0 16px;font-size:14px}
 </style>
+<link rel="stylesheet" href="/staff/staff-dark.css">
 </head>
 <body>
 <header><div class="in"><p class="tag">Poseidon staff only</p><h1>Staff tools</h1></div></header>
 <main>
-  <a class="tool" href="/staff/voip-checklist.html">
-    <h2>VoIP quote and readiness checklist</h2>
-    <p>One checklist per VoIP enquiry, from first contact to go-live.</p>
-    <span>Open checklist →</span>
-  </a>
-  <a class="tool" href="/staff/product-flyer-template.html">
-    <h2>Product flyer template</h2>
-    <p>Make a 1080 × 1350 PNS flyer for Facebook and WhatsApp.</p>
-    <span>Open flyer template →</span>
-  </a>
-  <a class="tool" href="/staff/dell-offers.html">
-    <h2>Dell offers</h2>
-    <p>Offers from Universe Direct, with our prices and status from new to sold.</p>
-    <span>Open Dell offers →</span>
-  </a>
+  <section class="sec" aria-labelledby="sales-and-stock">
+    <h2 id="sales-and-stock">Sales and stock</h2>
+    <p class="subh">Offers from Universe Direct and the flyers for them.</p>
+    <div class="grid">
+    <a class="tool" href="/staff/dell-offers.html">
+      <h3>Dell offers</h3>
+      <p>Offers from Universe Direct, with our prices and status from new to sold.</p>
+      <span>Open Dell offers →</span>
+    </a>
+    <a class="tool" href="/staff/product-flyer-template.html">
+      <h3>Product flyer template</h3>
+      <p>Make a 1080 × 1350 PNS flyer for Facebook and WhatsApp.</p>
+      <span>Open flyer template →</span>
+    </a>
+    </div>
+  </section>
+  <section class="sec" aria-labelledby="voip">
+    <h2 id="voip">VoIP</h2>
+    <p class="subh">Quote and go-live work for Switch Telecom VoIP.</p>
+    <div class="grid">
+    <a class="tool" href="/staff/voip-checklist.html">
+      <h3>VoIP quote and readiness checklist</h3>
+      <p>One checklist per VoIP enquiry, from first contact to go-live.</p>
+      <span>Open checklist →</span>
+    </a>
+    </div>
+  </section>
+  <section class="sec" aria-labelledby="customer-handouts">
+    <h2 id="customer-handouts">Customer handouts</h2>
+    <p class="subh">PDFs we send to customers. Open one to check it or copy the link.</p>
+    <ul class="links">
+      <li><a href="/downloads/PNS-Phone-Bill-Decoder.pdf">Phone Bill Decoder (sent by the free guide form)</a></li>
+      <li><a href="/downloads/PNS-Refurbished-vs-New-Dell.pdf">Refurbished vs New Dell (sent by the free guide form)</a></li>
+      <li><a href="/assets/poseidon-phone-bill-checklist.pdf">Business phone bill checklist (PDF)</a></li>
+      <li><a href="/assets/poseidon-refurbished-laptop-checklist.pdf">Refurbished laptop checklist (PDF)</a></li>
+    </ul>
+  </section>
+  <section class="sec" aria-labelledby="website-pages">
+    <h2 id="website-pages">Website pages</h2>
+    <p class="subh">The public pages customers see.</p>
+    <ul class="links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/refurbished-dell-equipment.html">Refurbished Dell laptops and desktops</a></li>
+      <li><a href="/new-dell-equipment.html">New Dell laptops and desktops</a></li>
+      <li><a href="/business-voip-cape-town.html">Business VoIP and hosted switchboard</a></li>
+      <li><a href="/phone-bill-checklist.html">Free phone bill checklist</a></li>
+      <li><a href="/refurbished-laptop-checklist.html">Free refurbished laptop checklist</a></li>
+      <li><a href="/resources.html">IT guides and free checklists</a></li>
+      <li><a href="/faq.html">FAQ</a></li>
+      <li><a href="/links.html">Links page</a></li>
+      <li><a href="/privacy.html">Privacy policy</a></li>
+      <li><a href="/terms.html">Terms of service</a></li>
+    </ul>
+  </section>
+  <section class="sec" aria-labelledby="product-pages">
+    <h2 id="product-pages">Product pages</h2>
+    <p class="subh">One page for each Dell model we list.</p>
+    <ul class="links">
+      <li><a href="/product-dell-latitude-5330.html">Dell Latitude 5330</a></li>
+      <li><a href="/product-dell-latitude-5400.html">Dell Latitude 5400</a></li>
+      <li><a href="/product-dell-latitude-5410.html">Dell Latitude 5410</a></li>
+      <li><a href="/product-dell-latitude-7430-2-in-1.html">Dell Latitude 7430 2-in-1</a></li>
+      <li><a href="/product-dell-optiplex-3060-micro.html">Dell OptiPlex 3060 Micro</a></li>
+      <li><a href="/product-dell-optiplex-3080-sff.html">Dell OptiPlex 3080 SFF</a></li>
+      <li><a href="/product-dell-optiplex-5060-sff.html">Dell OptiPlex 5060 SFF</a></li>
+      <li><a href="/product-dell-poweredge-r760-2u-server.html">Dell PowerEdge R760 2U server</a></li>
+    </ul>
+  </section>
 </main>
-<p class="back"><a href="/">← Back to website</a></p>
+<p class="back"><a href="/">← Back to website</a> · <a href="/staff/login?logout=1">Sign out</a></p>
 </body>
 </html>

@@ -2,11 +2,13 @@
 // Reads and writes the dell_offers table in Netlify Database.
 //
 // Security:
-//  - Every request needs the staff login: the same STAFF_USER (default "staff") and
-//    STAFF_PASSWORD that protect /staff/ in netlify/edge-functions/staff-auth.js.
+//  - Every request needs the staff login: either the signed sign-in cookie that /staff/login sets
+//    (same recipe as netlify/edge-functions/lib/staff-token.js) or the Basic login STAFF_USER
+//    (default "staff") plus STAFF_PASSWORD, which scripts can use.
 //  - Changes (POST, PUT, DELETE) must be JSON and carry the X-Requested-With header, which a
 //    web page on another site cannot send, so a stray link or form elsewhere cannot change data.
 //  - All values go to the database as parameters, never glued into SQL.
+import { createHmac } from "node:crypto";
 import { getDatabase } from "@netlify/database";
 
 const STATUSES = ["new", "listed", "sold", "dropped"];
@@ -33,11 +35,20 @@ const same = (a, b) => {
   return r === 0;
 };
 
+// Same signed cookie the sign-in page sets: "<expiry seconds>.<HMAC-SHA256 of the expiry>".
+const cookieOk = (req, pass) => {
+  const m = /(?:^|;\s*)pns_staff=(\d{10,13})\.([0-9a-f]{64})(?:;|$)/.exec(req.headers.get("cookie") || "");
+  if (!m || Number(m[1]) < Math.floor(Date.now() / 1000)) return false;
+  const want = createHmac("sha256", "pns-staff-v1|" + pass).update("pns-staff|" + m[1]).digest("hex");
+  return same(m[2], want);
+};
+
 // "ok", "unset" (no STAFF_PASSWORD configured) or "denied".
 const checkAuth = (req) => {
   const user = process.env.STAFF_USER || "staff";
   const pass = process.env.STAFF_PASSWORD;
   if (!pass) return "unset";
+  if (cookieOk(req, pass)) return "ok";
   const header = req.headers.get("authorization") || "";
   if (!header.startsWith("Basic ")) return "denied";
   try {
@@ -128,9 +139,7 @@ export const createHandler = (getDb) => async (req) => {
   const auth = checkAuth(req);
   if (auth === "unset") return json({ error: "The staff area is not set up yet." }, 503);
   if (auth !== "ok") {
-    return json({ error: "Staff login required." }, 401, {
-      "WWW-Authenticate": 'Basic realm="PNS staff", charset="UTF-8"',
-    });
+    return json({ error: "Staff login required." }, 401);
   }
 
   const method = req.method.toUpperCase();
