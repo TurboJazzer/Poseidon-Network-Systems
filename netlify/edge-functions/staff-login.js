@@ -78,19 +78,33 @@ export default async (request) => {
   }
 
   if (request.method === "POST") {
-    const origin = request.headers.get("origin");
-    if (origin && origin !== url.origin) return new Response("Request not allowed.", { status: 403, headers: { "Cache-Control": "no-store" } });
+    // Refuse a form that another website sent. Browsers label every request with Sec-Fetch-Site, which is
+    // reliable even when the platform reports an internal address. Older browsers fall back to comparing
+    // the Origin host with this site's host names.
+    const fetchSite = request.headers.get("sec-fetch-site");
+    let cross = fetchSite === "cross-site";
+    if (!fetchSite) {
+      const origin = request.headers.get("origin");
+      if (origin && origin !== "null") {
+        let oh = "";
+        try { oh = new URL(origin).host; } catch (_) {}
+        const mine = [url.host, request.headers.get("host"), request.headers.get("x-forwarded-host")].filter(Boolean);
+        cross = !mine.includes(oh);
+      }
+    }
+    if (cross) return new Response(page("/staff/", "That did not work. Please reload this page and try again. (code 403)"), { status: 403, headers: headers() });
     let password = "", next = "/staff/";
     try {
       const form = await request.formData();
       password = String(form.get("password") || "").slice(0, 200);
       next = safeNext(String(form.get("next") || ""));
     } catch (_) {
-      return new Response(page("/staff/", "That did not work. Please try again."), { status: 400, headers: headers() });
+      return new Response(page("/staff/", "That did not work. Please try again. (code 400)"), { status: 400, headers: headers() });
     }
-    if (!eq(password, pass)) {
+    // Spaces or a line break pasted around the password (in the form or in Netlify) are ignored.
+    if (!eq(password.trim(), pass.trim())) {
       await new Promise((r) => setTimeout(r, 400));
-      return new Response(page(next, "That password is not right. Please try again."), { status: 401, headers: headers() });
+      return new Response(page(next, "That password is not right. Please try again. (code 401)"), { status: 401, headers: headers() });
     }
     const exp = String(Math.floor(Date.now() / 1000) + MAX_AGE);
     const cookie = `pns_staff=${exp}.${await sign(pass, exp)}; Path=/staff; HttpOnly; Secure; SameSite=Strict`;
