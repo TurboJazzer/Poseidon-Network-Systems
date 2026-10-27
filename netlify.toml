@@ -159,3 +159,14 @@
   to = "/product-dell-optiplex-3060-micro.html"
   status = 301
   force = true
+
+# Staff-only Dell offers API (also checks the staff login itself). Path sits under /staff/ so the
+# browser sends the staff login with every request.
+[[redirects]]
+  from = "/staff/api/dell-offers"
+  to = "/.netlify/functions/dell-offers"
+  status = 200
+  [redirects.rate_limit]
+    window_limit = 60
+    window_size = 60
+    aggregate_by = ["ip", "domain"]

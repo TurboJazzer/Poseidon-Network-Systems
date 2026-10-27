@@ -1,0 +1,9 @@
+{
+  "name": "poseidon-network-systems-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Poseidon Network Systems website: static pages plus Netlify functions.",
+  "dependencies": {
+    "@netlify/database": "^2.0.1"
+  }
+}
