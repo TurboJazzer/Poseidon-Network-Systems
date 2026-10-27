@@ -1,3 +1,10 @@
+/* Sign out link, top right of every staff page. */
+header,header.top{position:relative}
+.signout{position:absolute;top:14px;right:16px;display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border:1px solid #2A3A5E;border-radius:8px;color:#8FABF5;font-size:14px;font-weight:600;text-decoration:none;background:#000}
+.signout:hover{border-color:#2D5BE3;color:#BBD0FF}
+@media (max-width:640px){header,header.top{padding-bottom:16px}.signout{position:static;margin:14px 20px 0}}
+@media print{.signout{display:none!important}}
+
 /* Dark mode for the whole staff area: black page, near-black cards. Screen only, so printing stays light. */
 @media screen {
 :root{color-scheme:dark;--ink:#E8EDFB;--muted:#9FB0D6;--line:#1E2B47;--field:#2A3A5E;--bg:#000}

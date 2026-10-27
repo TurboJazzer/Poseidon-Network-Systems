@@ -2,9 +2,9 @@
 // Reads and writes the dell_offers table in Netlify Database.
 //
 // Security:
-//  - Every request needs the staff login: either the signed sign-in cookie that /staff/login sets
-//    (same recipe as netlify/edge-functions/lib/staff-token.js) or the Basic login STAFF_USER
-//    (default "staff") plus STAFF_PASSWORD, which scripts can use.
+//  - Every request needs the signed sign-in cookie that /staff/login sets (same recipe as
+//    netlify/edge-functions/lib/staff-token.js). It is a session cookie, so closing the browser
+//    or signing out ends access.
 //  - Changes (POST, PUT, DELETE) must be JSON and carry the X-Requested-With header, which a
 //    web page on another site cannot send, so a stray link or form elsewhere cannot change data.
 //  - All values go to the database as parameters, never glued into SQL.
@@ -45,22 +45,9 @@ const cookieOk = (req, pass) => {
 
 // "ok", "unset" (no STAFF_PASSWORD configured) or "denied".
 const checkAuth = (req) => {
-  const user = process.env.STAFF_USER || "staff";
   const pass = process.env.STAFF_PASSWORD;
   if (!pass) return "unset";
-  if (cookieOk(req, pass)) return "ok";
-  const header = req.headers.get("authorization") || "";
-  if (!header.startsWith("Basic ")) return "denied";
-  try {
-    const decoded = Buffer.from(header.slice(6), "base64").toString("utf8");
-    const i = decoded.indexOf(":");
-    if (i < 0) return "denied";
-    const okUser = same(decoded.slice(0, i), user);
-    const okPass = same(decoded.slice(i + 1), pass);
-    return okUser && okPass ? "ok" : "denied";
-  } catch (_) {
-    return "denied";
-  }
+  return cookieOk(req, pass) ? "ok" : "denied";
 };
 
 const text = (v, max) => {

@@ -1,5 +1,5 @@
 // Branded staff sign-in page for /staff/login. Checks the password against STAFF_PASSWORD and sets a
-// signed 12-hour cookie. Limited to 10 requests a minute per visitor to stop password guessing.
+// signed session cookie: it is dropped when the browser is closed and is also valid for 12 hours at most. Limited to 10 requests a minute per visitor to stop password guessing.
 import { MAX_AGE, eq, sign, validCookie } from "./lib/staff-token.js";
 
 const esc = (s) => s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -71,7 +71,7 @@ export default async (request) => {
   const clear = "pns_staff=; Path=/staff; HttpOnly; Secure; SameSite=Strict; Max-Age=0";
 
   if (request.method === "GET") {
-    if (url.searchParams.get("logout") === "1") return new Response(page("/staff/"), { status: 200, headers: headers({ "Set-Cookie": clear }) });
+    if (url.searchParams.get("logout") === "1") return new Response(null, { status: 302, headers: { Location: "/", "Set-Cookie": clear, "Cache-Control": "no-store" } });
     const next = safeNext(url.searchParams.get("next"));
     if (await validCookie(request, pass)) return new Response(null, { status: 302, headers: { Location: next, "Cache-Control": "no-store" } });
     return new Response(page(next), { status: 200, headers: headers() });
@@ -93,7 +93,7 @@ export default async (request) => {
       return new Response(page(next, "That password is not right. Please try again."), { status: 401, headers: headers() });
     }
     const exp = String(Math.floor(Date.now() / 1000) + MAX_AGE);
-    const cookie = `pns_staff=${exp}.${await sign(pass, exp)}; Path=/staff; HttpOnly; Secure; SameSite=Strict; Max-Age=${MAX_AGE}`;
+    const cookie = `pns_staff=${exp}.${await sign(pass, exp)}; Path=/staff; HttpOnly; Secure; SameSite=Strict`;
     return new Response(null, { status: 303, headers: { Location: next, "Set-Cookie": cookie, "Cache-Control": "no-store" } });
   }
 
