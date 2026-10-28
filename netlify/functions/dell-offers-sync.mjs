@@ -4,8 +4,8 @@
 // Needs these Netlify environment variables:
 //   AIRTABLE_TOKEN    an Airtable personal access token with ONLY the data.records:read scope,
 //                     limited to the "PNS Dell Offers Inbox" base. It cannot change anything in Airtable.
-//   AIRTABLE_BASE_ID  appwHQvXIzxk1zNJl
-//   AIRTABLE_TABLE_ID tblPZu9iLXdgonM3L
+//   AIRTABLE_BASE_ID  the id of the "PNS Dell Offers Inbox" base (starts with "app")
+//   AIRTABLE_TABLE_ID the id of its "Dell offers inbox" table (starts with "tbl")
 // Nothing is deleted or changed in Airtable. Repeats are skipped because source_ref is unique.
 import { getDatabase } from "@netlify/database";
 import { addOffers } from "../lib/add-offers.mjs";
