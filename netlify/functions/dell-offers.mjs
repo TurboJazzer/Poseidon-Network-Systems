@@ -15,8 +15,10 @@ const STATUSES = ["new", "listed", "sold", "dropped"];
 const CONDITIONS = ["refurbished", "new", "unknown"];
 const MAX_BODY = 20000;
 const MAX_PRICE = 10000000;
+// Photos are only ever taken from the supplier's own uploads folder.
+export const IMAGE_URL_RE = /^https:\/\/www\.universedirect\.co\.za\/wp-content\/uploads\/[A-Za-z0-9._\/-]+\.(?:png|jpe?g|webp|gif)$/i;
 
-const json = (data, status = 200, extra = {}) =>
+export const json = (data, status = 200, extra = {}) =>
   new Response(JSON.stringify(data), {
     status,
     headers: {
@@ -44,7 +46,7 @@ const cookieOk = (req, pass) => {
 };
 
 // "ok", "unset" (no STAFF_PASSWORD configured) or "denied".
-const checkAuth = (req) => {
+export const checkAuth = (req) => {
   const pass = process.env.STAFF_PASSWORD;
   if (!pass) return "unset";
   return cookieOk(req, pass) ? "ok" : "denied";
@@ -94,6 +96,11 @@ export const cleanOffer = (b) => {
   const source_url = text(b.source_url, 500);
   if (source_url && !/^https:\/\//i.test(source_url)) return { error: "The source link must start with https://" };
 
+  const image_url = text(b.image_url, 500);
+  if (image_url && !IMAGE_URL_RE.test(image_url)) {
+    return { error: "The photo link must be a picture address from universedirect.co.za (https://www.universedirect.co.za/wp-content/uploads/...)." };
+  }
+
   return {
     value: {
       model,
@@ -107,6 +114,7 @@ export const cleanOffer = (b) => {
       our_price_excl_vat: op.value,
       source_ref: text(b.source_ref, 200),
       source_url,
+      image_url,
       first_seen,
       status,
       notes: text(b.notes, 1000),
@@ -151,7 +159,7 @@ export const createHandler = (getDb) => async (req) => {
         SELECT id::int AS id, model, cpu, ram, storage, screen, unit_condition, supplier,
                supplier_price_excl_vat::float8 AS supplier_price_excl_vat,
                our_price_excl_vat::float8 AS our_price_excl_vat,
-               source_ref, source_url, first_seen::text AS first_seen, status, notes,
+               source_ref, source_url, image_url, first_seen::text AS first_seen, status, notes,
                created_at, updated_at
         FROM dell_offers
         WHERE (${status || null}::text IS NULL OR status = ${status || null}::text)
@@ -183,15 +191,15 @@ export const createHandler = (getDb) => async (req) => {
       const rows = await db.sql`
         INSERT INTO dell_offers
           (model, cpu, ram, storage, screen, unit_condition, supplier,
-           supplier_price_excl_vat, our_price_excl_vat, source_ref, source_url, first_seen, status, notes)
+           supplier_price_excl_vat, our_price_excl_vat, source_ref, source_url, image_url, first_seen, status, notes)
         VALUES
           (${v.model}, ${v.cpu}, ${v.ram}, ${v.storage}, ${v.screen}, ${v.unit_condition}, ${v.supplier},
-           ${v.supplier_price_excl_vat}, ${v.our_price_excl_vat}, ${v.source_ref}, ${v.source_url},
+           ${v.supplier_price_excl_vat}, ${v.our_price_excl_vat}, ${v.source_ref}, ${v.source_url}, ${v.image_url},
            COALESCE(${v.first_seen}::date, CURRENT_DATE), ${v.status}, ${v.notes})
         RETURNING id::int AS id, model, cpu, ram, storage, screen, unit_condition, supplier,
                supplier_price_excl_vat::float8 AS supplier_price_excl_vat,
                our_price_excl_vat::float8 AS our_price_excl_vat,
-               source_ref, source_url, first_seen::text AS first_seen, status, notes,
+               source_ref, source_url, image_url, first_seen::text AS first_seen, status, notes,
                created_at, updated_at`;
       return json({ offer: rows[0] }, 201);
     }
@@ -205,13 +213,14 @@ export const createHandler = (getDb) => async (req) => {
         unit_condition = ${v.unit_condition}, supplier = ${v.supplier},
         supplier_price_excl_vat = ${v.supplier_price_excl_vat}, our_price_excl_vat = ${v.our_price_excl_vat},
         source_ref = ${v.source_ref}, source_url = ${v.source_url},
+        image_url = ${v.image_url}, image_checked_at = CASE WHEN ${v.image_url}::text IS DISTINCT FROM image_url THEN NULL ELSE image_checked_at END,
         first_seen = COALESCE(${v.first_seen}::date, first_seen),
         status = ${v.status}, notes = ${v.notes}, updated_at = NOW()
       WHERE id = ${id}
       RETURNING id::int AS id, model, cpu, ram, storage, screen, unit_condition, supplier,
              supplier_price_excl_vat::float8 AS supplier_price_excl_vat,
              our_price_excl_vat::float8 AS our_price_excl_vat,
-             source_ref, source_url, first_seen::text AS first_seen, status, notes,
+             source_ref, source_url, image_url, first_seen::text AS first_seen, status, notes,
              created_at, updated_at`;
     return rows.length ? json({ offer: rows[0] }) : json({ error: "Offer not found." }, 404);
   } catch (err) {
