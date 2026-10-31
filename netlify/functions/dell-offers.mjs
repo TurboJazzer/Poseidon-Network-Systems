@@ -13,6 +13,8 @@ import { getDatabase } from "@netlify/database";
 
 const STATUSES = ["new", "listed", "sold", "dropped"];
 const CONDITIONS = ["refurbished", "new", "unknown"];
+const AVAILABILITY = ["in_stock", "coming_soon", "to_order"];
+const flag = (v) => v === true || v === "true" || v === "on" || v === 1;
 const MAX_BODY = 20000;
 const MAX_PRICE = 10000000;
 // Photos are only ever taken from the supplier's own uploads folder.
@@ -72,7 +74,7 @@ export const cleanOffer = (b) => {
   const model = text(b.model, 120);
   if (!model) return { error: "Model is required." };
 
-  const status = b.status === undefined || b.status === "" ? "new" : b.status;
+  let status = b.status === undefined || b.status === "" ? "new" : b.status;
   if (!STATUSES.includes(status)) return { error: "Status must be new, listed, sold or dropped." };
 
   const unit_condition = b.unit_condition === undefined || b.unit_condition === "" ? "unknown" : b.unit_condition;
@@ -92,6 +94,19 @@ export const cleanOffer = (b) => {
     }
     first_seen = s;
   }
+
+  const availability = b.availability === undefined || b.availability === "" ? "in_stock" : b.availability;
+  if (!AVAILABILITY.includes(availability)) return { error: "Availability must be in stock, coming soon or available to order." };
+  const website_text = text(b.website_text, 300);
+
+  // Publishing to the website lists the offer and needs our price. Sold or dropped offers (or any status other
+  // than listed) are always taken off the website.
+  let published = flag(b.published);
+  if (published && (status === "new" || status === "listed")) {
+    if (op.value === null) return { error: "Set our price before publishing to the website." };
+    status = "listed";
+  }
+  if (status !== "listed") published = false;
 
   const source_url = text(b.source_url, 500);
   if (source_url && !/^https:\/\//i.test(source_url)) return { error: "The source link must start with https://" };
@@ -115,6 +130,10 @@ export const cleanOffer = (b) => {
       source_ref: text(b.source_ref, 200),
       source_url,
       image_url,
+      availability,
+      website_text,
+      published,
+      photo_ok: flag(b.photo_ok),
       first_seen,
       status,
       notes: text(b.notes, 1000),
@@ -159,7 +178,8 @@ export const createHandler = (getDb) => async (req) => {
         SELECT id::int AS id, model, cpu, ram, storage, screen, unit_condition, supplier,
                supplier_price_excl_vat::float8 AS supplier_price_excl_vat,
                our_price_excl_vat::float8 AS our_price_excl_vat,
-               source_ref, source_url, image_url, first_seen::text AS first_seen, status, notes,
+               source_ref, source_url, image_url, availability, website_text, published, photo_ok,
+               first_seen::text AS first_seen, status, notes,
                created_at, updated_at
         FROM dell_offers
         WHERE (${status || null}::text IS NULL OR status = ${status || null}::text)
@@ -191,15 +211,17 @@ export const createHandler = (getDb) => async (req) => {
       const rows = await db.sql`
         INSERT INTO dell_offers
           (model, cpu, ram, storage, screen, unit_condition, supplier,
-           supplier_price_excl_vat, our_price_excl_vat, source_ref, source_url, image_url, first_seen, status, notes)
+           supplier_price_excl_vat, our_price_excl_vat, source_ref, source_url, image_url, availability, website_text, published, photo_ok, first_seen, status, notes)
         VALUES
           (${v.model}, ${v.cpu}, ${v.ram}, ${v.storage}, ${v.screen}, ${v.unit_condition}, ${v.supplier},
            ${v.supplier_price_excl_vat}, ${v.our_price_excl_vat}, ${v.source_ref}, ${v.source_url}, ${v.image_url},
+           ${v.availability}, ${v.website_text}, ${v.published}, ${v.photo_ok},
            COALESCE(${v.first_seen}::date, CURRENT_DATE), ${v.status}, ${v.notes})
         RETURNING id::int AS id, model, cpu, ram, storage, screen, unit_condition, supplier,
                supplier_price_excl_vat::float8 AS supplier_price_excl_vat,
                our_price_excl_vat::float8 AS our_price_excl_vat,
-               source_ref, source_url, image_url, first_seen::text AS first_seen, status, notes,
+               source_ref, source_url, image_url, availability, website_text, published, photo_ok,
+               first_seen::text AS first_seen, status, notes,
                created_at, updated_at`;
       return json({ offer: rows[0] }, 201);
     }
@@ -213,6 +235,7 @@ export const createHandler = (getDb) => async (req) => {
         unit_condition = ${v.unit_condition}, supplier = ${v.supplier},
         supplier_price_excl_vat = ${v.supplier_price_excl_vat}, our_price_excl_vat = ${v.our_price_excl_vat},
         source_ref = ${v.source_ref}, source_url = ${v.source_url},
+        availability = ${v.availability}, website_text = ${v.website_text}, published = ${v.published}, photo_ok = ${v.photo_ok},
         image_url = ${v.image_url}, image_checked_at = CASE WHEN ${v.image_url}::text IS DISTINCT FROM image_url THEN NULL ELSE image_checked_at END,
         first_seen = COALESCE(${v.first_seen}::date, first_seen),
         status = ${v.status}, notes = ${v.notes}, updated_at = NOW()
@@ -220,7 +243,8 @@ export const createHandler = (getDb) => async (req) => {
       RETURNING id::int AS id, model, cpu, ram, storage, screen, unit_condition, supplier,
              supplier_price_excl_vat::float8 AS supplier_price_excl_vat,
              our_price_excl_vat::float8 AS our_price_excl_vat,
-             source_ref, source_url, image_url, first_seen::text AS first_seen, status, notes,
+             source_ref, source_url, image_url, availability, website_text, published, photo_ok,
+               first_seen::text AS first_seen, status, notes,
              created_at, updated_at`;
     return rows.length ? json({ offer: rows[0] }) : json({ error: "Offer not found." }, 404);
   } catch (err) {

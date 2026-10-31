@@ -61,6 +61,11 @@ button,select,input,textarea{font:inherit;color:inherit}
 .photo img{max-width:100%;max-height:100%;object-fit:contain;display:block}
 .photo .pl{display:flex;flex-wrap:wrap;gap:14px;font-size:13.5px}
 .photo .pl a{font-weight:600}
+.badge.s-web{background:#D1FAE5;color:#047857;margin-left:6px}
+.webbar{background:#F6F8FD;border:1px solid #E4E9F5;border-radius:10px;padding:10px 12px;font-size:13.5px;display:flex;flex-direction:column;gap:8px}
+.webbar label{display:flex;gap:8px;align-items:flex-start;font-weight:500}
+.webbar input[type=checkbox],.chk input{width:20px;height:20px;margin-top:1px;flex:none}
+.chk{display:flex;gap:10px;align-items:flex-start;font-size:14px;font-weight:500}
 .empty{background:#fff;border:1px dashed #C9D3EE;border-radius:12px;padding:32px 20px;text-align:center;color:#4A5578}
 dialog{border:none;border-radius:14px;padding:0;width:min(680px,calc(100% - 24px));box-shadow:0 18px 60px rgba(13,27,75,.35);color:#0D1B4B;background:#fff;max-height:calc(100% - 24px)}
 dialog::backdrop{background:rgba(13,27,75,.55)}
@@ -116,6 +121,13 @@ form h2{font-size:22px;margin-bottom:14px}
         <div class="hint">Filled in automatically from Universe Direct. Only change it if the photo is wrong.</div></div>
       <div class="f full"><label for="f-source_ref">Email reference (optional)</label><input id="f-source_ref" name="source_ref" maxlength="200" placeholder="Used to stop the same offer being saved twice">
         <div class="hint">Leave blank unless you have a reference such as the email thread id.</div></div>
+      <div class="f full"><label for="f-website_text">Website description (public)</label><textarea id="f-website_text" name="website_text" maxlength="300" placeholder="Factory reconditioned and tested, includes keyboard and mouse and 1-year warranty."></textarea>
+        <div class="hint">Shown on the Poseidon Network website. Do not put supplier names, prices or internal notes here. Leave blank for the standard wording.</div></div>
+      <div class="f"><label for="f-availability">Website badge</label>
+        <select id="f-availability" name="availability"><option value="in_stock">In stock</option><option value="coming_soon">Coming soon (pre-order)</option><option value="to_order">Available to order</option></select></div>
+      <div class="f"></div>
+      <div class="f full chk"><input type="checkbox" id="f-photo_ok" name="photo_ok"><label for="f-photo_ok" style="margin:0">The photo is fine for the website (no supplier price or supplier branding on it)</label></div>
+      <div class="f full chk"><input type="checkbox" id="f-published" name="published"><label for="f-published" style="margin:0">Checked and ready: show this on the Poseidon Network website (needs our price; sets the status to Listed)</label></div>
       <div class="f full"><label for="f-notes">Notes</label><textarea id="f-notes" name="notes" maxlength="1000" placeholder="Free laptop bag, stock level, delivery notes"></textarea></div>
     </div>
     <p id="ferr" role="alert"></p>
@@ -243,11 +255,52 @@ form h2{font-size:22px;margin-bottom:14px}
     return box;
   }
 
+  // Check, then publish: the website card appears only after staff tick the photo and press Publish.
+  function webBar(o) {
+    var box = el('div', 'webbar');
+    var lab = el('label');
+    var cb = el('input'); cb.type = 'checkbox'; cb.checked = !!o.photo_ok;
+    cb.setAttribute('aria-label', 'Photo is fine for the website');
+    cb.addEventListener('change', function () {
+      cb.disabled = true;
+      api('PUT', '?id=' + o.id, toPayload(o, { photo_ok: cb.checked }))
+        .then(function (d) { replace(d.offer); render(); })
+        .catch(function (e) { say(e.message, 'err'); render(); });
+    });
+    lab.appendChild(cb);
+    lab.appendChild(el('span', '', 'Photo is fine for the website (no supplier price on it)'));
+    box.appendChild(lab);
+    var b;
+    if (o.published) {
+      b = el('button', 'btn ghost', 'Take off the website');
+      b.type = 'button';
+      b.addEventListener('click', function () { setPublished(o, false, b); });
+    } else {
+      b = el('button', 'btn', 'Publish to website');
+      b.type = 'button';
+      b.addEventListener('click', function () { setPublished(o, true, b); });
+    }
+    box.appendChild(b);
+    return box;
+  }
+  function setPublished(o, on, btn) {
+    if (on) {
+      if (o.our_price_excl_vat === null) { say('Set our price first (Edit), then publish.', 'err'); return; }
+      var ok = window.confirm('Publish "' + o.model + '" on the Poseidon Network website?\n\nPrice shown: ' + money(o.our_price_excl_vat) + ' excl. VAT (' + money(Math.round(o.our_price_excl_vat * (1 + VAT) * 100) / 100) + ' incl.)\nPhoto shown: ' + (o.photo_ok && o.image_url ? 'yes' : 'no') + '\nIts status will change to Listed.');
+      if (!ok) return;
+    }
+    btn.disabled = true;
+    api('PUT', '?id=' + o.id, toPayload(o, { published: on }))
+      .then(function (d) { replace(d.offer); say(on ? o.model + ' is now on the website.' : o.model + ' is off the website.', 'okmsg'); render(); })
+      .catch(function (e) { say(e.message, 'err'); btn.disabled = false; });
+  }
+
   function card(o) {
     var c = el('article', 'card');
     var top = el('div', 'top');
     top.appendChild(el('h2', '', o.model));
-    top.appendChild(el('span', 'badge s-' + o.status, o.status));
+    var bd = el('span', 'badge s-' + o.status, o.status);
+    if (o.published) { var w = el('span', 'badge s-web', 'On website'); var wrap = el('span'); wrap.style.whiteSpace = 'nowrap'; wrap.appendChild(bd); wrap.appendChild(w); top.appendChild(wrap); } else top.appendChild(bd);
     c.appendChild(top);
     c.appendChild(photo(o));
     var sp = specLine(o);
@@ -260,6 +313,7 @@ form h2{font-size:22px;margin-bottom:14px}
       a.href = o.source_url; a.target = '_blank'; a.rel = 'noopener noreferrer';
       var pw = el('p', 'meta'); pw.appendChild(a); c.appendChild(pw);
     }
+    c.appendChild(webBar(o));
     var row = el('div', 'row');
     var lab = el('label', '', 'Status ');
     var sel = el('select');
@@ -302,7 +356,7 @@ form h2{font-size:22px;margin-bottom:14px}
 
   function toPayload(o, over) {
     var p = {};
-    ['model', 'cpu', 'ram', 'storage', 'screen', 'unit_condition', 'supplier', 'supplier_price_excl_vat', 'our_price_excl_vat', 'source_ref', 'source_url', 'image_url', 'first_seen', 'status', 'notes'].forEach(function (k) { p[k] = o[k]; });
+    ['model', 'cpu', 'ram', 'storage', 'screen', 'unit_condition', 'supplier', 'supplier_price_excl_vat', 'our_price_excl_vat', 'source_ref', 'source_url', 'image_url', 'availability', 'website_text', 'published', 'photo_ok', 'first_seen', 'status', 'notes'].forEach(function (k) { p[k] = o[k]; });
     for (var k in over) p[k] = over[k];
     return p;
   }
@@ -311,7 +365,7 @@ form h2{font-size:22px;margin-bottom:14px}
   }
   function quickStatus(o, status, sel) {
     sel.disabled = true;
-    api('PUT', '?id=' + o.id, toPayload(o, { status: status }))
+    api('PUT', '?id=' + o.id, toPayload(o, { status: status, published: status === 'listed' ? o.published : false }))
       .then(function (d) { replace(d.offer); say('Saved: ' + d.offer.model + ' is now ' + d.offer.status + '.', 'okmsg'); render(); })
       .catch(function (e) { say(e.message, 'err'); render(); });
   }
@@ -339,6 +393,8 @@ form h2{font-size:22px;margin-bottom:14px}
     if (o) {
       ['model', 'cpu', 'ram', 'storage', 'screen', 'supplier', 'source_ref', 'source_url', 'image_url', 'first_seen', 'notes'].forEach(function (k) { f[k].value = o[k] === null ? '' : o[k]; });
       f.unit_condition.value = o.unit_condition; f.status.value = o.status;
+      f.availability.value = o.availability || 'in_stock'; f.website_text.value = o.website_text || '';
+      f.published.checked = !!o.published; f.photo_ok.checked = !!o.photo_ok;
       f.supplier_price_excl_vat.value = o.supplier_price_excl_vat === null ? '' : o.supplier_price_excl_vat;
       f.our_price_excl_vat.value = o.our_price_excl_vat === null ? '' : o.our_price_excl_vat;
     }
@@ -357,7 +413,8 @@ form h2{font-size:22px;margin-bottom:14px}
     ev.preventDefault();
     ferr.textContent = '';
     var f = form.elements, p = {};
-    ['model', 'cpu', 'ram', 'storage', 'screen', 'unit_condition', 'supplier', 'supplier_price_excl_vat', 'our_price_excl_vat', 'source_ref', 'source_url', 'image_url', 'first_seen', 'status', 'notes'].forEach(function (k) { p[k] = f[k].value.trim(); });
+    ['model', 'cpu', 'ram', 'storage', 'screen', 'unit_condition', 'supplier', 'supplier_price_excl_vat', 'our_price_excl_vat', 'source_ref', 'source_url', 'image_url', 'availability', 'website_text', 'first_seen', 'status', 'notes'].forEach(function (k) { p[k] = f[k].value.trim(); });
+    p.published = f.published.checked; p.photo_ok = f.photo_ok.checked;
     if (!p.model) { ferr.textContent = 'Please enter the model.'; f.model.focus(); return; }
     var btn = $('save'); btn.disabled = true;
     var req = editingId ? api('PUT', '?id=' + editingId, p) : api('POST', '', p);

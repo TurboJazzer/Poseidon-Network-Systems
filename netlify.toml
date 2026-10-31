@@ -180,3 +180,13 @@
     window_limit = 120
     window_size = 60
     aggregate_by = ["ip", "domain"]
+
+# Public list of Dell offers staff have published (no sign-in; returns public fields only).
+[[redirects]]
+  from = "/api/dell-listings"
+  to = "/.netlify/functions/dell-listings"
+  status = 200
+  [redirects.rate_limit]
+    window_limit = 60
+    window_size = 60
+    aggregate_by = ["ip", "domain"]

@@ -150,7 +150,7 @@
     <div style="max-width:1200px;margin:0 auto;">
       <h2 style="font-size:clamp(1.5rem,3.5vw,2rem);font-weight:700;font-family:'Space Grotesk',sans-serif;color:#0D1B4B;margin:0 0 12px;">Which refurbished Dell laptops and desktops are in stock?</h2>
       <p style="font-size:14px;color:#5A6588;margin:0 0 32px;">"In stock" units ship immediately; "Coming soon" units are available to pre-order. Delivered within 40km of Cape Town, arranged per order. Further away, we can courier it at your cost.</p>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;">
+      <div id="stock-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;">
         <div style="background:#fff;border:1px solid #E4E9F5;border-left:3px solid #059669;border-radius:12px;padding:28px;">
           <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:12px;">
             <h3 style="font-size:19px;font-weight:700;color:#0D1B4B;margin:0;">Latitude 5400</h3>
@@ -389,5 +389,58 @@
     </div>
   </footer>
 </div>
+<script>
+/* Dell offers that staff have checked and published (from /api/dell-listings). Adds a card for each one.
+   Cards for a model that already has a hand-made card above are skipped. Nothing is shown if the list cannot load. */
+(function () {
+  var grid = document.getElementById('stock-grid');
+  if (!grid || !window.fetch) return;
+  var BADGE = {
+    in_stock: ['In stock', '#047857', '#D1FAE5', '#059669'],
+    coming_soon: ['Coming soon', '#92400E', '#FEF3C7', '#2D5BE3'],
+    to_order: ['Available to order', '#047857', '#D1FAE5', '#059669']
+  };
+  function money(n) { return 'R' + n.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 2 }); }
+  function el(tag, css, text) { var n = document.createElement(tag); if (css) n.style.cssText = css; if (text !== undefined) n.textContent = text; return n; }
+  function norm(s) { return String(s || '').toLowerCase().replace(/^dell\s+/, '').replace(/[^a-z0-9]+/g, ' ').trim(); }
+  var have = Array.prototype.map.call(grid.querySelectorAll('h3'), function (h) { return norm(h.textContent); });
+  function exists(model) { var m = norm(model); return have.some(function (h) { return h && m.indexOf(h) === 0; }); }
+  function card(o) {
+    var b = BADGE[o.availability] || BADGE.in_stock;
+    var c = el('div', 'background:#fff;border:1px solid #E4E9F5;border-left:3px solid ' + b[3] + ';border-radius:12px;padding:28px;');
+    var top = el('div', 'display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:12px;');
+    top.appendChild(el('h3', 'font-size:19px;font-weight:700;color:#0D1B4B;margin:0;', o.model));
+    top.appendChild(el('span', 'font-size:11px;font-weight:700;color:' + b[1] + ';background:' + b[2] + ';padding:4px 10px;border-radius:999px;white-space:nowrap;', b[0]));
+    c.appendChild(top);
+    c.appendChild(el('p', 'font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#4A5578;margin:0 0 12px;', o.unit_condition === 'new' ? 'New' : 'Factory reconditioned'));
+    if (o.has_photo) {
+      var img = el('img', 'width:100%;height:auto;aspect-ratio:600/867;object-fit:contain;background:#F6F8FD;border-radius:8px;margin-bottom:14px;display:block;');
+      img.src = '/api/dell-listings?photo=' + o.id; img.alt = o.model; img.loading = 'lazy'; img.width = 600; img.height = 867;
+      img.addEventListener('error', function () { img.remove(); });
+      c.appendChild(img);
+    }
+    var spec = [o.cpu, o.ram, o.storage, o.screen].filter(Boolean).join(' \u00b7 ');
+    if (spec) c.appendChild(el('p', 'font-size:13px;color:#5A6588;font-family:monospace;margin:0 0 12px;', spec));
+    var text = o.website_text || (o.unit_condition === 'refurbished' ? 'Factory reconditioned and tested, with a 1-year warranty.' : '');
+    if (text) c.appendChild(el('p', 'font-size:14px;color:#4A5578;line-height:1.6;margin:0 0 12px;', text));
+    var pr = el('div', 'font-size:20px;font-weight:700;color:#0D1B4B;margin-bottom:2px;', money(o.price_excl_vat) + ' ');
+    pr.appendChild(el('span', 'font-size:12px;font-weight:500;color:#5A6588;', 'excl. VAT'));
+    c.appendChild(pr);
+    c.appendChild(el('div', 'font-size:13px;color:#4A5578;margin-bottom:14px;', money(Math.round(o.price_excl_vat * 115) / 100) + ' incl. 15% VAT'));
+    var soon = o.availability === 'coming_soon';
+    var msg = soon ? 'Hi, please let me know when the ' + o.model + ' is in stock' : "Hi, I'm interested in the " + o.model;
+    var a = el('a', 'display:block;text-align:center;background:#0D1B4B;color:#fff;font-weight:600;font-size:14px;padding:12px;border-radius:6px;', soon ? 'Notify me on WhatsApp' : 'Order on WhatsApp');
+    a.href = 'https://wa.me/27627883650?text=' + encodeURIComponent(msg);
+    c.appendChild(a);
+    return c;
+  }
+  fetch('/api/dell-listings', { credentials: 'omit' }).then(function (r) { return r.ok ? r.json() : { offers: [] }; }).then(function (d) {
+    (d.offers || []).forEach(function (o) {
+      if (!o || typeof o.model !== 'string' || typeof o.price_excl_vat !== 'number' || exists(o.model)) return;
+      grid.appendChild(card(o));
+    });
+  }).catch(function () {});
+})();
+</script>
 </body>
 </html>

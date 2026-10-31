@@ -54,3 +54,7 @@ ul.cl li{border-top-color:#1E2B47!important}
 .preview canvas{border-color:#1E2B47!important}
 input[type=file]{color:#9FB0D6}
 }
+/* Dell offers: website publish bar */
+.webbar{background:#111A2E!important;border-color:#2A3A5E!important;color:#DDE6FB!important}
+.webbar label,.chk label{color:#DDE6FB!important}
+.webbar .btn{width:100%}
