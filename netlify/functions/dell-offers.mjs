@@ -133,7 +133,6 @@ export const cleanOffer = (b) => {
       availability,
       website_text,
       published,
-      photo_ok: flag(b.photo_ok),
       first_seen,
       status,
       notes: text(b.notes, 1000),
@@ -178,7 +177,7 @@ export const createHandler = (getDb) => async (req) => {
         SELECT id::int AS id, model, cpu, ram, storage, screen, unit_condition, supplier,
                supplier_price_excl_vat::float8 AS supplier_price_excl_vat,
                our_price_excl_vat::float8 AS our_price_excl_vat,
-               source_ref, source_url, image_url, availability, website_text, published, photo_ok,
+               source_ref, source_url, image_url, availability, website_text, published, photo_ok, EXTRACT(EPOCH FROM card_image_at)::int AS card_v,
                first_seen::text AS first_seen, status, notes,
                created_at, updated_at
         FROM dell_offers
@@ -208,19 +207,20 @@ export const createHandler = (getDb) => async (req) => {
     const v = checked.value;
 
     if (method === "POST") {
+      if (v.published) return json({ error: "Make the website picture first, then publish." }, 400);
       const rows = await db.sql`
         INSERT INTO dell_offers
           (model, cpu, ram, storage, screen, unit_condition, supplier,
-           supplier_price_excl_vat, our_price_excl_vat, source_ref, source_url, image_url, availability, website_text, published, photo_ok, first_seen, status, notes)
+           supplier_price_excl_vat, our_price_excl_vat, source_ref, source_url, image_url, availability, website_text, published, first_seen, status, notes)
         VALUES
           (${v.model}, ${v.cpu}, ${v.ram}, ${v.storage}, ${v.screen}, ${v.unit_condition}, ${v.supplier},
            ${v.supplier_price_excl_vat}, ${v.our_price_excl_vat}, ${v.source_ref}, ${v.source_url}, ${v.image_url},
-           ${v.availability}, ${v.website_text}, ${v.published}, ${v.photo_ok},
+           ${v.availability}, ${v.website_text}, ${v.published},
            COALESCE(${v.first_seen}::date, CURRENT_DATE), ${v.status}, ${v.notes})
         RETURNING id::int AS id, model, cpu, ram, storage, screen, unit_condition, supplier,
                supplier_price_excl_vat::float8 AS supplier_price_excl_vat,
                our_price_excl_vat::float8 AS our_price_excl_vat,
-               source_ref, source_url, image_url, availability, website_text, published, photo_ok,
+               source_ref, source_url, image_url, availability, website_text, published, photo_ok, EXTRACT(EPOCH FROM card_image_at)::int AS card_v,
                first_seen::text AS first_seen, status, notes,
                created_at, updated_at`;
       return json({ offer: rows[0] }, 201);
@@ -229,13 +229,17 @@ export const createHandler = (getDb) => async (req) => {
     // PUT: replace every editable field of one offer.
     const id = parseId(url);
     if (!id) return json({ error: "A valid id is needed." }, 400);
+    if (v.published) {
+      const have = await db.sql`SELECT photo_ok FROM dell_offers WHERE id = ${id}`;
+      if (have.length && !have[0].photo_ok) return json({ error: "Make the website picture first (Make website picture), then publish." }, 400);
+    }
     const rows = await db.sql`
       UPDATE dell_offers SET
         model = ${v.model}, cpu = ${v.cpu}, ram = ${v.ram}, storage = ${v.storage}, screen = ${v.screen},
         unit_condition = ${v.unit_condition}, supplier = ${v.supplier},
         supplier_price_excl_vat = ${v.supplier_price_excl_vat}, our_price_excl_vat = ${v.our_price_excl_vat},
         source_ref = ${v.source_ref}, source_url = ${v.source_url},
-        availability = ${v.availability}, website_text = ${v.website_text}, published = ${v.published}, photo_ok = ${v.photo_ok},
+        availability = ${v.availability}, website_text = ${v.website_text}, published = ${v.published},
         image_url = ${v.image_url}, image_checked_at = CASE WHEN ${v.image_url}::text IS DISTINCT FROM image_url THEN NULL ELSE image_checked_at END,
         first_seen = COALESCE(${v.first_seen}::date, first_seen),
         status = ${v.status}, notes = ${v.notes}, updated_at = NOW()
@@ -243,7 +247,7 @@ export const createHandler = (getDb) => async (req) => {
       RETURNING id::int AS id, model, cpu, ram, storage, screen, unit_condition, supplier,
              supplier_price_excl_vat::float8 AS supplier_price_excl_vat,
              our_price_excl_vat::float8 AS our_price_excl_vat,
-             source_ref, source_url, image_url, availability, website_text, published, photo_ok,
+             source_ref, source_url, image_url, availability, website_text, published, photo_ok, EXTRACT(EPOCH FROM card_image_at)::int AS card_v,
                first_seen::text AS first_seen, status, notes,
              created_at, updated_at`;
     return rows.length ? json({ offer: rows[0] }) : json({ error: "Offer not found." }, 404);

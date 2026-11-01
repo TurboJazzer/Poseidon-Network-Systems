@@ -171,6 +171,16 @@
     window_size = 60
     aggregate_by = ["ip", "domain"]
 
+# Staff-only finished website picture for a Dell offer (also checks the staff login itself).
+[[redirects]]
+  from = "/staff/api/dell-offers-card"
+  to = "/.netlify/functions/dell-offers-card"
+  status = 200
+  [redirects.rate_limit]
+    window_limit = 60
+    window_size = 60
+    aggregate_by = ["ip", "domain"]
+
 # Staff-only photo for a Dell offer (also checks the staff login itself).
 [[redirects]]
   from = "/staff/api/dell-offers-image"

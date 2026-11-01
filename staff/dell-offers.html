@@ -9,7 +9,7 @@
 <link rel="icon" href="/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box}
 body{margin:0;background:#F6F8FD;color:#0D1B4B;font-family:'Inter',system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
@@ -66,6 +66,19 @@ button,select,input,textarea{font:inherit;color:inherit}
 .webbar label{display:flex;gap:8px;align-items:flex-start;font-weight:500}
 .webbar input[type=checkbox],.chk input{width:20px;height:20px;margin-top:1px;flex:none}
 .chk{display:flex;gap:10px;align-items:flex-start;font-size:14px;font-weight:500}
+.webpic{display:flex;flex-direction:column;gap:6px}
+.webpic .lbl{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#4A5578;margin:0}
+.webpic img{width:100%;height:auto;aspect-ratio:4/5;border-radius:8px;display:block;border:1px solid #E4E9F5;background:#14284B}
+.webpic .none{font-size:13.5px;color:#4A5578;margin:0}
+#pdlg{width:min(760px,calc(100% - 24px))}
+#pdlg canvas{width:auto;max-width:100%;max-height:60vh;height:auto;aspect-ratio:4/5;margin:0 auto;border-radius:10px;border:1px solid #E4E9F5;display:block;background:#14284B}
+#pdlg .ctl{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+#pdlg .ctl label{display:block;font-size:13px;font-weight:600;margin-bottom:2px}
+#pdlg input[type=range]{width:100%;min-height:32px}
+#pnote{font-size:13.5px;color:#4A5578;margin:10px 0 0}
+.pchk{display:flex;gap:10px;align-items:center;margin-top:12px;font-size:14px;font-weight:500}
+.pchk input{width:20px;height:20px;flex:none}
+.pchk label{margin:0}
 .empty{background:#fff;border:1px dashed #C9D3EE;border-radius:12px;padding:32px 20px;text-align:center;color:#4A5578}
 dialog{border:none;border-radius:14px;padding:0;width:min(680px,calc(100% - 24px));box-shadow:0 18px 60px rgba(13,27,75,.35);color:#0D1B4B;background:#fff;max-height:calc(100% - 24px)}
 dialog::backdrop{background:rgba(13,27,75,.55)}
@@ -118,7 +131,7 @@ form h2{font-size:22px;margin-bottom:14px}
       <div class="f"><label for="f-first_seen">First seen</label><input id="f-first_seen" name="first_seen" type="date"></div>
       <div class="f full"><label for="f-source_url">Link to the email</label><input id="f-source_url" name="source_url" type="url" maxlength="500" placeholder="https://mail.google.com/..."></div>
       <div class="f full"><label for="f-image_url">Photo link (optional)</label><input id="f-image_url" name="image_url" type="url" maxlength="500" placeholder="https://www.universedirect.co.za/wp-content/uploads/...">
-        <div class="hint">Filled in automatically from Universe Direct. Only change it if the photo is wrong.</div></div>
+        <div class="hint">Supplier photo, found automatically. It is only used to make the Poseidon website picture and is never shown on the website itself.</div></div>
       <div class="f full"><label for="f-source_ref">Email reference (optional)</label><input id="f-source_ref" name="source_ref" maxlength="200" placeholder="Used to stop the same offer being saved twice">
         <div class="hint">Leave blank unless you have a reference such as the email thread id.</div></div>
       <div class="f full"><label for="f-website_text">Website description (public)</label><textarea id="f-website_text" name="website_text" maxlength="300" placeholder="Factory reconditioned and tested, includes keyboard and mouse and 1-year warranty."></textarea>
@@ -126,12 +139,28 @@ form h2{font-size:22px;margin-bottom:14px}
       <div class="f"><label for="f-availability">Website badge</label>
         <select id="f-availability" name="availability"><option value="in_stock">In stock</option><option value="coming_soon">Coming soon (pre-order)</option><option value="to_order">Available to order</option></select></div>
       <div class="f"></div>
-      <div class="f full chk"><input type="checkbox" id="f-photo_ok" name="photo_ok"><label for="f-photo_ok" style="margin:0">The photo is fine for the website (no supplier price or supplier branding on it)</label></div>
-      <div class="f full chk"><input type="checkbox" id="f-published" name="published"><label for="f-published" style="margin:0">Checked and ready: show this on the Poseidon Network website (needs our price; sets the status to Listed)</label></div>
+      <div class="f full chk"><input type="checkbox" id="f-published" name="published"><label for="f-published" style="margin:0">Checked and ready: show this on the Poseidon Network website (needs our price and the website picture; sets the status to Listed)</label></div>
       <div class="f full"><label for="f-notes">Notes</label><textarea id="f-notes" name="notes" maxlength="1000" placeholder="Free laptop bag, stock level, delivery notes"></textarea></div>
     </div>
     <p id="ferr" role="alert"></p>
     <div class="actions"><button type="button" class="btn ghost" id="cancel">Cancel</button><button type="submit" class="btn" id="save">Save offer</button></div>
+  </form>
+</dialog>
+
+<dialog id="pdlg" aria-labelledby="ptitle">
+  <form id="pform" novalidate>
+    <h2 id="ptitle">Website picture</h2>
+    <canvas id="pcanvas" width="1080" height="1350" role="img" aria-label="Preview of the website picture"></canvas>
+    <p id="pnote"></p>
+    <div class="ctl" id="pctl">
+      <div><label for="p-top">Cut from the top</label><input id="p-top" type="range" min="0" max="60" value="27"></div>
+      <div><label for="p-bot">Cut from the bottom</label><input id="p-bot" type="range" min="40" max="100" value="68"></div>
+    </div>
+    <div class="pchk"><input type="checkbox" id="p-cut" checked><label for="p-cut">Cut the product out of the supplier photo</label></div>
+    <div class="pchk"><input type="checkbox" id="p-plain"><label for="p-plain">Do not use the supplier photo (show the Poseidon logo instead)</label></div>
+    <div class="f" style="margin-top:10px"><label for="p-extra">Red line at the bottom (optional)</label><input id="p-extra" type="text" maxlength="120" placeholder="Includes FREE bag"></div>
+    <p id="perr" role="alert" style="margin:12px 0 0;color:#9B2C2C;font-size:14.5px;min-height:22px"></p>
+    <div class="actions"><button type="button" class="btn ghost" id="pcancel">Cancel</button><button type="button" class="btn ghost" id="pdl">Download picture</button><button type="button" class="btn danger" id="pdel">Remove picture</button><button type="submit" class="btn" id="psave">Save picture</button></div>
   </form>
 </dialog>
 
@@ -140,6 +169,7 @@ form h2{font-size:22px;margin-bottom:14px}
   'use strict';
   var API = '/staff/api/dell-offers';
   var API_IMG = '/staff/api/dell-offers-image';
+  var API_CARD = '/staff/api/dell-offers-card';
   var VAT = 0.15;
   var STATUSES = [['all', 'All'], ['new', 'New'], ['listed', 'Listed'], ['sold', 'Sold'], ['dropped', 'Dropped']];
   var CONDITION = { refurbished: 'Refurbished', 'new': 'New', unknown: 'Condition not set' };
@@ -243,6 +273,7 @@ form h2{font-size:22px;margin-bottom:14px}
     img.src = q;
     frame.appendChild(img);
     box.appendChild(frame);
+    var cap = el('p', 'meta', 'Supplier photo (not shown on the website)'); cap.style.margin = '0'; box.appendChild(cap);
     var pl = el('div', 'pl');
     var dl = el('a', '', 'Download photo');
     dl.href = q + '&download=1';
@@ -255,21 +286,25 @@ form h2{font-size:22px;margin-bottom:14px}
     return box;
   }
 
-  // Check, then publish: the website card appears only after staff tick the photo and press Publish.
+  // Make the Poseidon website picture, then publish: the website card appears only after staff have made the picture and pressed Publish.
   function webBar(o) {
     var box = el('div', 'webbar');
-    var lab = el('label');
-    var cb = el('input'); cb.type = 'checkbox'; cb.checked = !!o.photo_ok;
-    cb.setAttribute('aria-label', 'Photo is fine for the website');
-    cb.addEventListener('change', function () {
-      cb.disabled = true;
-      api('PUT', '?id=' + o.id, toPayload(o, { photo_ok: cb.checked }))
-        .then(function (d) { replace(d.offer); render(); })
-        .catch(function (e) { say(e.message, 'err'); render(); });
-    });
-    lab.appendChild(cb);
-    lab.appendChild(el('span', '', 'Photo is fine for the website (no supplier price on it)'));
-    box.appendChild(lab);
+    var wp = el('div', 'webpic');
+    wp.appendChild(el('p', 'lbl', 'Website picture'));
+    if (o.photo_ok) {
+      var im = el('img'); im.alt = 'Website picture for ' + o.model; im.src = API_CARD + '?id=' + o.id + '&v=' + (o.card_v || 0);
+      wp.appendChild(im);
+      var dlk = el('a', '', 'Download this picture');
+      dlk.href = API_CARD + '?id=' + o.id + '&download=1'; dlk.style.fontWeight = '600'; dlk.style.fontSize = '13.5px';
+      wp.appendChild(dlk);
+    } else {
+      wp.appendChild(el('p', 'none', 'Not made yet. Make it before publishing.'));
+    }
+    box.appendChild(wp);
+    var mk = el('button', 'btn ghost', o.photo_ok ? 'Change website picture' : 'Make website picture');
+    mk.type = 'button';
+    mk.addEventListener('click', function () { openPicture(o, false); });
+    box.appendChild(mk);
     var b;
     if (o.published) {
       b = el('button', 'btn ghost', 'Take off the website');
@@ -278,7 +313,11 @@ form h2{font-size:22px;margin-bottom:14px}
     } else {
       b = el('button', 'btn', 'Publish to website');
       b.type = 'button';
-      b.addEventListener('click', function () { setPublished(o, true, b); });
+      b.addEventListener('click', function () {
+        if (o.our_price_excl_vat === null) { say('Set our price first (Edit), then publish.', 'err'); return; }
+        if (!o.photo_ok) { openPicture(o, true); return; }
+        setPublished(o, true, b);
+      });
     }
     box.appendChild(b);
     return box;
@@ -286,7 +325,7 @@ form h2{font-size:22px;margin-bottom:14px}
   function setPublished(o, on, btn) {
     if (on) {
       if (o.our_price_excl_vat === null) { say('Set our price first (Edit), then publish.', 'err'); return; }
-      var ok = window.confirm('Publish "' + o.model + '" on the Poseidon Network website?\n\nPrice shown: ' + money(o.our_price_excl_vat) + ' excl. VAT (' + money(Math.round(o.our_price_excl_vat * (1 + VAT) * 100) / 100) + ' incl.)\nPhoto shown: ' + (o.photo_ok && o.image_url ? 'yes' : 'no') + '\nIts status will change to Listed.');
+      var ok = window.confirm('Publish "' + o.model + '" on the Poseidon Network website?\n\nPrice shown: ' + money(o.our_price_excl_vat) + ' excl. VAT (' + money(Math.round(o.our_price_excl_vat * (1 + VAT) * 100) / 100) + ' incl.)\nPicture: the Poseidon website picture shown on the card\n' + '\nIts status will change to Listed.');
       if (!ok) return;
     }
     btn.disabled = true;
@@ -356,7 +395,7 @@ form h2{font-size:22px;margin-bottom:14px}
 
   function toPayload(o, over) {
     var p = {};
-    ['model', 'cpu', 'ram', 'storage', 'screen', 'unit_condition', 'supplier', 'supplier_price_excl_vat', 'our_price_excl_vat', 'source_ref', 'source_url', 'image_url', 'availability', 'website_text', 'published', 'photo_ok', 'first_seen', 'status', 'notes'].forEach(function (k) { p[k] = o[k]; });
+    ['model', 'cpu', 'ram', 'storage', 'screen', 'unit_condition', 'supplier', 'supplier_price_excl_vat', 'our_price_excl_vat', 'source_ref', 'source_url', 'image_url', 'availability', 'website_text', 'published', 'first_seen', 'status', 'notes'].forEach(function (k) { p[k] = o[k]; });
     for (var k in over) p[k] = over[k];
     return p;
   }
@@ -394,7 +433,7 @@ form h2{font-size:22px;margin-bottom:14px}
       ['model', 'cpu', 'ram', 'storage', 'screen', 'supplier', 'source_ref', 'source_url', 'image_url', 'first_seen', 'notes'].forEach(function (k) { f[k].value = o[k] === null ? '' : o[k]; });
       f.unit_condition.value = o.unit_condition; f.status.value = o.status;
       f.availability.value = o.availability || 'in_stock'; f.website_text.value = o.website_text || '';
-      f.published.checked = !!o.published; f.photo_ok.checked = !!o.photo_ok;
+      f.published.checked = !!o.published;
       f.supplier_price_excl_vat.value = o.supplier_price_excl_vat === null ? '' : o.supplier_price_excl_vat;
       f.our_price_excl_vat.value = o.our_price_excl_vat === null ? '' : o.our_price_excl_vat;
     }
@@ -414,7 +453,7 @@ form h2{font-size:22px;margin-bottom:14px}
     ferr.textContent = '';
     var f = form.elements, p = {};
     ['model', 'cpu', 'ram', 'storage', 'screen', 'unit_condition', 'supplier', 'supplier_price_excl_vat', 'our_price_excl_vat', 'source_ref', 'source_url', 'image_url', 'availability', 'website_text', 'first_seen', 'status', 'notes'].forEach(function (k) { p[k] = f[k].value.trim(); });
-    p.published = f.published.checked; p.photo_ok = f.photo_ok.checked;
+    p.published = f.published.checked;
     if (!p.model) { ferr.textContent = 'Please enter the model.'; f.model.focus(); return; }
     var btn = $('save'); btn.disabled = true;
     var req = editingId ? api('PUT', '?id=' + editingId, p) : api('POST', '', p);
@@ -422,6 +461,318 @@ form h2{font-size:22px;margin-bottom:14px}
       if (editingId) replace(d.offer); else offers.unshift(d.offer);
       closeForm(); say('Saved ' + d.offer.model + '.', 'okmsg'); render();
     }).catch(function (e) { ferr.textContent = e.message; }).then(function () { btn.disabled = false; });
+  });
+
+  // ---- Website picture: the standard Poseidon Network product flyer (same layout as the Product flyer template),
+  // built from this offer's details, with the product cut out of the supplier flyer. ----
+  var PW = 1080, PH = 1350, GREY = '#7d7f82';
+  var pdlg = $('pdlg'), pcv = $('pcanvas'), pform = $('pform');
+  var pstate = null;
+  var assets = null;
+  var OPEN = "'Open Sans', Inter, Arial, sans-serif";
+  function svgIcon(body) {
+    return 'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 40 40" fill="none" stroke="' + GREY + '" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">' + body + '</svg>');
+  }
+  var ICONS = {
+    cpu: svgIcon('<rect x="10" y="10" width="20" height="20" rx="2"/><rect x="15" y="15" width="10" height="10" fill="' + GREY + '" stroke="none"/><path d="M15 4v6M20 4v6M25 4v6M15 30v6M20 30v6M25 30v6M4 15h6M4 20h6M4 25h6M30 15h6M30 20h6M30 25h6"/>'),
+    ram: svgIcon('<rect x="3" y="11" width="34" height="16" rx="1.5"/><path d="M8 16v6M13 16v6M18 16v6M23 16v6M28 16v6M33 16v6M6 27v4M34 27v4"/>'),
+    ssd: svgIcon('<ellipse cx="20" cy="9" rx="13" ry="5"/><path d="M7 9v22c0 2.8 5.8 5 13 5s13-2.2 13-5V9M7 16.5c0 2.8 5.8 5 13 5s13-2.2 13-5M7 24c0 2.8 5.8 5 13 5s13-2.2 13-5"/>'),
+    screen: svgIcon('<rect x="3" y="7" width="34" height="23" rx="1.5"/><path d="M9 25l22-13M24 11.5h7.5v4.5M16 25.5H8.5V21"/>'),
+    tick: svgIcon('<circle cx="20" cy="20" r="15"/><path d="M12.5 20.5l5 5 10-11"/>')
+  };
+  var SEAL = (function () {
+    var p = [];
+    for (var i = 0; i < 48; i++) { var r = i % 2 ? 92 : 100, a = i / 48 * Math.PI * 2; p.push((100 + r * Math.cos(a)).toFixed(1) + ',' + (100 + r * Math.sin(a)).toFixed(1)); }
+    return 'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 200 200"><defs><radialGradient id="g" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#3a3a3a"/><stop offset="1" stop-color="#0d0d0d"/></radialGradient></defs><polygon points="' + p.join(' ') + '" fill="url(#g)"/><circle cx="100" cy="100" r="78" fill="none" stroke="#fff" stroke-width="3"/><circle cx="100" cy="100" r="71" fill="none" stroke="#fff" stroke-width="1" opacity=".6"/></svg>');
+  })();
+  var STOCK = { in_stock: ['IN STOCK', '#1F7A4D'], coming_soon: ['COMING SOON', '#2D5BE3'], to_order: ['AVAILABLE TO ORDER', '#2D5BE3'] };
+
+  function loadImg(src) {
+    return new Promise(function (resolve) {
+      var i = new Image();
+      i.onload = function () { resolve(i); };
+      i.onerror = function () { resolve(null); };
+      i.src = src;
+    });
+  }
+  // The logo file has a navy background of its own. Make that background transparent and trim the empty margin, so the
+  // logo sits cleanly on the banner with no box or outline around it (the same look as the flyers on the website).
+  function keyLogo(img) {
+    var w = img.naturalWidth, h = img.naturalHeight;
+    var c = document.createElement('canvas'); c.width = w; c.height = h;
+    var x = c.getContext('2d', { willReadFrequently: true }); x.drawImage(img, 0, 0);
+    var im = x.getImageData(0, 0, w, h), d = im.data;
+    var br = d[0], bg = d[1], bb = d[2];
+    var x0 = w, x1 = 0, y0 = h, y1 = 0;
+    for (var yy = 0; yy < h; yy++) for (var xx = 0; xx < w; xx++) {
+      var i = (yy * w + xx) * 4;
+      var dist = Math.sqrt(Math.pow(d[i] - br, 2) + Math.pow(d[i + 1] - bg, 2) + Math.pow(d[i + 2] - bb, 2));
+      var a = Math.max(0, Math.min(1, (dist - 10) / 26));
+      d[i + 3] = Math.round(a * 255);
+      if (a > 0.5) { if (xx < x0) x0 = xx; if (xx > x1) x1 = xx; if (yy < y0) y0 = yy; if (yy > y1) y1 = yy; }
+    }
+    x.putImageData(im, 0, 0);
+    if (x1 <= x0 || y1 <= y0) return img;
+    var o = document.createElement('canvas'); o.width = x1 - x0 + 1; o.height = y1 - y0 + 1;
+    o.getContext('2d').drawImage(c, x0, y0, o.width, o.height, 0, 0, o.width, o.height);
+    return o;
+  }
+  function loadAssets() {
+    if (assets) return Promise.resolve(assets);
+    var out = {};
+    var jobs = [loadImg('/assets/pns_logo_new.png').then(function (i) { out.logo = i ? keyLogo(i) : null; }), loadImg('/assets/dell_logo_letters.png').then(function (i) { out.dell = i; }), loadImg(SEAL).then(function (i) { out.seal = i; })];
+    Object.keys(ICONS).forEach(function (k) { jobs.push(loadImg(ICONS[k]).then(function (i) { out[k] = i; })); });
+    return Promise.all(jobs).then(function () { if (out.logo && out.seal && out.dell) assets = out; return out; });
+  }
+  function fmtR(n) {
+    var c = Math.round(n * 100), whole = Math.floor(c / 100), cents = c % 100;
+    return 'R' + String(whole).replace(/\B(?=(\d{3})+(?!\d))/g, ',') + (cents ? '.' + String(cents).padStart(2, '0') : '');
+  }
+  function wrapText(ctx, text, maxW) {
+    var words = String(text).split(' '), out = [], line = '';
+    words.forEach(function (w) { var t = line ? line + ' ' + w : w; if (ctx.measureText(t).width > maxW && line) { out.push(line); line = w; } else line = t; });
+    if (line) out.push(line);
+    return out;
+  }
+  function spacing(ctx, px) { if ('letterSpacing' in ctx) ctx.letterSpacing = px + 'px'; }
+  function specRows(o) {
+    var rows = [];
+    if (o.cpu) rows.push(['cpu', o.cpu]);
+    if (o.ram) rows.push(['ram', o.ram]);
+    if (o.storage) rows.push(['ssd', o.storage]);
+    if (o.screen) rows.push(['screen', o.screen]);
+    return rows;
+  }
+
+  // The product, cut out of the supplier flyer: the flyer background is a smooth gradient, so each row's background
+  // colour is read from that row's left and right edges and anything close to it becomes transparent.
+  function runSpan(counts, minRun) {
+    var n = counts.length, first = -1, last = -1, i = 0;
+    while (i < n) {
+      if (counts[i] >= 3) {
+        var j = i;
+        while (j < n && counts[j] >= 3) j++;
+        if (j - i >= minRun) { if (first < 0) first = i; last = j - 1; }
+        i = j;
+      } else i++;
+    }
+    return first < 0 ? [0, n - 1] : [first, last];
+  }
+  function cutOut(flyer, top, bottom, cut) {
+    var sw = flyer.naturalWidth, sh = flyer.naturalHeight;
+    var sy = Math.round(top * sh), sHt = Math.max(20, Math.round((bottom - top) * sh));
+    var k = Math.min(1, 900 / sw), w = Math.max(20, Math.round(sw * k)), h = Math.max(20, Math.round(sHt * k));
+    var c = document.createElement('canvas'); c.width = w; c.height = h;
+    var x = c.getContext('2d', { willReadFrequently: true });
+    x.imageSmoothingQuality = 'high';
+    x.drawImage(flyer, 0, sy, sw, sHt, 0, 0, w, h);
+    if (!cut) return c;
+    var img = x.getImageData(0, 0, w, h), d = img.data;
+    var ins = Math.max(2, Math.round(w * 0.02));
+    var rowCount = new Uint16Array(h), colCount = new Uint16Array(w);
+    for (var yy = 0; yy < h; yy++) {
+      var l = [0, 0, 0], r = [0, 0, 0], n = 0;
+      for (var q = 0; q < 4; q++) {
+        var il = ((yy * w) + ins + q) * 4, ir = ((yy * w) + (w - 1 - ins - q)) * 4;
+        for (var ch = 0; ch < 3; ch++) { l[ch] += d[il + ch]; r[ch] += d[ir + ch]; }
+        n++;
+      }
+      for (var xx = 0; xx < w; xx++) {
+        var t = xx / (w - 1), i4 = (yy * w + xx) * 4, dist = 0;
+        for (var c3 = 0; c3 < 3; c3++) { var bg = (l[c3] * (1 - t) + r[c3] * t) / n; var df = d[i4 + c3] - bg; dist += df * df; }
+        dist = Math.sqrt(dist);
+        var a = Math.max(0, Math.min(1, (dist - 16) / 34));
+        d[i4 + 3] = Math.round(a * 255);
+        if (a > 0.6) { rowCount[yy]++; colCount[xx]++; }
+      }
+    }
+    x.putImageData(img, 0, 0);
+    // box around the product: ignore thin runs of columns or rows (a stray line or border is not product)
+    var ex = runSpan(colCount, Math.max(3, Math.round(w * 0.04))), ey = runSpan(rowCount, Math.max(3, Math.round(h * 0.04)));
+    var x0 = ex[0], x1 = ex[1], y0 = ey[0], y1 = ey[1];
+    if (x1 - x0 < 20 || y1 - y0 < 20) return c;
+    var t2 = document.createElement('canvas'); t2.width = x1 - x0 + 1; t2.height = y1 - y0 + 1;
+    t2.getContext('2d').drawImage(c, x0, y0, t2.width, t2.height, 0, 0, t2.width, t2.height);
+    return t2;
+  }
+
+  function drawPicture(cv, o, A, flyer, opt) {
+    var ctx = cv.getContext('2d');
+    ctx.save(); ctx.clearRect(0, 0, PW, PH);
+    ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
+    var g = ctx.createLinearGradient(0, 0, 0, PH); g.addColorStop(0, '#B8B8B6'); g.addColorStop(1, '#ECECEC');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, PW, PH);
+    ctx.fillStyle = '#CDCFD2'; ctx.beginPath(); ctx.moveTo(508, 0); ctx.lineTo(PW, 0); ctx.lineTo(PW, 312); ctx.lineTo(620, 312); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = '#172841'; ctx.beginPath(); ctx.moveTo(520, 0); ctx.lineTo(PW, 0); ctx.lineTo(PW, 300); ctx.lineTo(628, 300); ctx.closePath(); ctx.fill();
+    if (A.logo) {
+      var lw0 = A.logo.width, lh0 = A.logo.height, lsc = Math.min(330 / lw0, 250 / lh0);
+      ctx.drawImage(A.logo, 855 - lw0 * lsc / 2, 150 - lh0 * lsc / 2, lw0 * lsc, lh0 * lsc);
+    }
+
+    // availability pill, top left
+    var st = STOCK[o.availability] || STOCK.in_stock;
+    ctx.save(); ctx.font = '800 28px ' + OPEN; spacing(ctx, 1);
+    var pw = ctx.measureText(st[0]).width + 44;
+    ctx.fillStyle = st[1]; ctx.beginPath(); if (ctx.roundRect) ctx.roundRect(60, 34, pw, 54, 27); else ctx.rect(60, 34, pw, 54); ctx.fill();
+    ctx.fillStyle = '#fff'; ctx.textAlign = 'left'; ctx.textBaseline = 'middle'; ctx.fillText(st[0], 82, 62); spacing(ctx, 0); ctx.restore();
+
+    // Dell logo on every unit (we sell Dell only), the same round logo as the flyers on the website, then the condition
+    if (A.dell) {
+      ctx.save(); ctx.fillStyle = '#172841'; ctx.beginPath(); ctx.arc(145, 185, 80, 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = '#fff'; ctx.lineWidth = 9; ctx.beginPath(); ctx.arc(145, 185, 74, 0, Math.PI * 2); ctx.stroke();
+      var dw = 122; ctx.drawImage(A.dell, 145 - dw / 2, 185 - (dw * A.dell.height / A.dell.width) / 2, dw, dw * A.dell.height / A.dell.width); ctx.restore();
+    }
+    var cond = o.unit_condition === 'refurbished' ? ['FACTORY', 'RECONDITIONED', '& TESTED'] : (o.unit_condition === 'new' ? ['BRAND NEW'] : []);
+    ctx.save(); ctx.fillStyle = '#172841'; ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic'; ctx.font = '800 30px ' + OPEN; spacing(ctx, 0.4);
+    var cy = cond.length === 1 ? 196 : 164;
+    cond.forEach(function (l, i) { ctx.fillText(l, 252, cy + i * 38, 250); });
+    spacing(ctx, 0); ctx.restore();
+
+    // title
+    ctx.save(); ctx.font = '700 56px ' + OPEN; ctx.fillStyle = '#fff'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.shadowColor = 'rgba(0,0,0,.45)'; ctx.shadowBlur = 8; ctx.shadowOffsetY = 2;
+    ctx.fillText(o.model, PW / 2, 349, PW - 80); ctx.restore();
+
+    // product
+    var bx = 220, by = 405, bw = 640, bh = 370;
+    if (flyer) {
+      var pc = cutOut(flyer, opt.top, opt.bottom, opt.cut);
+      var sc = Math.min(bw / pc.width, bh / pc.height), w = pc.width * sc, h = pc.height * sc;
+      ctx.drawImage(pc, bx + (bw - w) / 2, by + (bh - h) / 2, w, h);
+    } else if (A.logo) {
+      // no supplier photo: a full-width navy band (like the banner at the top) with the logo on it, so there is no box round the logo
+      var ls = 360, lhh = ls * A.logo.height / A.logo.width, bandH = Math.round(lhh + 70), by0 = by + (bh - bandH) / 2;
+      ctx.save(); ctx.fillStyle = '#172841'; ctx.fillRect(0, by0, PW, bandH);
+      ctx.fillStyle = '#CDCFD2'; ctx.fillRect(0, by0 - 8, PW, 8); ctx.fillRect(0, by0 + bandH, PW, 8);
+      ctx.drawImage(A.logo, PW / 2 - ls / 2, by0 + (bandH - lhh) / 2, ls, lhh); ctx.restore();
+    }
+
+    // specs
+    var rows = specRows(o), row = 0;
+    ctx.font = '400 32px ' + OPEN; ctx.fillStyle = '#333'; ctx.textBaseline = 'middle'; ctx.textAlign = 'left';
+    rows.forEach(function (rw) {
+      var y = 796 + row * 47;
+      if (A[rw[0]]) ctx.drawImage(A[rw[0]], 100, y + 1, 40, 40);
+      ctx.fillText(rw[1], 160, y + 22, 610); row++;
+    });
+
+    // warranty seal (only where we know the warranty: reconditioned units)
+    if (o.unit_condition === 'refurbished' && A.seal) {
+      ctx.drawImage(A.seal, 794, 800, 190, 190);
+      ctx.fillStyle = '#fff'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.font = '400 76px ' + OPEN; ctx.fillText('1', 889, 866);
+      spacing(ctx, 1); ctx.font = '700 26px ' + OPEN; ctx.fillText('YEAR', 889, 922);
+      spacing(ctx, 1.5); ctx.font = '700 13px ' + OPEN; ctx.fillText('WARRANTY', 889, 946); spacing(ctx, 0);
+    }
+
+    // prices
+    var n = o.our_price_excl_vat, priceLeft = PW - 56;
+    ctx.fillStyle = '#152640'; ctx.textAlign = 'right'; ctx.textBaseline = 'alphabetic';
+    if (typeof n === 'number') {
+      var R = PW - 56;
+      var line = function (price, size, ls, label, y) {
+        ctx.font = '600 24px ' + OPEN; ctx.fillText(label, R, y); var lw = ctx.measureText(label).width;
+        spacing(ctx, ls); ctx.font = '800 ' + size + 'px ' + OPEN; ctx.fillText(price, R - lw - 12, y); var pw2 = ctx.measureText(price).width; spacing(ctx, 0);
+        return R - lw - 12 - pw2;
+      };
+      priceLeft = Math.min(line(fmtR(n), 96, -3, 'excl. VAT', 1160), line(fmtR(Math.round(n * 115) / 100), 52, -1, 'incl. VAT', 1232));
+    }
+
+    // extra lines in red, bottom left
+    ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic'; ctx.font = '700 28px ' + OPEN; ctx.fillStyle = '#C0392B';
+    var maxW = Math.min(priceLeft - 24 - 60, 620), lines = [];
+    String(opt.extra || '').split('\n').map(function (t) { return t.trim(); }).filter(Boolean).forEach(function (t) { lines.push.apply(lines, wrapText(ctx, t, maxW)); });
+    lines.slice(0, 4).reverse().forEach(function (l, i) { ctx.fillText(l, 60, 1232 - i * 36); });
+
+    // contact strip, the same on every flyer
+    ctx.fillStyle = '#172841'; ctx.fillRect(0, PH - 86, PW, 86);
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillStyle = '#fff'; ctx.font = '700 30px ' + OPEN; ctx.fillText('WhatsApp 062 788 3650  ·  021 300 8278  ·  poseidon-network.com', PW / 2, PH - 56, PW - 80);
+    ctx.fillStyle = '#C9D5F5'; ctx.font = '400 21px ' + OPEN; ctx.fillText('Delivery within 40km of Cape Town · courier further afield at your cost', PW / 2, PH - 22, PW - 80);
+    ctx.restore();
+  }
+  function redraw() {
+    if (!pstate || !pstate.assets) return;
+    var t = Number($('p-top').value) / 100, b = Number($('p-bot').value) / 100;
+    if (b - t < 0.1) { b = t + 0.1; $('p-bot').value = Math.round(b * 100); }
+    drawPicture(pcv, pstate.offer, pstate.assets, $('p-plain').checked ? null : pstate.flyer, { top: t, bottom: b, cut: $('p-cut').checked, extra: $('p-extra').value });
+  }
+  function openPicture(o, andPublish) {
+    pstate = { offer: o, publish: !!andPublish, flyer: null, assets: null };
+    $('perr').textContent = '';
+    $('ptitle').textContent = 'Website picture: ' + o.model;
+    $('psave').textContent = andPublish ? 'Save picture and publish' : 'Save picture';
+    $('pdel').style.display = o.photo_ok ? '' : 'none';
+    $('p-plain').checked = false; $('p-cut').checked = true; $('p-top').value = 27; $('p-bot').value = 68; $('p-extra').value = '';
+    $('pnote').textContent = 'Loading the supplier photo…';
+    if (typeof pdlg.showModal === 'function') pdlg.showModal(); else pdlg.setAttribute('open', '');
+    var fonts = document.fonts && document.fonts.load ? Promise.all([document.fonts.load("800 28px 'Open Sans'"), document.fonts.load("700 56px 'Open Sans'"), document.fonts.load("400 32px 'Open Sans'"), document.fonts.load("600 24px 'Open Sans'")]).catch(function () {}) : Promise.resolve();
+    Promise.all([loadAssets(), loadImg(API_IMG + '?id=' + o.id), fonts]).then(function (r) {
+      if (!pstate || pstate.offer.id !== o.id) return;
+      if (!r[0] || !r[0].logo || !r[0].dell) { $('perr').textContent = 'The Poseidon logo or the Dell logo did not load. Refresh the page and try again.'; return; }
+      pstate.assets = r[0];
+      pstate.flyer = r[1];
+      var has = !!r[1];
+      $('p-plain').checked = !has; $('p-plain').disabled = !has;
+      $('pctl').style.opacity = has ? '1' : '.4';
+      $('pnote').textContent = has
+        ? 'This is the standard Poseidon flyer. Only the product is taken from the supplier photo (their logo, title and price are left out). If part of the product is missing or something is left over, use the sliders, or untick "Cut the product out".'
+        : 'No supplier photo was found, so the flyer shows the Poseidon logo where the product would be.';
+      redraw();
+    });
+  }
+  function closePicture() {
+    pstate = null;
+    if (typeof pdlg.close === 'function') pdlg.close(); else pdlg.removeAttribute('open');
+  }
+  $('p-top').addEventListener('input', redraw);
+  $('p-bot').addEventListener('input', redraw);
+  $('p-plain').addEventListener('change', redraw);
+  $('p-cut').addEventListener('change', redraw);
+  $('p-extra').addEventListener('input', redraw);
+  $('pcancel').addEventListener('click', closePicture);
+  // Download the picture as it looks now, before anything is saved or published.
+  $('pdl').addEventListener('click', function () {
+    if (!pstate || !pstate.assets) { $('perr').textContent = 'The picture is still loading. Try again in a moment.'; return; }
+    $('perr').textContent = '';
+    var name = 'PNS_' + pstate.offer.model.replace(/[^A-Za-z0-9]+/g, '_').replace(/^_|_$/g, '') + '_flyer.png';
+    pcv.toBlob(function (blob) {
+      if (!blob) { $('perr').textContent = 'The browser could not make the picture.'; return; }
+      var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000);
+    }, 'image/png');
+  });
+  $('pdel').addEventListener('click', function () {
+    if (!pstate) return;
+    var o = pstate.offer;
+    if (!window.confirm('Remove the website picture for "' + o.model + '"?\n\nThis also takes it off the website.')) return;
+    fetch(API_CARD + '?id=' + o.id, { method: 'DELETE', credentials: 'same-origin', headers: { 'X-Requested-With': 'pns-staff' } })
+      .then(function (res) { return res.json().catch(function () { return {}; }).then(function (d) { if (!res.ok) throw new Error(d.error || 'Could not remove it.'); }); })
+      .then(function () { o.photo_ok = false; o.published = false; o.card_v = 0; closePicture(); say('Removed the website picture for ' + o.model + '.', 'okmsg'); render(); })
+      .catch(function (e) { $('perr').textContent = e.message; });
+  });
+  pform.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    if (!pstate) return;
+    var o = pstate.offer, publish = pstate.publish, btn = $('psave');
+    var data;
+    try { data = pcv.toDataURL('image/jpeg', 0.88); } catch (e) { $('perr').textContent = 'The browser could not make the picture. Try the plain Poseidon picture.'; return; }
+    btn.disabled = true; $('perr').textContent = '';
+    fetch(API_CARD + '?id=' + o.id, { method: 'PUT', credentials: 'same-origin', headers: { 'X-Requested-With': 'pns-staff', 'Content-Type': 'application/json' }, body: JSON.stringify({ image: data }) })
+      .then(function (res) { return res.json().catch(function () { return {}; }).then(function (d) { if (!res.ok) throw new Error(d.error || 'Could not save the picture (' + res.status + ').'); }); })
+      .then(function () {
+        o.photo_ok = true; o.card_v = Math.floor(Date.now() / 1000);
+        if (!publish) return null;
+        return api('PUT', '?id=' + o.id, toPayload(o, { published: true })).then(function (d) { replace(d.offer); return d.offer; });
+      })
+      .then(function (pub) {
+        closePicture();
+        say(pub ? o.model + ' is now on the website.' : 'Saved the website picture for ' + o.model + '.', 'okmsg');
+        render();
+      })
+      .catch(function (e) { $('perr').textContent = e.message; })
+      .then(function () { btn.disabled = false; });
   });
 
   load();

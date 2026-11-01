@@ -4,12 +4,9 @@
 // Only offers that are published AND status "listed" are returned, and only public fields:
 // model, specs, condition, availability, public description, our price. Supplier price, margin, internal
 // notes, email links and references are never sent.
-// ?photo=<id> returns the photo, only when staff ticked "photo is fine for the website".
+// ?photo=<id> returns the finished Poseidon website picture made on the staff page (never the supplier flyer).
 import { getDatabase } from "@netlify/database";
-import { IMAGE_URL_RE } from "./dell-offers.mjs";
 
-const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36";
-const MAX_IMAGE = 8 * 1024 * 1024;
 
 const json = (data, status = 200, extra = {}) =>
   new Response(JSON.stringify(data), {
@@ -27,25 +24,21 @@ export const createListingsHandler = (getDb, fetchFn = fetch) => async (req) => 
     if (photo !== null) {
       if (!/^\d{1,9}$/.test(photo) || Number(photo) < 1) return json({ error: "Not found." }, 404, { "Cache-Control": "no-store" });
       const rows = await db.sql`
-        SELECT image_url FROM dell_offers
-        WHERE id = ${Number(photo)} AND published AND status = 'listed' AND photo_ok AND image_url IS NOT NULL`;
-      const img = rows[0] && rows[0].image_url;
-      if (!img || !IMAGE_URL_RE.test(img)) return json({ error: "Not found." }, 404, { "Cache-Control": "no-store" });
-      const res = await fetchFn(img, { headers: { "User-Agent": UA }, signal: AbortSignal.timeout(20000) });
-      if (!res.ok) return json({ error: "Not found." }, 404, { "Cache-Control": "no-store" });
-      const type = (res.headers.get("content-type") || "").split(";")[0].trim().toLowerCase();
-      if (!/^image\/(png|jpeg|webp|gif)$/.test(type)) return json({ error: "Not found." }, 404, { "Cache-Control": "no-store" });
-      const buf = Buffer.from(await res.arrayBuffer());
-      if (buf.length > MAX_IMAGE) return json({ error: "Not found." }, 404, { "Cache-Control": "no-store" });
+        SELECT card_image FROM dell_offers
+        WHERE id = ${Number(photo)} AND published AND status = 'listed' AND photo_ok AND card_image IS NOT NULL`;
+      const b64 = rows[0] && rows[0].card_image;
+      if (!b64) return json({ error: "Not found." }, 404, { "Cache-Control": "no-store" });
+      const buf = Buffer.from(b64, "base64");
+      if (buf.length < 4 || buf[0] !== 0xff || buf[1] !== 0xd8) return json({ error: "Not found." }, 404, { "Cache-Control": "no-store" });
       return new Response(buf, {
         status: 200,
-        headers: { "Content-Type": type, "Cache-Control": "public, max-age=86400", "X-Content-Type-Options": "nosniff" },
+        headers: { "Content-Type": "image/jpeg", "Cache-Control": "public, max-age=3600", "X-Content-Type-Options": "nosniff" },
       });
     }
 
     const rows = await db.sql`
       SELECT id::int AS id, model, cpu, ram, storage, screen, unit_condition, availability, website_text,
-             our_price_excl_vat::float8 AS price_excl_vat, photo_ok AND image_url IS NOT NULL AS has_photo
+             our_price_excl_vat::float8 AS price_excl_vat, (photo_ok AND card_image IS NOT NULL) AS has_photo, EXTRACT(EPOCH FROM card_image_at)::int AS pv
       FROM dell_offers
       WHERE published AND status = 'listed' AND our_price_excl_vat IS NOT NULL
       ORDER BY updated_at DESC, id DESC
