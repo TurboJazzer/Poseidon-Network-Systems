@@ -4,6 +4,7 @@
 // Only offers that are published AND status "listed" are returned, and only public fields:
 // model, specs, condition, availability, public description, our price. Supplier price, margin, internal
 // notes, email links and references are never sent.
+// stock: staff edits (price, stock status, hidden) to the fixed cards already written in the page.
 // ?photo=<id> returns the finished Poseidon website picture made on the staff page (never the supplier flyer).
 import { getDatabase } from "@netlify/database";
 
@@ -43,7 +44,8 @@ export const createListingsHandler = (getDb, fetchFn = fetch) => async (req) => 
       WHERE published AND status = 'listed' AND our_price_excl_vat IS NOT NULL
       ORDER BY updated_at DESC, id DESC
       LIMIT 60`;
-    return json({ offers: rows });
+    const stock = await db.sql`SELECT card_key AS key, price_excl_vat::float8 AS price_excl_vat, availability, hidden, description FROM website_stock`;
+    return json({ offers: rows, stock });
   } catch (err) {
     console.error("dell-listings error:", err && err.message ? err.message : err);
     return json({ offers: [] }, 200, { "Cache-Control": "no-store" });

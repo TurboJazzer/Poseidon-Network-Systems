@@ -171,6 +171,16 @@
     window_size = 60
     aggregate_by = ["ip", "domain"]
 
+# Staff-only edits to the fixed cards on the refurbished Dell page (also checks the staff login itself).
+[[redirects]]
+  from = "/staff/api/website-stock"
+  to = "/.netlify/functions/website-stock"
+  status = 200
+  [redirects.rate_limit]
+    window_limit = 60
+    window_size = 60
+    aggregate_by = ["ip", "domain"]
+
 # Staff-only finished website picture for a Dell offer (also checks the staff login itself).
 [[redirects]]
   from = "/staff/api/dell-offers-card"

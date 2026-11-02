@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Staff: Website stock and prices | Poseidon Network Systems</title>
+<meta name="description" content="Internal staff tool for Poseidon Network Systems: change prices and stock status on the refurbished Dell page. Not for public use.">
+<link rel="icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:#F6F8FD;color:#0D1B4B;font-family:'Inter',system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:#2D5BE3}a:hover{color:#1F47C4}
+h1,h2{font-family:'Space Grotesk',sans-serif;margin:0}
+header{background:#0D1B4B;color:#fff;padding:28px 20px 30px}
+header .in,main,.back{max-width:1040px;margin:0 auto}
+.tag{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8fabf5;margin:0 0 8px}
+h1{font-size:28px;line-height:1.2}
+header p.lead{margin:8px 0 0;color:#c9d4f5;font-size:15px;max-width:680px}
+main{padding:20px 16px 56px}
+button,select,input{font:inherit;color:inherit}
+.btn{min-height:44px;padding:10px 18px;border-radius:10px;border:1px solid #2D5BE3;background:#2D5BE3;color:#fff;font-weight:600;font-size:15px;cursor:pointer}
+.btn:hover{background:#1F47C4;border-color:#1F47C4}
+.btn.ghost{background:#fff;color:#2D5BE3}
+.btn.ghost:hover{background:#EEF3FF}
+.btn[disabled]{opacity:.6;cursor:wait}
+:is(button,select,input,a):focus-visible{outline:3px solid #9DB6F5;outline-offset:2px}
+#msg{min-height:24px;margin:0 0 12px;font-size:14.5px}
+#msg.err{color:#9B2C2C;background:#FDF0F0;border:1px solid #E3B4B4;border-radius:10px;padding:10px 14px}
+#msg.okmsg{color:#1D5F3A}
+.note{background:#fff;border:1px solid #E4E9F5;border-radius:12px;padding:12px 16px;font-size:14px;color:#4A5578;margin:0 0 14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:14px}
+.card{background:#fff;border:1px solid #E4E9F5;border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:10px}
+.card h2{font-size:19px;line-height:1.25}
+.top{display:flex;gap:10px;align-items:flex-start;justify-content:space-between}
+.badge{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.b-in_stock{background:#D1FAE5;color:#047857}.b-coming_soon{background:#FEF3C7;color:#92400E}.b-to_order{background:#D1FAE5;color:#047857}.b-hidden{background:#E8EAF0;color:#4A5578}
+.meta{margin:0;color:#4A5578;font-size:13.5px}
+.thumb{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:top;border-radius:8px;background:#14284B;display:block}
+.f label{display:block;font-size:13px;font-weight:600;margin-bottom:4px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.f textarea{width:100%;padding:9px 11px;border:1px solid #C9D3EE;border-radius:10px;background:#fff;resize:vertical}
+.f input[type=text],.f select{width:100%;min-height:44px;padding:9px 11px;border:1px solid #C9D3EE;border-radius:10px;background:#fff}
+.hint{font-size:12.5px;color:#4A5578;margin-top:4px}
+.chk{display:flex;gap:10px;align-items:center;font-size:14px;font-weight:500}
+.chk input{width:20px;height:20px;flex:none}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.live{font-size:13px;color:#1D5F3A;font-weight:600;margin:0}
+.back{padding:0 16px 40px;font-size:14px}
+</style>
+<link rel="stylesheet" href="/staff/staff-dark.css">
+</head>
+<body>
+<header><div class="in"><a class="staff-home" href="/staff/">← Staff home</a>
+    <p class="tag">Poseidon staff only</p><h1>Website stock and prices</h1><p class="lead">Fix the price or stock status of the cards on the refurbished Dell page. Press Save and repost and the change is live on the website straight away.</p></div><a class="signout" href="/staff/login?logout=1">Sign out</a></header>
+<main>
+  <p class="note">These are the fixed cards on <a href="/refurbished-dell-equipment.html" target="_blank" rel="noopener">refurbished-dell-equipment.html</a>. Cards made from the <a href="/staff/dell-offers.html">Dell offers</a> page are changed there. Type the price with or without VAT and the other is worked out. Leave it blank to keep the price written on the page. You can also reword a card's description. The price on a card's own product page and on its flyer picture is not changed here.</p>
+  <p id="msg" role="status" aria-live="polite"></p>
+  <div id="list" class="grid" aria-busy="true"></div>
+</main>
+<p class="back"><a href="/staff/">← Back to staff tools</a></p>
+
+<script>
+(function () {
+  'use strict';
+  var API = '/staff/api/website-stock';
+  var PAGE = '/refurbished-dell-equipment.html';
+  var VAT = 0.15;
+  var LABEL = { in_stock: 'In stock', coming_soon: 'Coming soon', to_order: 'Available to order' };
+  var $ = function (id) { return document.getElementById(id); };
+  var list = $('list'), msg = $('msg');
+  var cards = [], saved = {};
+
+  function el(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text !== undefined && text !== null) n.textContent = text; return n; }
+  function money(n) { return 'R' + n.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 2 }); }
+  function say(t, kind) { msg.textContent = t || ''; msg.className = kind || ''; }
+
+  function api(method, query, body) {
+    var opts = { method: method, credentials: 'same-origin', headers: { 'X-Requested-With': 'pns-staff' } };
+    if (body !== undefined) { opts.headers['Content-Type'] = 'application/json'; opts.body = JSON.stringify(body); }
+    return fetch(API + (query || ''), opts).then(function (res) {
+      return res.json().catch(function () { return {}; }).then(function (data) {
+        if (!res.ok) throw new Error(data.error || (res.status === 401 ? 'Please sign in again.' : 'Something went wrong (' + res.status + ').'));
+        return data;
+      });
+    });
+  }
+
+  // The cards as written in the page (the page itself is the single source for model, picture and starting price).
+  function readPage(html) {
+    var doc = new DOMParser().parseFromString(html, 'text/html');
+    return Array.prototype.map.call(doc.querySelectorAll('#stock-grid [data-key]'), function (c) {
+      var badge = c.querySelector('h3 + span'), t = badge ? badge.textContent.trim() : '';
+      var avail = /coming/i.test(t) ? 'coming_soon' : (/order/i.test(t) ? 'to_order' : 'in_stock');
+      var pd = Array.prototype.filter.call(c.querySelectorAll('div'), function (d) { return /excl\. VAT/.test(d.textContent) && d.querySelector('span'); })[0];
+      var price = null;
+      if (pd) { var m = /R\s*([\d,]+(?:\.\d+)?)/.exec(pd.textContent); if (m) price = Number(m[1].replace(/,/g, '')); }
+      var dp = Array.prototype.filter.call(c.querySelectorAll('p'), function (q) { return /line-height:1\.6/.test(q.getAttribute('style') || ''); })[0];
+      var img = c.querySelector('img');
+      return { desc: dp ? dp.textContent.trim() : '', key: c.getAttribute('data-key'), model: c.querySelector('h3').textContent.trim(), avail: avail, price: price, img: img ? img.getAttribute('src') : null };
+    });
+  }
+
+  function render() {
+    list.textContent = '';
+    list.setAttribute('aria-busy', 'false');
+    if (!cards.length) { list.appendChild(el('p', 'note', 'No cards were found on the page.')); return; }
+    cards.forEach(function (c) { list.appendChild(card(c)); });
+  }
+
+  function card(c) {
+    var s = saved[c.key] || null;
+    var box = el('article', 'card');
+    var top = el('div', 'top');
+    top.appendChild(el('h2', '', c.model));
+    var curAvail = s && s.availability ? s.availability : c.avail;
+    top.appendChild(s && s.hidden ? el('span', 'badge b-hidden', 'Hidden') : el('span', 'badge b-' + curAvail, LABEL[curAvail]));
+    box.appendChild(top);
+    if (c.img) { var im = el('img', 'thumb'); im.src = '/' + c.img.replace(/^\//, ''); im.alt = ''; im.loading = 'lazy'; box.appendChild(im); }
+    var shown = s && typeof s.price_excl_vat === 'number' ? s.price_excl_vat : c.price;
+    box.appendChild(el('p', 'meta', c.price === null ? 'Price on application (written on the page)' : 'Showing ' + money(shown) + ' excl. VAT (' + money(Math.round(shown * (1 + VAT) * 100) / 100) + ' incl.)' + (s && typeof s.price_excl_vat === 'number' ? ', changed' : ', as written on the page')));
+
+    var VATX = 1 + VAT;
+    var r2 = function (n) { return Math.round(n * 100) / 100; };
+    var num = function (t) { var v = String(t).replace(/[\s,]/g, ''); return v === '' ? null : Number(v); };
+    var pr = el('div', 'two');
+    var fp = el('div', 'f'); var lp = el('label', '', 'Price excl. VAT (R)'); lp.htmlFor = 'p-' + c.key; fp.appendChild(lp);
+    var ip = el('input'); ip.type = 'text'; ip.id = 'p-' + c.key; ip.inputMode = 'decimal'; ip.maxLength = 12;
+    ip.placeholder = c.price === null ? 'n/a' : String(c.price);
+    fp.appendChild(ip);
+    var fi = el('div', 'f'); var li = el('label', '', 'Price incl. 15% VAT (R)'); li.htmlFor = 'i-' + c.key; fi.appendChild(li);
+    var ii = el('input'); ii.type = 'text'; ii.id = 'i-' + c.key; ii.inputMode = 'decimal'; ii.maxLength = 12;
+    ii.placeholder = c.price === null ? 'n/a' : String(r2(c.price * VATX));
+    fi.appendChild(ii);
+    ip.disabled = ii.disabled = c.price === null;
+    if (s && typeof s.price_excl_vat === 'number') { ip.value = String(s.price_excl_vat); ii.value = String(r2(s.price_excl_vat * VATX)); }
+    // Type either price; the other is worked out (15% VAT), and the excl. VAT figure is what is saved.
+    ip.addEventListener('input', function () { var v = num(ip.value); ii.value = v !== null && isFinite(v) && v >= 0 ? String(r2(v * VATX)) : ''; });
+    ii.addEventListener('input', function () { var v = num(ii.value); ip.value = v !== null && isFinite(v) && v >= 0 ? String(r2(v / VATX)) : ''; });
+    pr.appendChild(fp); pr.appendChild(fi); box.appendChild(pr);
+    box.appendChild(el('div', 'hint', 'Type either price and the other is worked out. Leave both blank to keep the price written on the page.'));
+
+    var fs = el('div', 'f'); var ls = el('label', '', 'Stock status'); ls.htmlFor = 's-' + c.key; fs.appendChild(ls);
+    var sel = el('select'); sel.id = 's-' + c.key;
+    var o0 = el('option', '', 'As written on the page (' + LABEL[c.avail] + ')'); o0.value = ''; sel.appendChild(o0);
+    Object.keys(LABEL).forEach(function (k) { var o = el('option', '', LABEL[k]); o.value = k; sel.appendChild(o); });
+    sel.value = s && s.availability ? s.availability : '';
+    fs.appendChild(sel); box.appendChild(fs);
+
+    var fd = el('div', 'f'); var ld = el('label', '', 'Description on the card'); ld.htmlFor = 'd-' + c.key; fd.appendChild(ld);
+    var ta = el('textarea'); ta.id = 'd-' + c.key; ta.maxLength = 300; ta.rows = 3;
+    ta.value = s && s.description ? s.description : c.desc;
+    fd.appendChild(ta); fd.appendChild(el('div', 'hint', 'Shown under the specs. Do not put the supplier name or internal notes here. Put the original wording back by pressing Put back as written.'));
+    box.appendChild(fd);
+
+    var lc = el('label', 'chk'); var cb = el('input'); cb.type = 'checkbox'; cb.checked = !!(s && s.hidden);
+    lc.appendChild(cb); lc.appendChild(el('span', '', 'Hide this card on the website')); box.appendChild(lc);
+
+    var row = el('div', 'row');
+    var save = el('button', 'btn', 'Save and repost'); save.type = 'button';
+    save.addEventListener('click', function () {
+      var raw = ip.value.trim(), n = raw ? Number(raw.replace(/[\s,]/g, '')) : null;
+      if (raw && (!isFinite(n) || n < 0)) { say('Enter the price as a number, for example 5940.', 'err'); ip.focus(); return; }
+      var dtext = ta.value.trim();
+      save.disabled = true;
+      api('PUT', '?key=' + encodeURIComponent(c.key), { price_excl_vat: n, availability: sel.value || null, hidden: cb.checked, description: dtext && dtext !== c.desc ? dtext : null })
+        .then(function (d) { saved[c.key] = d.item; say(c.model + ' is updated and live on the website now.', 'okmsg'); render(); })
+        .catch(function (e) { say(e.message, 'err'); save.disabled = false; });
+    });
+    row.appendChild(save);
+    var reset = el('button', 'btn ghost', 'Put back as written'); reset.type = 'button';
+    reset.addEventListener('click', function () {
+      if (!saved[c.key]) { say('Nothing to put back: this card is already as written on the page.', 'okmsg'); return; }
+      reset.disabled = true;
+      api('DELETE', '?key=' + encodeURIComponent(c.key))
+        .then(function () { delete saved[c.key]; say(c.model + ' is back as written on the page.', 'okmsg'); render(); })
+        .catch(function (e) { say(e.message, 'err'); reset.disabled = false; });
+    });
+    row.appendChild(reset);
+    box.appendChild(row);
+    return box;
+  }
+
+  Promise.all([
+    fetch(PAGE, { credentials: 'same-origin', cache: 'no-store' }).then(function (r) { if (!r.ok) throw new Error('Could not read the website page.'); return r.text(); }),
+    api('GET')
+  ]).then(function (r) {
+    cards = readPage(r[0]);
+    (r[1].items || []).forEach(function (it) { saved[it.key] = it; });
+    say(''); render();
+  }).catch(function (e) { list.textContent = ''; list.setAttribute('aria-busy', 'false'); say(e.message, 'err'); });
+})();
+</script>
+</body>
+</html>
