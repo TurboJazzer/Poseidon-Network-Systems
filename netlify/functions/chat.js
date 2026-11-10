@@ -2,6 +2,9 @@
 // Calls the Claude API server-side, grounded on an embedded knowledge base (no filesystem reads,
 // since Netlify's function bundler does not automatically package non-JS files).
 // Requires an ANTHROPIC_API_KEY environment variable set in Netlify (Site settings > Environment variables).
+//
+// The refurbished product list below is a snapshot of /refurbished-dell-equipment.html taken on 10 November 2026, 16:31 (Bangkok time).
+// It is not read live. After stock changes on the website, replace this file and knowledge-base.json with a new snapshot.
 
 const KNOWLEDGE_BASE = {
   "business": {
@@ -53,90 +56,178 @@ const KNOWLEDGE_BASE = {
       {
         "name": "Dell Latitude 5400",
         "category": "Laptop",
-        "specs": "Intel Core i5-8th Gen, 8GB DDR4, 256GB SSD, 14\" screen, Windows 11 Pro",
+        "specs": "Intel Core i5-8th Gen · 8GB DDR4 · 256GB SSD · 14\" · Webcam · Windows 11 Pro",
+        "availability": "In stock",
+        "notes": "Factory reconditioned and tested, includes free bag and 1-year warranty. 4G Card/LTE WWAN upgrade available.",
+        "page": "/product-dell-latitude-5400.html",
         "price": 5000,
         "currency": "ZAR",
-        "priceNote": "excl. VAT (R5,750 incl. VAT)",
-        "availability": "In stock",
-        "notes": "Factory reconditioned and tested. Includes free bag and 1-year warranty (battery covered for 6 months). 4G Card/LTE WWAN upgrade available.",
-        "page": "/product-dell-latitude-5400.html"
-      },
-      {
-        "name": "Dell Latitude 5330",
-        "category": "Laptop",
-        "specs": "Intel Core i5-12th Gen, 16GB DDR4, 512GB SSD, 13.3\" screen, Windows 11 Pro",
-        "price": 8600,
-        "currency": "ZAR",
-        "priceNote": "excl. VAT (R9,890 incl. VAT)",
-        "availability": "In stock",
-        "notes": "Factory reconditioned and tested. Includes free bag and 1-year warranty (battery covered for 6 months).",
-        "page": "/product-dell-latitude-5330.html"
-      },
-      {
-        "name": "Dell Latitude 5410",
-        "category": "Laptop",
-        "specs": "Intel Core i5-10th Gen, 16GB DDR4, 256GB SSD, 14\" screen, webcam, Windows 11 Pro",
-        "price": 6440,
-        "currency": "ZAR",
-        "priceNote": "excl. VAT (R7,406 incl. VAT)",
-        "availability": "Coming soon",
-        "notes": "Factory reconditioned and tested. Includes free bag and 1-year warranty (battery covered for 6 months).",
-        "page": "/product-dell-latitude-5410.html"
-      },
-      {
-        "name": "Dell Latitude 7430 2-in-1",
-        "category": "Laptop",
-        "specs": "Intel Core i7-13th Gen, 32GB DDR4, 512GB SSD, 14\" touchscreen, webcam, Windows 11 Pro",
-        "price": 15295,
-        "currency": "ZAR",
-        "priceNote": "excl. VAT (R17,589.25 incl. VAT)",
-        "availability": "Coming soon",
-        "notes": "Factory reconditioned and tested. Includes free bag and 1-year warranty (battery covered for 6 months).",
-        "page": "/product-dell-latitude-7430-2-in-1.html"
+        "priceNote": "excl. VAT (R5,750 incl. VAT)"
       },
       {
         "name": "Dell OptiPlex 3060 Micro",
         "category": "Desktop",
-        "specs": "Intel Core i5-8th Gen, 8GB DDR4, 256GB SSD, Intel UHD 630, Windows 11 Home",
+        "specs": "Intel Core i5-8th Gen · 8GB DDR4 · 256GB SSD · Windows 11 Home",
+        "availability": "In stock",
+        "notes": "Factory reconditioned and tested, includes keyboard & mouse and 1-year warranty. Monitor sold separately.",
+        "page": "/product-dell-optiplex-3060-micro.html",
         "price": 4650,
         "currency": "ZAR",
-        "priceNote": "excl. VAT (R5,347.50 incl. VAT)",
-        "availability": "In stock",
-        "notes": "Factory reconditioned and tested. Includes keyboard and mouse and 1-year warranty. Monitor sold separately.",
-        "page": "/product-dell-optiplex-3060-micro.html"
+        "priceNote": "excl. VAT (R5,347.5 incl. VAT)"
       },
       {
         "name": "Dell OptiPlex 5060 SFF",
         "category": "Desktop",
-        "specs": "Intel Core i5-8th Gen, 16GB DDR4, 256GB SSD, Windows 11 Pro",
+        "specs": "Intel Core i5-8th Gen · 16GB DDR4 · 256GB SSD · Windows 11 Pro",
+        "availability": "Coming soon",
+        "notes": "Factory reconditioned and tested, includes keyboard & mouse and 1-year warranty. Monitor sold separately.",
+        "page": "/product-dell-optiplex-5060-sff.html",
         "price": 5940,
         "currency": "ZAR",
-        "priceNote": "excl. VAT (R6,831 incl. VAT)",
-        "availability": "Coming soon",
-        "notes": "Factory reconditioned and tested. Includes keyboard and mouse and 1-year warranty. Monitor sold separately.",
-        "page": "/product-dell-optiplex-5060-sff.html"
+        "priceNote": "excl. VAT (R6,831 incl. VAT)"
       },
       {
         "name": "Dell OptiPlex 3080 SFF",
         "category": "Desktop",
-        "specs": "Intel Core i7-10th Gen, 16GB DDR4, 256GB SSD, Windows 11 Pro",
+        "specs": "Intel Core i7-10th Gen · 16GB DDR4 · 256GB SSD · Windows 11 Pro",
+        "availability": "In stock",
+        "notes": "Factory reconditioned and tested, includes keyboard & mouse and 1-year warranty. Monitor sold separately.",
+        "page": "/product-dell-optiplex-3080-sff.html",
         "price": 8590,
         "currency": "ZAR",
-        "priceNote": "excl. VAT (R9,878.50 incl. VAT)",
+        "priceNote": "excl. VAT (R9,878.5 incl. VAT)"
+      },
+      {
+        "name": "Dell Latitude 5330",
+        "category": "Laptop",
+        "specs": "Intel Core i5-12th Gen · 16GB DDR4 · 512GB SSD · 13.3\" · Windows 11 Pro",
         "availability": "In stock",
-        "notes": "Factory reconditioned and tested. Includes keyboard and mouse and 1-year warranty. Monitor sold separately.",
-        "page": "/product-dell-optiplex-3080-sff.html"
+        "notes": "Factory reconditioned and tested, includes free bag and 1-year warranty.",
+        "page": "/product-dell-latitude-5330.html",
+        "price": 8600,
+        "currency": "ZAR",
+        "priceNote": "excl. VAT (R9,890 incl. VAT)"
+      },
+      {
+        "name": "Dell Latitude 5410",
+        "category": "Laptop",
+        "specs": "Intel Core i5-10th Gen · 16GB DDR4 · 256GB SSD · 14\" · Windows 11 Pro",
+        "availability": "Coming soon",
+        "notes": "Factory reconditioned and tested, includes free bag and 1-year warranty.",
+        "page": "/product-dell-latitude-5410.html",
+        "price": 6440,
+        "currency": "ZAR",
+        "priceNote": "excl. VAT (R7,406 incl. VAT)"
+      },
+      {
+        "name": "Dell Latitude 7430 2-in-1",
+        "category": "Laptop",
+        "specs": "Intel Core i7-13th Gen · 32GB DDR4 · 512GB SSD · 14\" Touch · Webcam · Windows 11 Pro",
+        "availability": "Coming soon",
+        "notes": "Factory reconditioned and tested 2-in-1 touchscreen laptop, includes free bag and 1-year warranty.",
+        "page": "/product-dell-latitude-7430-2-in-1.html",
+        "price": 15295,
+        "currency": "ZAR",
+        "priceNote": "excl. VAT (R17,589.25 incl. VAT)"
       },
       {
         "name": "Dell PowerEdge R760 2U Server",
         "category": "Server",
-        "specs": "2 x Intel Xeon Silver 4416+ (20 cores / 40 threads), memory and storage configured to order (24 x 2.5\" backplane), PERC H755 RAID, Intel X710-T4L quad-port 10GbE, iDRAC9",
-        "price": null,
-        "currency": "ZAR",
-        "priceNote": "Price on application",
+        "specs": "2 x Intel Xeon Silver 4416+ · Configured to order · PERC H755 RAID · Quad 10GbE · iDRAC9",
         "availability": "Available to order",
-        "notes": "Factory reconditioned and tested. 5-year parts replacement warranty. WhatsApp 062 788 3650 for a quote.",
-        "page": "/product-dell-poweredge-r760-2u-server.html"
+        "notes": "Factory reconditioned and tested rack server, 24 x 2.5\" drive backplane, 5-year parts replacement warranty.",
+        "page": "/product-dell-poweredge-r760-2u-server.html",
+        "priceNote": "Price on application"
+      },
+      {
+        "name": "Dell Precision 7760 Mobile Workstation",
+        "category": "Laptop",
+        "specs": "Intel Core i7-11th Gen · 32GB DDR4 RAM · 512GB M.2 PCIe Gen 3 NVMe SSD · 17.3-inch FHD (1920x1080) IPS, Anti-glare",
+        "price": 21765,
+        "currency": "ZAR",
+        "priceNote": "excl. VAT (R25,029.75 incl. VAT)",
+        "availability": "Coming soon",
+        "notes": "Factory reconditioned and tested, with a 1-year warranty."
+      },
+      {
+        "name": "Dell Latitude 5310 Laptop",
+        "category": "Laptop",
+        "specs": "Intel Core i5-10th Gen · 16GB DDR4 · 256GB M.2 PCIe NVMe SSD · 13.3-inch FHD (1920x1080) IPS",
+        "price": 7470,
+        "currency": "ZAR",
+        "priceNote": "excl. VAT (R8,590.5 incl. VAT)",
+        "availability": "In stock",
+        "notes": "Factory reconditioned and tested, with a 1-year warranty."
+      },
+      {
+        "name": "Dell Latitude 5490 Laptop",
+        "category": "Laptop",
+        "specs": "Intel Core i5-8th Gen · 8GB DDR4 · 256GB M.2 PCIe NVMe SSD · 14-inch FHD (1920x1080) IPS",
+        "price": 5706,
+        "currency": "ZAR",
+        "priceNote": "excl. VAT (R6,561.9 incl. VAT)",
+        "availability": "In stock",
+        "notes": "Factory reconditioned and tested, with a 1-year warranty."
+      },
+      {
+        "name": "Dell Latitude 5411 Laptop",
+        "category": "Laptop",
+        "specs": "Intel Core i5-10th Gen · 16GB DDR4 · 256GB M.2 PCIe NVMe SSD · 14-inch FHD (1920x1080) IPS",
+        "price": 7180,
+        "currency": "ZAR",
+        "priceNote": "excl. VAT (R8,257 incl. VAT)",
+        "availability": "In stock",
+        "notes": "Factory reconditioned and tested, with a 1-year warranty."
+      },
+      {
+        "name": "Dell U2713HM 27in Monitor",
+        "category": "Monitor",
+        "specs": "27-inch QHD (2560x1440)",
+        "price": 1940,
+        "currency": "ZAR",
+        "priceNote": "excl. VAT (R2,231 incl. VAT)",
+        "availability": "In stock",
+        "notes": "Factory reconditioned and tested, with a 1-year warranty."
+      },
+      {
+        "name": "Dell U2715H 27in Monitor",
+        "category": "Monitor",
+        "specs": "27-inch QHD (2560x1440) IPS, Anti-Glare",
+        "price": 1940,
+        "currency": "ZAR",
+        "priceNote": "excl. VAT (R2,231 incl. VAT)",
+        "availability": "In stock",
+        "notes": "Factory reconditioned and tested, with a 1-year warranty."
+      },
+      {
+        "name": "Dell Latitude 7340 (2-in-1) Laptop",
+        "category": "Laptop",
+        "specs": "Intel Core i7-13th Gen · 32GB DDR4 (soldered) · 512GB M.2 PCIe NVMe SSD · 13.3-inch FHD (1920x1200) IPS",
+        "price": 15295,
+        "currency": "ZAR",
+        "priceNote": "excl. VAT (R17,589.25 incl. VAT)",
+        "availability": "In stock",
+        "notes": "Factory reconditioned and tested, with a 1-year warranty."
+      },
+      {
+        "name": "Dell U3419W 34in Ultrawide Monitor",
+        "category": "Monitor",
+        "specs": "34-inch UWQHD (3440x1440) IPS, 21:9",
+        "price": 4118,
+        "currency": "ZAR",
+        "priceNote": "excl. VAT (R4,735.7 incl. VAT)",
+        "availability": "In stock",
+        "notes": "Factory reconditioned and tested, with a 1-year warranty."
+      },
+      {
+        "name": "Dell PowerEdge R740 2U server",
+        "category": "Server",
+        "specs": "2 x Intel Xeon Gold 6138 (20 cores / 40 threads each) · 256GB DDR4 ECC · 8 x 2.5in bays, configurable; PERC H730P RAID controller",
+        "price": 37650,
+        "currency": "ZAR",
+        "priceNote": "excl. VAT (R43,297.5 incl. VAT)",
+        "availability": "In stock",
+        "notes": "Factory reconditioned and tested, with a 1-year warranty."
       }
     ],
     "new": [
@@ -313,6 +404,7 @@ exports.handler = async function (event) {
 6. POLICIES: For delivery, warranty, battery, payment, returns, VoIP contract and emergency calls, use the "policies" wording exactly. Delivery outside 40km of Cape Town (for example Paarl) is by courier at the customer's cost. Never call delivery free and never quote courier prices or delivery times.
 7. DELL PARTNER: Poseidon is a Dell Technologies Authorized Partner for new Dell only. Never imply refurbished stock comes from Dell.
 8. FORMAT: Reply in plain text only. No markdown, no asterisks, no bullet symbols, no headings. Never use em dashes; use a comma, full stop or colon instead.
+9. STOCK: The refurbished list in the data matches the website's refurbished page. Offer only models in it. "Coming soon" means pre-order and is never in stock. If a visitor asks for a refurbished model that is not in the list, say it is not listed right now and that any other IT hardware can be sourced on request through the WhatsApp buttons.
 
 === GROUND TRUTH DATA ===
 ${JSON.stringify(KNOWLEDGE_BASE)}`;

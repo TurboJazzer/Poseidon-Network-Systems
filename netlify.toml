@@ -210,3 +210,16 @@
     window_limit = 60
     window_size = 60
     aggregate_by = ["ip", "domain"]
+
+
+# Old capitalised addresses (the capitalised duplicate files were removed so the site unzips cleanly on Windows).
+# These only apply when no file exists at the capitalised address, so the real pages are never affected.
+[[redirects]]
+  from = "/FAQ.html"
+  to = "/faq.html"
+  status = 301
+
+[[redirects]]
+  from = "/Resources.html"
+  to = "/resources.html"
+  status = 301
