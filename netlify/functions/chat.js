@@ -3,8 +3,11 @@
 // since Netlify's function bundler does not automatically package non-JS files).
 // Requires an ANTHROPIC_API_KEY environment variable set in Netlify (Site settings > Environment variables).
 //
-// The refurbished product list below is a snapshot of /refurbished-dell-equipment.html taken on 10 November 2026, 16:31 (Bangkok time).
-// It is not read live. After stock changes on the website, replace this file and knowledge-base.json with a new snapshot.
+// The refurbished product list below is a fallback copy of /refurbished-dell-equipment.html taken on 10 November 2026,
+// 16:31 (Bangkok time). Normally the chat uses the copy saved in the database instead: the scheduled function
+// chat-stock-sync re-reads the page every 15 minutes and saves it, and the chat only reads that saved copy (it never
+// reads the page itself). This list is used when nothing is saved yet, the saved copy is over 24 hours old, or the
+// database cannot be reached.
 
 const KNOWLEDGE_BASE = {
   "business": {
@@ -322,6 +325,35 @@ const KNOWLEDGE_BASE = {
   }
 };
 
+// Saved copy of the refurbished list (table chat_stock_snapshot, written by chat-stock-sync).
+// Returns { products, asOf } or null when there is no usable copy.
+const SNAPSHOT_MAX_AGE_MS = 24 * 60 * 60 * 1000;
+const SNAPSHOT_TIMEOUT_MS = 2500;
+
+async function readStockSnapshot() {
+  const { getDatabase } = await import('@netlify/database');
+  let timer;
+  let rows;
+  try {
+    rows = await Promise.race([
+      getDatabase().sql`SELECT products, read_at FROM chat_stock_snapshot WHERE id = 1`,
+      new Promise(function (_, reject) { timer = setTimeout(function () { reject(new Error('snapshot read timed out')); }, SNAPSHOT_TIMEOUT_MS); })
+    ]);
+  } finally {
+    clearTimeout(timer);
+  }
+  const row = rows && rows[0];
+  if (!row) return null;
+  let products = row.products;
+  if (typeof products === 'string') products = JSON.parse(products);
+  if (!Array.isArray(products) || products.length === 0 || products.length > 100) return null;
+  if (!products.every(function (p) { return p && typeof p.name === 'string' && p.name; })) return null;
+  const at = new Date(row.read_at).getTime();
+  const age = Date.now() - at;
+  if (!Number.isFinite(at) || age > SNAPSHOT_MAX_AGE_MS || age < -5 * 60 * 1000) return null;
+  return { products: products, asOf: new Date(at).toISOString() };
+}
+
 const RATE_LIMIT_WINDOW_MS = 60 * 1000;
 const RATE_LIMIT_MAX = 8;
 const rateLimitStore = new Map();
@@ -393,6 +425,21 @@ exports.handler = async function (event) {
     return { statusCode: 400, body: JSON.stringify({ error: 'Message too long (max ' + MAX_MESSAGE_LEN + ' characters).' }) };
   }
 
+  // Refurbished list: the saved copy from the database if there is a fresh one, otherwise the built-in list above.
+  // (exports.snapshotReader exists only so the function can be tested without a database.)
+  let knowledge = KNOWLEDGE_BASE;
+  try {
+    const snap = await (exports.snapshotReader || readStockSnapshot)();
+    if (snap && Array.isArray(snap.products) && snap.products.length) {
+      knowledge = Object.assign({}, KNOWLEDGE_BASE, {
+        products: Object.assign({}, KNOWLEDGE_BASE.products, { refurbished: snap.products }),
+        refurbishedStockReadAt: snap.asOf
+      });
+    }
+  } catch (e) {
+    console.error('Saved stock list not used, using the built-in list:', e && e.message ? e.message : e);
+  }
+
   const systemPrompt = `You are a sales assistant for Poseidon Network Systems. Answer questions strictly using the provided ground-truth JSON data below.
 
 === BEHAVIORAL RULES ===
@@ -407,7 +454,7 @@ exports.handler = async function (event) {
 9. STOCK: The refurbished list in the data matches the website's refurbished page. Offer only models in it. "Coming soon" means pre-order and is never in stock. If a visitor asks for a refurbished model that is not in the list, say it is not listed right now and that any other IT hardware can be sourced on request through the WhatsApp buttons.
 
 === GROUND TRUTH DATA ===
-${JSON.stringify(KNOWLEDGE_BASE)}`;
+${JSON.stringify(knowledge)}`;
 
   const trimmedHistory = Array.isArray(history) ? history.slice(-MAX_HISTORY_ITEMS) : [];
   const messages = trimmedHistory
