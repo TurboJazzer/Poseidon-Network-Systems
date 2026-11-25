@@ -37,7 +37,7 @@ button,select,input{font:inherit;color:inherit}
 .card h2{font-size:19px;line-height:1.25}
 .top{display:flex;gap:10px;align-items:flex-start;justify-content:space-between}
 .badge{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:3px 9px;border-radius:999px;white-space:nowrap}
-.b-in_stock{background:#D1FAE5;color:#047857}.b-coming_soon{background:#FEF3C7;color:#92400E}.b-to_order{background:#D1FAE5;color:#047857}.b-hidden{background:#E8EAF0;color:#4A5578}
+.b-in_stock{background:#D1FAE5;color:#047857}.b-coming_soon{background:#FEF3C7;color:#92400E}.b-to_order{background:#D1FAE5;color:#047857}.b-out_of_stock{background:#FDE8E8;color:#9B2C2C}.b-hidden{background:#E8EAF0;color:#4A5578}
 .meta{margin:0;color:#4A5578;font-size:13.5px}
 .thumb{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:top;border-radius:8px;background:#14284B;display:block}
 .f label{display:block;font-size:13px;font-weight:600;margin-bottom:4px}
@@ -69,7 +69,7 @@ button,select,input{font:inherit;color:inherit}
   var API = '/staff/api/website-stock';
   var PAGE = '/refurbished-dell-equipment.html';
   var VAT = 0.15;
-  var LABEL = { in_stock: 'In stock', coming_soon: 'Coming soon', to_order: 'Available to order' };
+  var LABEL = { in_stock: 'In stock', coming_soon: 'Coming soon', to_order: 'Available to order', out_of_stock: 'Out of stock' };
   var $ = function (id) { return document.getElementById(id); };
   var list = $('list'), msg = $('msg');
   var cards = [], saved = {};
@@ -94,7 +94,7 @@ button,select,input{font:inherit;color:inherit}
     var doc = new DOMParser().parseFromString(html, 'text/html');
     return Array.prototype.map.call(doc.querySelectorAll('#stock-grid [data-key]'), function (c) {
       var badge = c.querySelector('h3 + span'), t = badge ? badge.textContent.trim() : '';
-      var avail = /coming/i.test(t) ? 'coming_soon' : (/order/i.test(t) ? 'to_order' : 'in_stock');
+      var avail = /out of stock/i.test(t) ? 'out_of_stock' : (/coming/i.test(t) ? 'coming_soon' : (/order/i.test(t) ? 'to_order' : 'in_stock'));
       var pd = Array.prototype.filter.call(c.querySelectorAll('div'), function (d) { return /excl\. VAT/.test(d.textContent) && d.querySelector('span'); })[0];
       var price = null;
       if (pd) { var m = /R\s*([\d,]+(?:\.\d+)?)/.exec(pd.textContent); if (m) price = Number(m[1].replace(/,/g, '')); }

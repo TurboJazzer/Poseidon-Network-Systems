@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Staff: Morning stock check | Poseidon Network Systems</title>
+<meta name="description" content="Internal staff tool for Poseidon Network Systems: the morning check of the refurbished Dell page against Universe Direct stock. Not for public use.">
+<link rel="icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:#F6F8FD;color:#0D1B4B;font-family:'Inter',system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:#2D5BE3}a:hover{color:#1F47C4}
+h1,h2{font-family:'Space Grotesk',sans-serif;margin:0}
+header{background:#0D1B4B;color:#fff;padding:28px 20px 30px}
+header .in,main,.back{max-width:1040px;margin:0 auto}
+.tag{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8fabf5;margin:0 0 8px}
+h1{font-size:28px;line-height:1.2}
+header p.lead{margin:8px 0 0;color:#c9d4f5;font-size:15px;max-width:680px}
+main{padding:20px 16px 56px}
+button,select,input{font:inherit;color:inherit}
+.btn{min-height:44px;padding:10px 18px;border-radius:10px;border:1px solid #2D5BE3;background:#2D5BE3;color:#fff;font-weight:600;font-size:15px;cursor:pointer}
+.btn:hover{background:#1F47C4;border-color:#1F47C4}
+.btn.ghost{background:#fff;color:#2D5BE3}
+.btn.ghost:hover{background:#EEF3FF}
+.btn[disabled]{opacity:.6;cursor:wait}
+:is(button,select,input,a):focus-visible{outline:3px solid #9DB6F5;outline-offset:2px}
+#msg{min-height:24px;margin:0 0 12px;font-size:14.5px}
+#msg.err{color:#9B2C2C;background:#FDF0F0;border:1px solid #E3B4B4;border-radius:10px;padding:10px 14px}
+#msg.okmsg{color:#1D5F3A}
+.note{background:#fff;border:1px solid #E4E9F5;border-radius:12px;padding:12px 16px;font-size:14px;color:#4A5578;margin:0 0 14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:14px}
+.card{background:#fff;border:1px solid #E4E9F5;border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:10px}
+.card h2{font-size:19px;line-height:1.25}
+.top{display:flex;gap:10px;align-items:flex-start;justify-content:space-between}
+.badge{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.b-in_stock{background:#D1FAE5;color:#047857}.b-coming_soon{background:#FEF3C7;color:#92400E}.b-to_order{background:#D1FAE5;color:#047857}.b-hidden{background:#E8EAF0;color:#4A5578}
+.meta{margin:0;color:#4A5578;font-size:13.5px}
+.thumb{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:top;border-radius:8px;background:#14284B;display:block}
+.f label{display:block;font-size:13px;font-weight:600;margin-bottom:4px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.f textarea{width:100%;padding:9px 11px;border:1px solid #C9D3EE;border-radius:10px;background:#fff;resize:vertical}
+.f input[type=text],.f select{width:100%;min-height:44px;padding:9px 11px;border:1px solid #C9D3EE;border-radius:10px;background:#fff}
+.hint{font-size:12.5px;color:#4A5578;margin-top:4px}
+.chk{display:flex;gap:10px;align-items:center;font-size:14px;font-weight:500}
+.chk input{width:20px;height:20px;flex:none}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.live{font-size:13px;color:#1D5F3A;font-weight:600;margin:0}
+.back{padding:0 16px 40px;font-size:14px}
+</style>
+<link rel="stylesheet" href="/staff/staff-dark.css">
+</head>
+<body>
+<header><div class="in"><a class="staff-home" href="/staff/">← Staff home</a>
+    <p class="tag">Poseidon staff only</p><h1>Morning stock check</h1><p class="lead">Every morning the website checks the refurbished Dell page against what Universe Direct has in stock, and emails you. Nothing on the website is changed by this check.</p></div><a class="signout" href="/staff/login?logout=1">Sign out</a></header>
+<main>
+  <p class="note" id="when">Loading the latest check…</p>
+  <div class="row" style="margin:0 0 14px"><button class="btn" id="run" type="button">Check again now</button><a class="btn ghost" href="/staff/website-stock.html" style="text-decoration:none;display:inline-flex;align-items:center">Change a card on the website</a></div>
+  <p id="msg" role="status" aria-live="polite"></p>
+  <div id="list" class="grid" aria-busy="true"></div>
+</main>
+<p class="back"><a href="/staff/">← Back to staff tools</a></p>
+<script>
+(function () {
+  'use strict';
+  var API = '/staff/api/stock-check';
+  var LABEL = { action: 'Out of stock at Universe Direct', check: 'Please check', info: 'Good news', ok: 'All fine' };
+  var BADGE = { action: 'b-hidden', check: 'b-coming_soon', info: 'b-in_stock', ok: 'b-to_order' };
+  var list = document.getElementById('list'), msg = document.getElementById('msg'), when = document.getElementById('when'), run = document.getElementById('run');
+  function el(t, c, x) { var e = document.createElement(t); if (c) e.className = c; if (x !== undefined) e.textContent = x; return e; }
+  function say(t, c) { msg.textContent = t || ''; msg.className = c || ''; }
+  function api(method) {
+    var o = { method: method, credentials: 'same-origin', headers: { 'X-Requested-With': 'pns-staff' } };
+    return fetch(API, o).then(function (r) { return r.json().then(function (d) { if (!r.ok) throw new Error(d.error || 'Something went wrong.'); return d; }); });
+  }
+  function show(d) {
+    list.textContent = ''; list.setAttribute('aria-busy', 'false');
+    if (!d.report) { when.textContent = 'No check has run yet. It runs every morning, or press Check again now.'; return; }
+    var t = new Date(d.checked_at);
+    var c = d.report.counts;
+    when.textContent = 'Last checked ' + t.toLocaleString('en-ZA', { dateStyle: 'medium', timeStyle: 'short' }) + '. ' + c.action + ' out of stock at Universe Direct, ' + c.check + ' to check, ' + c.info + ' good news, ' + c.ok + ' fine.';
+    d.report.lines.forEach(function (l) {
+      var card = el('article', 'card'), top = el('div', 'top');
+      top.appendChild(el('h2', '', l.model)); top.appendChild(el('span', 'badge ' + (BADGE[l.level] || ''), LABEL[l.level] || l.level));
+      card.appendChild(top);
+      card.appendChild(el('p', 'meta', 'Website says: ' + l.website));
+      card.appendChild(el('p', '', l.note));
+      if (l.matches && l.matches.length) {
+        card.appendChild(el('p', 'meta', 'Universe Direct variants: ' + l.matches.map(function (m) { return m.name + ' (' + (m.in_stock ? 'in stock' : 'out') + ')'; }).join('; ')));
+      }
+      list.appendChild(card);
+    });
+  }
+  api('GET').then(show).catch(function (e) { list.setAttribute('aria-busy', 'false'); when.textContent = ''; say(e.message, 'err'); });
+  run.addEventListener('click', function () {
+    run.disabled = true; say('Checking Universe Direct…');
+    api('POST').then(function (d) { show(d); say('Checked just now.', 'okmsg'); }).catch(function (e) { say(e.message, 'err'); }).then(function () { run.disabled = false; });
+  });
+})();
+</script>
+</body>
+</html>

@@ -6,7 +6,7 @@
 import { getDatabase } from "@netlify/database";
 import { json, checkAuth } from "./dell-offers.mjs";
 
-const AVAIL = ["in_stock", "coming_soon", "to_order"];
+const AVAIL = ["in_stock", "coming_soon", "to_order", "out_of_stock"];
 const KEY_RE = /^[a-z0-9-]{1,60}$/;
 const MAX_BODY = 2000;
 
@@ -20,7 +20,7 @@ export const cleanStock = (b) => {
   }
   let availability = null;
   if (b.availability !== undefined && b.availability !== null && b.availability !== "") {
-    if (!AVAIL.includes(b.availability)) return { error: "Stock status must be in stock, coming soon or available to order." };
+    if (!AVAIL.includes(b.availability)) return { error: "Stock status must be in stock, coming soon, out of stock or available to order." };
     availability = b.availability;
   }
   let description = null;

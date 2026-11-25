@@ -149,7 +149,7 @@
   <section style="padding:72px 24px;background:#F6F8FD;">
     <div style="max-width:1200px;margin:0 auto;">
       <h2 style="font-size:clamp(1.5rem,3.5vw,2rem);font-weight:700;font-family:'Space Grotesk',sans-serif;color:#0D1B4B;margin:0 0 12px;">Which refurbished Dell laptops and desktops are in stock?</h2>
-      <p style="font-size:14px;color:#5A6588;margin:0 0 32px;">"In stock" units ship immediately; "Coming soon" units are available to pre-order. Delivered within 40km of Cape Town, arranged per order. Further away, we can courier it at your cost.</p>
+      <p style="font-size:14px;color:#5A6588;margin:0 0 32px;">"In stock" units ship immediately; "Coming soon" units are available to pre-order; "Out of stock" units are not available right now, and we will WhatsApp you when they are back. Delivered within 40km of Cape Town, arranged per order. Further away, we can courier it at your cost.</p>
       <div id="stock-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;">
         <div data-key="latitude-5400" style="background:#fff;border:1px solid #E4E9F5;border-left:3px solid #059669;border-radius:12px;padding:28px;">
           <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:12px;">
@@ -398,7 +398,8 @@
   var BADGE = {
     in_stock: ['In stock', '#047857', '#D1FAE5', '#059669'],
     coming_soon: ['Coming soon', '#92400E', '#FEF3C7', '#2D5BE3'],
-    to_order: ['Available to order', '#047857', '#D1FAE5', '#059669']
+    to_order: ['Available to order', '#047857', '#D1FAE5', '#059669'],
+    out_of_stock: ['Out of stock', '#9B2C2C', '#FDE8E8', '#B3261E']
   };
   function money(n) { return 'R' + n.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 2 }); }
   function el(tag, css, text) { var n = document.createElement(tag); if (css) n.style.cssText = css; if (text !== undefined) n.textContent = text; return n; }
@@ -417,10 +418,10 @@
         var b = BADGE[it.availability], badge = c.querySelector('h3 + span');
         if (badge) { badge.textContent = b[0]; badge.style.color = b[1]; badge.style.background = b[2]; }
         c.style.borderLeftColor = b[3];
-        var cta = c.querySelector('a[href^="https://wa.me"]'), soon = it.availability === 'coming_soon';
+        var cta = c.querySelector('a[href^="https://wa.me"]'), soon = it.availability === 'coming_soon', out = it.availability === 'out_of_stock';
         if (cta && !/quote/i.test(cta.textContent)) {
-          cta.textContent = soon ? 'Tell me when it arrives' : 'Order on WhatsApp';
-          cta.href = 'https://wa.me/27627883650?text=' + encodeURIComponent(soon ? 'Hi, please let me know when the ' + model + ' is in stock' : "Hi, I'm interested in the " + model);
+          cta.textContent = (soon || out) ? 'Tell me when it arrives' : 'Order on WhatsApp';
+          cta.href = 'https://wa.me/27627883650?text=' + encodeURIComponent(out ? 'Hi, please let me know when the ' + model + ' is back in stock' : soon ? 'Hi, please let me know when the ' + model + ' is in stock' : "Hi, I'm interested in the " + model);
         }
       }
       if (it.description) {
@@ -460,9 +461,9 @@
     pr.appendChild(el('span', 'font-size:12px;font-weight:500;color:#5A6588;', 'excl. VAT'));
     c.appendChild(pr);
     c.appendChild(el('div', 'font-size:13px;color:#4A5578;margin-bottom:14px;', money(Math.round(o.price_excl_vat * 115) / 100) + ' incl. 15% VAT'));
-    var soon = o.availability === 'coming_soon';
-    var msg = soon ? 'Hi, please let me know when the ' + o.model + ' is in stock' : "Hi, I'm interested in the " + o.model;
-    var a = el('a', 'display:block;text-align:center;background:#0D1B4B;color:#fff;font-weight:600;font-size:14px;padding:12px;border-radius:6px;', soon ? 'Notify me on WhatsApp' : 'Order on WhatsApp');
+    var soon = o.availability === 'coming_soon', out = o.availability === 'out_of_stock';
+    var msg = out ? 'Hi, please let me know when the ' + o.model + ' is back in stock' : soon ? 'Hi, please let me know when the ' + o.model + ' is in stock' : "Hi, I'm interested in the " + o.model;
+    var a = el('a', 'display:block;text-align:center;background:#0D1B4B;color:#fff;font-weight:600;font-size:14px;padding:12px;border-radius:6px;', (soon || out) ? 'Notify me on WhatsApp' : 'Order on WhatsApp');
     a.href = 'https://wa.me/27627883650?text=' + encodeURIComponent(msg);
     c.appendChild(a);
     return c;

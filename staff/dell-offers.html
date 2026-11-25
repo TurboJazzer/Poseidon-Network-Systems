@@ -137,7 +137,7 @@ form h2{font-size:22px;margin-bottom:14px}
       <div class="f full"><label for="f-website_text">Website description (public)</label><textarea id="f-website_text" name="website_text" maxlength="300" placeholder="Factory reconditioned and tested, includes keyboard and mouse and 1-year warranty."></textarea>
         <div class="hint">Shown on the Poseidon Network website. Do not put supplier names, prices or internal notes here. Leave blank for the standard wording.</div></div>
       <div class="f"><label for="f-availability">Website badge</label>
-        <select id="f-availability" name="availability"><option value="in_stock">In stock</option><option value="coming_soon">Coming soon (pre-order)</option><option value="to_order">Available to order</option></select></div>
+        <select id="f-availability" name="availability"><option value="in_stock">In stock</option><option value="coming_soon">Coming soon (pre-order)</option><option value="to_order">Available to order</option><option value="out_of_stock">Out of stock</option></select></div>
       <div class="f"></div>
       <div class="f full chk"><input type="checkbox" id="f-published" name="published"><label for="f-published" style="margin:0">Checked and ready: show this on the Poseidon Network website (needs our price and the website picture; sets the status to Listed)</label></div>
       <div class="f full"><label for="f-notes">Notes</label><textarea id="f-notes" name="notes" maxlength="1000" placeholder="Free laptop bag, stock level, delivery notes"></textarea></div>
@@ -485,7 +485,7 @@ form h2{font-size:22px;margin-bottom:14px}
     for (var i = 0; i < 48; i++) { var r = i % 2 ? 92 : 100, a = i / 48 * Math.PI * 2; p.push((100 + r * Math.cos(a)).toFixed(1) + ',' + (100 + r * Math.sin(a)).toFixed(1)); }
     return 'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 200 200"><defs><radialGradient id="g" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#3a3a3a"/><stop offset="1" stop-color="#0d0d0d"/></radialGradient></defs><polygon points="' + p.join(' ') + '" fill="url(#g)"/><circle cx="100" cy="100" r="78" fill="none" stroke="#fff" stroke-width="3"/><circle cx="100" cy="100" r="71" fill="none" stroke="#fff" stroke-width="1" opacity=".6"/></svg>');
   })();
-  var STOCK = { in_stock: ['IN STOCK', '#1F7A4D'], coming_soon: ['COMING SOON', '#2D5BE3'], to_order: ['AVAILABLE TO ORDER', '#2D5BE3'] };
+  var STOCK = { in_stock: ['IN STOCK', '#1F7A4D'], coming_soon: ['COMING SOON', '#2D5BE3'], to_order: ['AVAILABLE TO ORDER', '#2D5BE3'], out_of_stock: ['OUT OF STOCK', '#B3261E'] };
 
   function loadImg(src) {
     return new Promise(function (resolve) {

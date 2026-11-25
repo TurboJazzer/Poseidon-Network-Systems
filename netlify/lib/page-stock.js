@@ -12,7 +12,7 @@ const TIMEOUT_MS = 4000;
 const MAX_PAGE_CHARS = 600000;
 const UA = 'PNS-chat-stock-sync/1.0';
 
-const AVAIL_LABEL = { in_stock: 'In stock', coming_soon: 'Coming soon', to_order: 'Available to order' };
+const AVAIL_LABEL = { in_stock: 'In stock', coming_soon: 'Coming soon', to_order: 'Available to order', out_of_stock: 'Out of stock' };
 
 const ENTITIES = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ' };
 
@@ -47,6 +47,7 @@ function inclVat(excl) {
 
 function availFromBadge(badge) {
   const b = String(badge || '').toLowerCase();
+  if (b.indexOf('out of stock') !== -1) return 'out_of_stock';
   if (b.indexOf('coming soon') !== -1) return 'coming_soon';
   if (b.indexOf('available to order') !== -1) return 'to_order';
   if (b.indexOf('in stock') !== -1) return 'in_stock';

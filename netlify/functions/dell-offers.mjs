@@ -13,7 +13,7 @@ import { getDatabase } from "@netlify/database";
 
 const STATUSES = ["new", "listed", "sold", "dropped"];
 const CONDITIONS = ["refurbished", "new", "unknown"];
-const AVAILABILITY = ["in_stock", "coming_soon", "to_order"];
+const AVAILABILITY = ["in_stock", "coming_soon", "to_order", "out_of_stock"];
 const flag = (v) => v === true || v === "true" || v === "on" || v === 1;
 const MAX_BODY = 20000;
 const MAX_PRICE = 10000000;
@@ -96,7 +96,7 @@ export const cleanOffer = (b) => {
   }
 
   const availability = b.availability === undefined || b.availability === "" ? "in_stock" : b.availability;
-  if (!AVAILABILITY.includes(availability)) return { error: "Availability must be in stock, coming soon or available to order." };
+  if (!AVAILABILITY.includes(availability)) return { error: "Availability must be in stock, coming soon, out of stock or available to order." };
   const website_text = text(b.website_text, 300);
 
   // Publishing to the website lists the offer and needs our price. Sold or dropped offers (or any status other
